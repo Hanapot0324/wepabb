@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .research2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 1200px;
+            padding: 50px;
+            font-size: large;
+            margin-left: 6%;
+            column-count: 1;
+            text-align: justify;
+        }
+        .paper{
+            text-align: center;
+        }
+        .name{
+            text-align: center;
+        }
+        h1 {
+    text-align: center;
+    margin-top: 5%;
+}
+h2 {
+    text-align: center;
+    margin-top: .1%;
+}
+h3 {
+    text-align: left;
+}
+h4 {
+    text-align: center;
+}
+.first-letter{
+    font-size: 50px;
+    font-family: serif;
+    font-weight: bolder;
+}
+.recent{
+    text-align: center;
+    margin-left: 6%;
+    margin-right: 2%;
+}
+.keywords{
+    text-align: center;
+}
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h5{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #fff4c3;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Si Langgam at si Tipaklong')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h5>Notes</h5>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Research 4'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+<h1>Exploratory Research: The Effects of Electronic Books on College Students</h1> <br>
+ <h2> Author's Note </h2> <br>
+        <div class="container">
+        <p class="paper">A paper Submitted in Partial Fulfillment of the
+            Requirements for the MBA Degree  <br>
+            Course Name: Business Information & Decision-Making <br>
+            Professor: Martin W. Sivula, Ph.D. <br>
+            Course Number: RSCH 5500</p> <br>
+        <p class="name"> <b> Ya-Ling Chen <br>
+            Sitong Fan <br>
+            Zhongyuan He </b></p> <br>
+        </div>
+        
+        <h4> ABSTRACT </h4>
+        <div class="container"></div>
+        <p class="recent"><b><i> In recent years, the e-book has become more and more popular among college students,
+            and it is much easier to be installed and set up in electronic equipment, such as laptop, Kindle, or
+            IPad. A random sample (N=80) of undergraduate (n=25) and graduate (n=55) students not only
+            use the e-book to read in class and library, but also at public places and at home. Of the
+            respondents, 46% have a part-time job, 32% have a full-time job, and 22% are not employed.
+            Fifty-five percent of the sample was male and 45% were female. The results of the survey
+            questionnaire indicate that 55% sample claimed to spend hours on learning every week by using
+            electronic tools, especially reading articles. Twenty-eight percent of the participants would take
+            their electronic equipment to class instead of traditional textbooks; and 17% of them own at least
+            two pieces of electronic equipment. Although most students rely on traditional paper print books,
+            the population of college students applying e-book in their study life is increasing rapidly
+            because many more “smart” and inexpensive electronic equipment (hardware) are displayed in
+            markets in which an e-book can be installed. As everyone knows, textbooks in the United States
+            are very expensive to be afforded by all college students. Consequently, the e-book offers a far
+            less expensive alternative than paper print books. </p> <br>
+        <p class="keywords"> Keywords: e-book, college students, e-book reader, electronic equipment, devices</i></b></p>
+         
+<div>
+
+    <div class="research2">
+        <h3> I. Introduction </h3>
+        <p><br>College life could be an incredibly important period in a young person’s development.
+            However, many college students are facing exorbitant tuition fees and after graduating from
+            universities, they may have to pay back students loans. What’s worse, the price of traditional
+            textbooks in colleges is extremely high, which implies that much more pressure is given to
+            students... and they have to afford more payments in their school life besides study. Fortunately,
+            there is a new option to release their stress recently which costs next to nothing: the e-book. E-
+            book has become one of the most popular and important tools for college students, and its price
+            is far lower than textbooks. Also, e-books can be transported at the speed of light anywhere
+            around the world instantly, no more heavy books. At present, there are several e-book devices,
+            for example, some commonly used devices are PCs, PDAs, Blackberries, Pocket PCs, Tablets,
+            Sony Readers, mobile phones, iPods and Kindle (Vasileiou, Hartley, & Rowley, 2008). In recent
+            years, the number of college students applying e-book to their study life is increasing. Therefore,
+            this research ascertains college students’ attitudes and perceptions about using e-books instead of
+            traditional books. </p> <br>
+ 
+            <h3> Statement of Problem </h3> <br> 
+            <p> To address the issue of the effectiveness of using the e-book, the first question raised in
+                this study is: for what purpose do college students decide to purchase e-book for their study? Is
+                it really more helpful and more reliable than regular books? Is it easier to save and carry? Based
+                on these fundamental questions, we attempt to compare students’ preferences of e-books and
+                standard textbook. Thus, the objective of this research is to explore college students’ attitudes 
+                and perceptions towards using e-book at school. <br>
+                The purpose of this research is to seek students’ attitudes and perceptions between text
+                book and e-book and to determine the advantages and disadvantages of e-book. Results might
+                improve the use of educational technology and increase learning efficiency.</p> <br>
+
+                    <h3> Research Problems </h3> <br>
+            <p> 1. What are the attitudes and perceptions of college students toward e-book?<br>
+                2. What are the advantages and disadvantages of e-book? <br> 
+                3. Why would students decide to choose another form of reading? </p> <br>
+            <h3> Literature Review </h3> <br> 
+            <p> The Internet is changing globally. The new word in the publishing industry is not a word,
+                but a letter “e” in electronic books or e-books (Rao, 2003, p.85). The emergence of e-book
+                technology in recent years has been a significant development, and the continued presence of
+                electronic books or e-books as an information provision medium throughout this time has
+                significantly affected the publishing industry (Rao, 2004, p.363). The e-book can be defined as: a
+                text in digital form; as a book converted into digital form; as digital reading material; as a book
+                in a computer file format or electronic file of words; or as images with unique identifiers. The
+                metadata may be displayed on computer screen or read on a computer through network or
+                viewed on a desktop/notebook/dedicated portable device, or read on any type of computer or
+                formatted for display on specific e-book readers (Rao, 2004, p.364). After many years of a
+                dedicated effort by a number of scientists, the e-book industry has finally appeared to have got the
+                technology correct (Qian, 2011, p.97).</p><br> 
+            <p> With the incredible development of Internet and electronic technology industry, e-book
+                has become a necessary part in college students’ school life across the world today. They spend
+                hours every day online on reading, doing coursework and searching relevant materials. A large
+                user base of students complements the audience for academic e-books (Velde & Ernst, 2009,
+                p.571). However, they are just going about it in a less-than-traditional way. Users recognized
+                that dealing with chargers, downloads, files, joysticks, and keyboards is different from dealing
+                with paper, pages, or pens, but they are deterred by the change (Pattuelli & Rabina, 2010, p.242).
+                With the help of e-books, it is becoming much easier for students when dealing with their school
+                work. E-readers were easily and seamlessly integrated into the day-to-day activities of
+                participants (Pattuelli & Rabina, 2010, p.242). Although some dissatisfaction with specific
+                features of the e-reader was reported, the portability and ubiquity that Kindle offers were
+                generally valued by students (Pattuelli & Rabina, 2010, p.242).</p> <br>
+            <p> Recently, universities and librarians have been increasing the number of electronic
+                collections. E-books are becoming essential components of university library collections (Wu, &
+                Chen, 2011, p.294). There is undoubtedly a role for e-books in school library, and it is likely that
+                e-book service will attract new users to library service and perhaps will better serve patrons with
+                special needs (Jeong, 2012, p.390). E-books can provide digital content for the development of
+                digital libraries, whether personal or institutional, while complying with copyright and fair use
+                laws (Connaway, 2001, p.347).</p> <br> 
+            <p> In recent years, more and more students are using electronic tools to study because it is
+                much more convenient and effective for them to fulfill the coursework requirements by reading
+                and writing online. By giving students and researchers access to large e-book collections, they
+                are given access to a valuable database of content (Velde & Ernst, 2009, p.583). E-book content is electronic and potentially offers the users all the advantages of the computer... including being
+                able to search and find particular information and being able to manipulate the content (Long,
+                2003, p.30). Replacing traditional reserve materials with e-books offers a perfect opportunity to
+                transform low use items into tools for student success, while making better use of our collections
+                and funds (Rojeski, 2012, p.237). </p> <br>
+            <p> Nowadays, there are more and more e-book readers displayed in markets around the world. There
+                are several e-book formats available on the market and also devices specifically designed to read e-books
+                or designed for other uses as well (Vasileiou, Hartley, & Rowley, 2009, p.175). E-readers and tablet
+                computers are becoming increasingly popular and publishers are trying to keep up (Lynch, 2012,
+                p.78). Previous research findings indicate that factors of convenience, compatibility, and media
+                richness appear to be significant determinants of e-book readers’ acceptance (Lai, & Chang,
+                2011, p.558). However, because e-book reader technology is relatively new, different e-book readers
+                tend to use different e-book file formats (Qian, 2011, p.97). In order to be able to read an e-book,
+                consumers must use a computer, ebook-reader, IPadTM or other form of electronic hardware (Helberger,
+                2011, p.69). Just as the Apple IPodTM transformed the music industry, portable e-readers like the
+                KindleTM and recently introduced Apple IPadTM have the potential to significantly alter the way
+                readers consume books and other written materials (Pattuelli & Rabina, 2010, p.242). Regardless
+                of how the e-book revolution plays out, the fundamental co-dependent relationship between texts
+                and text-bearing devices will not change, but the nature of that relationship almost certainly will
+                change (Peters, 2001, p.61). Print books are here to stay; e-books will enhance access to more
+                science and research (Velde & Ernst, 2009, p.583).</p> <br> 
+                <h3> Method </h3> <br>
+                <p> A pilot study was conducted to ascertain students’ attitudes on the e-book using a small
+                    sample (N = 80) of college students from which data was collected. This study utilized an
+                    anonymous questionnaire, and data was collected according to the standard survey collection
+                    methods. The total number of usable questionnaires was 80, with a gender makeup of males
+                    (n=44) and females (n=36). According to the respondents, 63% were graduate students and 37%
+                    were undergraduate students attending school currently. Forty-six percent of the participants
+                    have a part-time job, 32% have a full-time job, and 22% are not employed. Fifty-six percent of
+                    the participants were international students whose first language is not English, and 44% of the
+                    participants were American. These demographics were of high relevance to the research
+                    questions and might help explain variance shown in questionnaire.</p> <br> 
+                <p>The questionnaire was developed with a series of questions about college students’
+                    attitudes toward e-book. This survey method was stochastic selection of participants without the
+                    consideration of gender and educational level. The collected data implies multiple variables
+                    which lead to whether college students’ attitudes and perceptions regarding e-book were positive
+                    or negative. There are some sample questions, for instance: “What are your points of views about
+                    e-book?”, “How often do you use electronic equipment for learning?” and “How many e-readers
+                    (such as laptops, iPads, Kindles or mobile phones) do you have?”</p> <br> 
+                <p> There were some other elements which made up students’ opinions on the advantages
+                    and disadvantages between e-books and traditional print books, and their opinions of whether e-
+                    books were more helpful and effective than regular printed textbooks. One open ended question
+                    asked “What are the advantages of e-book readers?” which might shed light on why students determine to use e-book instead of traditional books. The questionnaire closed with an open
+                    question as to whether they think the e-book would replace paper print materials in the future.
+                    Compared with traditional textbooks, this survey questionnaire summarized with how college
+                    students consider e-book’s practical application, benefits, and future development.</p><br>
+                <p> A variety of different questions exhibited students’ attitudes toward e-books. Researchers
+                    attempted to control other variables which could affect the results. Also the researchers tried to
+                    decrease other independent variables endangering and affecting respondents’ attitudes in order to
+                    increase this research’s internal validity.</p> <br> 
+                <h3> Results </h3> <br>
+                <p>All of the participants (N = 80) admitted that they used e-books both in their study hours
+                    and in their leisure time. Eighty-three percent of the participants agreed with that e-books had a
+                    positive aspect for both their school life and daily life. However, <u>only 17% of the sample
+                    considered that e-books were not that useful.</u> According to the survey, <u>the best benefit of e-book
+                    was its lower price than traditional books.</u> Being of “light weight” and “flexible” were two
+                    advantages of e-books recognized by the respondents. One hundred percent of the sample
+                    owned a laptop which could be used as an e-book reader. Seventy- five percent of the sample
+                    admitted that they spent hours on learning every week using electronic tools. Seventy-four
+                    percent of the sample was iPhone and other smartphone users, allowing them to read e-books on
+                    these devices as well. Moreover, 45% of the sample used special e-book readers besides laptops
+                    and smart phones, such as iPads and Kindles. Eighty-nine percent of the sample held an idea that
+                    it was really helpful to look for materials for their coursework through Internet, and where they
+                    could read material instantly. <u>Forty-seven percent of the participants took an e-book reader to class 
+                    instead of regular print textbooks,</u>and 91% of the sample stated that their professors used
+                    electronic equipment to teach in class, such as a Smart blackboard and/or a projector. Fifty-six
+                    percent of the sample admitted that an e-book reader was expensive. On the other hand, <u>78% of
+                    the sample disagreed that e-book would replace traditional print books in the future and they
+                    think that the regular book would keep its special position.</u> </p> <br> 
+                <h3> Discussion </h3> <br>
+                <p>From the results of the survey, most of the participants have positive attitudes on e-books
+                    and claim they have been using e-books both in their study hours and in leisure time. The
+                    development of e-book technology has made vast improvements over the last several years. Not
+                    only can users read articles and take notes on the e-book, but they can also watch videos, search
+                    words, and draw pictures. More and more smart functions and “apps” on e-books are coming out
+                    which make them more appealing and convenient. There is nothing that seems impossible in the
+                    near future for the development of the e-book. In addition, 100% of the sample owned a laptop,
+                    and 74% of the sample was IPhone and other Smartphone users, and 45% of the sample used
+                    special e-book readers. Fifty-six percent of the sample was international students, and they stated
+                    that e-book was very useful for them because their first language is not English. Therefore, they
+                    could look into English dictionary when they were using electronic devices to read at the same
+                    time. As we can see, many persons own electronic devices, which mean electronic products have 
+                    become much cheaper, so most people can afford them. This is the other important reason why e-
+                    book is becoming so popular.</p> <br>
+                <p> However, 78% of the sample disagreed that e-book would take over traditional print
+                    books in the future and they think that the regular book would keep its special position. There are
+                    some reasons, for example e-book can be harmful so some individual’s eyes, and it can be lost very easily. Many persons still use a traditional reading style and still rely on real paper
+                    materials. The participants who were not employed still think a special ebook-reader such as
+                    iPad or Kindle is expensive, and they could not afford it. Although these devices are relatively
+                    expensive, they seem to be less expensive than purchasing print textbooks for each course (from
+                    the student perspective). As we all know, print textbooks in colleges are so expensive that the
+                    prices of two textbooks would be equal to an ebook-reader. Hence, with the super development
+                    of technology, electronic devices’ prices are decreasing compared to a few years ago. Therefore,
+                    e-book reading will interface more and more with one’s life style in the years to come. </p> <br>
+               <h3> Conclusion</h3> <br> 
+               <p>In summary, this research shows the attitudes of most college students on e-books were
+                found to be positive and they prefer reading e-books to paper materials. Although this research
+                indicated e-books have some weakness, bad for health (e.g., the eyes), easy to lose data if you
+                forget back up, and so on. However, these problems will not hamper the development of e-book,
+                because e-books have more benefits such as watching videos, searching words, and over the long
+                term cheaper in price. The improvement of the e-book can be attributed to the successful
+                research and development of this technology. Integration of person’s lives with electronic
+                products will tend to increase over the next several decades. </p> <br>
+                <h3> Recommendations and Future Research </h3> <br>
+                <p>Since our group had limited time for this research project, we did an exploratory study by
+                    only and received 80 usable questionnaires. When compared with millions of college students in
+                    the United States, this is just a small study, testing the feasibility of the possibility larger research
+                    study design in the future. As a result, a serious limitation is that our data and results may not reflect 
+                    the whole population’s attitudes. Also we limited our questions and this may not be
+                    suitable and may affect the results.</p> <br>
+                <p> In addition, at the time of our study many regular print books could not be found in e-
+                    book editions. Thus, we recommend that editors and publishers should speed up the development
+                    process of e-books so that they can meet customers demand. This research also found that the
+                    software which makes e-books not easy to apply. Most editors need more time to learn how to
+                    edit the books using professional software. Even though the e-book is a new technology,
+                    companies should pay attention on all their procedures. Moreover, there are too many e-book
+                    editions, such as iBook, Kindle, PDF, which can’t be read on one e-device. If customers use
+                    IPads, they can only read IBook edition. That means if customers buy e-books from Amazon, the
+                    books might not be read on the IPad. Therefore, customers need to buy more devices or install
+                    more software, which is costly and complicated. All the e-books should have the same edition if
+                    it is all possible, because this is not only good for customers, but also good for editors. Thus, the
+                    government or other organizations might consider a change on this policy.</p><br> 
+
+            <h3>References</h3><br>
+            <p align='justify'> [1] &emsp; Dodgson M, Gann D, Salter A 2006 R&d Management 36(3) 333-346   </p>
+            <p align='justify'> [2] &emsp; Salmon G 2005 ALT-J 13(3) 201-218</p>
+            <p align='justify'> [3] &emsp; Fleck J 2012 Journal of Management Development</p>
+            <p align='justify'> [4] &emsp; Watson J 2008 Promising Practices in Online Learning. North American Council for Online
+                Learning</p>
+            <p align='justify'> [5] &emsp; Soni V D 2020 Available at SSRN 3630073</p>
+            <p align='justify'> [6] &emsp; Hodhod R, Ibrahim M., Khafagy M., Abdel-Wahab M S 2010 Issues of choosing the suitable
+                virtual learning environment</p>
+            <p align='justify'> [7] &emsp; Zhang D and Nunamaker J F 2003 Information systems frontiers 5(2) 207-218</p>
+            <p align='justify'> [8] &emsp; Chesebro J L and McCroskey J C 2001 Communication Education 50(1) 59-68</p>
+            <p align='justify'> [9] &emsp; Wijanayu A, Hardyanto W, Isnaeni W 2018 Journal of primary education 7(1) 88-95</p>
+            <p align='justify'> [10] &emsp; Wijanayu A, Hardyanto W, Isnaeni W 2018 Journal of primary education 7(1) 88-95</p>
+            <p align='justify'> [11] &emsp; Jabborov U 2020 Архив Научных Публикаций JSPI</p>
+            <p align='justify'> [12] &emsp; Harms C M, Niederhauser D S, Davis N E, Roblyer M D, Gilbert S B 2006 Journal of
+                Communication 16(1) 17-24</p>
+            <p align='justify'> [13] &emsp; Kirna I M 2013 Prosiding Seminar Nasional MIPA</p>
+            <p align='justify'> [14] &emsp; Dabbagh N and Bannan-Ritland B 2005 Online learning: Concepts, strategies, and
+                application. Prentice Hall</p>
+            <p align='justify'> [15] &emsp; Morin D, Thomas J D, Saadé R G 2015 Journal of Information Technology Education 14</p>
+            <p align='justify'> [16] &emsp; Jannah M, Prasojo L D, Jerusalem M A 2020 Al Ibtida: Jurnal Pendidikan Guru MI, 7(1) 1-
+                18</p>
+            <p align='justify'> [17] &emsp; Sipayung D H, Sani R A, Bunawan W 2018 In 3rd Annual International Seminar on
+                Transformative Education and Educational Leadership (AISTEEL 2018) 200 440-445 </p>
+            <p align='justify'> [18] &emsp; Erdoğan V 2019 International Journal of Education and Research 7(11) 113-124</p>
+            <p align='justify'> [19] &emsp; Triana D, Anggraito Y U, Ridlo S 2020 Journal of Innovative Science Education 9(2) 181-
+                187</p>
+            <p align='justify'> [20] &emsp; Triana D, Anggraito Y U, Ridlo S 2020 Journal of Innovative Science Education 9(2) 181-
+                187</p>
+            <p align='justify'> [21] &emsp; Giancoli, D C 2014 Physics for scientists & engineers with modern physics p. 762 (Pearson)</p>
+            <p align='justify'> [22] &emsp; Alonso M and Finn E J 1967 Fundamental university physics Vol. 2 pp. p-818 (MA: Addison-
+                Wesley)</p>
+            <p align='justify'> [23] &emsp; Ornek F, Robinson, W R, Haugan M P 2008 International Journal of Environmental and
+                Science Education 3(1) 30-34</p>
+            <p align='justify'> [24] &emsp; Tuah T, Herman N D, Maknun J 2019 In 5th UPI International Conference on Technical and
+                Vocational Education and Training (ICTVET 2018) 299 281-287</p>
+            <p align='justify'> [25] &emsp; Sugiyono 2010 Metode Penelitian Kuantitatif kualitatif dan R&D (Bandung: Alfabeta)</p>
+            <p align='justify'> [26] &emsp; Sa'diyah K 2021 EDUKATIF: JURNAL ILMU PENDIDIKAN 3(4) 1298-1308</p>
+            <p align='justify'> [27] &emsp; Uno H B 2014 Model pembelajaran menciptakan proses belajar mengajar yang kreatif dan
+                efektif.</p>
+            <p align='justify'> [28] &emsp; Kirana R W C and Susilowibowo J 2020 Jurnal Pendidikan Akuntansi Indonesia 18(1) 80-90</p>
+            <p align='justify'> [29] &emsp; Yulaika N F, Harti H, Sakti N C 2020 JPEKA: Jurnal Pendidikan Ekonomi, Manajemen dan
+                Keuangan 4(1) 67-76</p>
+            <p align='justify'> [30] &emsp; Warsono H and Hariyanto M S 2012 Pembelajaran aktif teori dan asesmen (Bandung: PT
+                Remaja Rosdakarya)</p>
+            <p align='justify'> [31] &emsp; Warsono H and Hariyanto M S 2012 Pembelajaran aktif teori dan asesmen (Bandung: PT
+                Remaja Rosdakarya)</p>
+            <p align='justify'> [32] &emsp; Johnson Elaine B 2002 Contextual teaching and Learning (Califonia. MLC) p15</p>
+            <p align='justify'> [33] &emsp; Fisher A 2009 Berpikir kritis sebuah pengantar (Jakarta: Erlangga) p4</p>
+            <p align='justify'> [34] &emsp; Pujiastuti H and Haryadi R 2018 In First International Conference on Technology and
+                Educational Science. European Alliance for Innovation (EAI)</p>
+            <p align='justify'> [35] &emsp; López-Escribano C, Valverde-Montesino S, García-Ortega V 2021 International Journal of
+                Environmental Research and Public Health 18(12) 6510</p>
+            <p align='justify'> [36] &emsp; Huang H C 2013 Computer assisted language learning 26(3) 258-281</p>
+            <p align='justify'> [37] &emsp; Yager S E, and Szabo Z 2011 In Proceedings of the 49th SIGMIS annual conference on
+                Computer personnel research 6-10</p>
+            <p align='justify'> [38] &emsp; Connor C M, Day S L, Zargar E, Wood T S, Taylor K S, Jones, M R, Hwang J K 2019
+                Computers & education 128 284-311</p>
+            <p align='justify'> [39] &emsp; Wang C C, Hung J C, Chen S N, Chang H P 2019 Multimedia Tools and Applications 78(4)
+                4813-4834</p>
+            <p align='justify'> [40] &emsp; Morgan H 2013 Early Childhood Education Journal 41(6) 477-483</p>
+            <p align='justify'> [41] &emsp; Wahyuni D E 2015 Inovasi Pendidikan Fisika 4(3)</p>
+            <p align='justify'> [42] &emsp; Miaz Y 2020 Jurnal Mutiara Pendidikan Indonesia 5(1) 25-35</p>
+            <p align='justify'> [43] &emsp; Zubaidah S 2018 In 2nd Science Education National Conference 13)</p> </p>
+    </div>
+
+
+                
+</div>
+</div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Research1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

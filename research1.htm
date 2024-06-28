@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trends in E-book Research</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .main-div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 2%;
+        }
+        .research1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        .research2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        h1 {
+        text-align: center;
+        margin-top: 5%;
+        }
+        h2 {
+            text-align: center;
+            margin-top: .1%;
+            margin-bottom: 2%;
+        }
+        h3 {
+            text-align: left;
+        }
+        h4 {
+            text-align: center;
+        }
+        .first-letter{
+    font-size: 50px;
+    font-family: serif;
+    font-weight: bolder;
+    
+}
+.department{
+    
+    text-align: center;
+}
+.intro {
+    text-align: center;
+    margin-left: 6%;
+    margin-right: 2%;
+}
+.keywords {
+    
+    text-align: center;
+}
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h5{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #fff4c3;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Si Langgam at si Tipaklong')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h5>Notes</h5>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Trends in E-book Research'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+<h1>Trends in E-book Research</h1>
+    <h2>by: Rajendra Kumbhar</h2> 
+    <div class="container">
+        <p class="department">Department of Library & Information Science, Savitribai Phule Pune University,<br> Pune - 411 007, India
+            E-mail: rajendra_kumbhar@unipune.ac.in</p><br>
+        </div>
+        <h4> ABSTRACT </h4>
+        <div class="container">
+            <p class="intro"><b><i>In this study, e-book research articles were reviewed which are published in various library science and non-library 
+                    science journals. Identifies facets and significant results of e-book research. For this review, literature on e-books 
+                    published in English language, in 2016 was searched from various databases. The review finds that the focus of current research 
+                    on e-books is on use. Themes such as e-book collection development and management; search and discovery are also paid more 
+                    attention to. Use of e-books by children is emerging as a prominent area of e-book research. Results of most of the research 
+                    on e-books are supportive to each other.</i></b></p> <br> 
+                <p class="keywords">Keywords: E-book use; E-book research; E-book collection development; E-book promotion.</p>
+        </div>
+  
+<div class="main-div">
+    <div class="research1">
+        <h3> I. Introduction </h3>
+            <p><br>E-books have now become an integral part of library collections. E-books emerged little 
+                later than e-journals, but they have soon become important with reference to library budgets, acquisition, cataloguing, 
+                services and usage. Users too are attracted to this format of reading material. Many stakeholders have interest in e-books 
+                from different points of view. For example, the publishers and aggregators are interested in e-books as a market commodity. 
+                The library professionals are keenly interested in e-books as a new format to serve users and an another opportunity to 
+                extend their services. Researchers from many other subject areas too are interested in this new communication format. 
+                At this background the author is interested in knowing the current trends in e-book research with reference to topics 
+                covered and major findings. Earlier author did review the research on e-book published during 2010.</p><br><br>
+ 
+        <h3> II. Objectives, scope and method</h3>
+            <p><br>This research intends to identify the facets of e-books attended to by the research 
+                published during 2016. It also intends to review significant results and their supportive or contradictory nature. 
+                To fulfill these aims the researcher searched articles on e-books from LISA, Emerald Insight, Ebsco and Google Scholar databases. 
+                ‘E-books OR ebooks’ statement was used for searching literature. The query was restricted to journal articles published in 
+                English language without any geographical limitation. The scope was delimited to January to December 2016. All the above databases 
+                together retrieved about 200 article. The retrieved items were deduplicated. In the final reading few articles were sorted out 
+                as irrelevant and finally 78 article were identified as relevant and are reviewed here.</p><br><br> 
+
+        <h3> III. Purpose of using e-books </h3>
+            <p><br> Different users use e-books for different purposes. 
+                For example, Wang and Bai found that undergraduate students mainly used e-books for 
+                leisure purpose. Contrary to this the postgraduate students used e-books more for 
+                academic purposes. Similarly, Carroll, et al. observed that overall the use of e-books 
+                for academic purpose has increased considerably. Koçak, et al. also noticed that students 
+                preferred e-books while studying. Khan, et al. and Lewellen , et al.found that postgraduate 
+                students used e-books more than the undergraduates. Carroll, et al. has observed that 
+                general reference books were favoured in e-book format than in print. However, a study of 
+                the e-book usage by the academia in an Indian university library found that reference e-books 
+                were used very frequently (Nikam & Shivraj). The different national background must be responsible 
+                for these variations in results. Inquiring about gender-wise differences in e-book usage Khan, et al. 
+                found that compared with female students, male students (in Pakistan) universities used e-books more frequently. 
+                However, Lewellen, et al. noticed that there is little difference by gender in use of e-books and printed books. 
+                Investigating about the correlation, if any, between length of reading and type of book formats preferred, 
+                Goertzen and Bakkalbasi noticed that students preferred e-books for discontinuous reading; quick reference, 
+                whereas printed books were preferred for continuous or prolonged reading.<br><br>
+                Rafiq and Warraich studying e-book usage pattern of undergraduate medical students in Pakistan noticed that 
+                most students read e-books for academic purpose but still preferred to read textbooks in print format. 
+                Carroll, et al. found that more students favoured literary works in printed format than in e-book format. 
+                Contrary to this the general public favoured fictions in e-book format especially for holidays and did not favour 
+                nonfictions in e-book format10. It must be specially noted that these are non-academic users whereas 
+                Carroll’s respondents were academic users. Asai studied format choice for popular fiction in Japan and found that 
+                compared with e-novels, e-comics are popular format. <br><br>
+                As far as use of e-books by students of specific subject is concerned Letchumanan and Muniandy12 found that 
+                the mathematics postgraduate students mostly used mobile e-books for study and to find information for their research 
+                activities. Jou, et al. studied use of e-books and APP and found that e-books were used by engineering students in 
+                classroom setting to study the principles of mechanical drawing and APP was used for creating mechanical drawings. 
+                Librarians often wish to know whether readers in a particular discipline favour e-books or printed books. 
+                Knowlton developed a two-step model useful for this purpose. It could be noticed from the above discussions that 
+                there is a fair amount of research investigating purposes of using e-books. However, e-books are not used to the 
+                desired magnitude in an Indian horticulture and forestry university (Bhat and Ganaie). When enquired whether students 
+                like e-books or not the survey of Estelle found mixed reactions.</p><br><br>    
+
+                <h3>IV. Reasons for using e-books </h3> 
+            <p><br> Quick to read and easy to manage formats, aesthetics, ‘task-technology fit’, anywhere anytime 
+            availability, user friendliness, etc. are some of the common reasons for using e-books. According to Dean, e-textbooks are used 
+            because they can engage students and help them succeed in their studies. Ahmad and Brogan observed that academic library users 
+            favoured e-books because of familiarity, usability, utility and hedonic attributes. Being able to use even when the library is 
+            closed and could be used simultaneously by many users are the other reasons why users preferred e-books (Oliva). E-books are 
+            technological products. Okocha applied the unified theory of acceptance and use of technology (UTAUT) model to test the reasons 
+            for acceptance of e-books by university students. The author found that performance expectancy, effort expectancy and facilitating 
+            conditions influenced student’s decision to use e-books. <br><br>
+            Liaw and Huang’s investigation revealed that interactive learning environments, acceptable screen size, perceived self-regulation, 
+            and self-efficacy could positively influence usefulness of e-books as learning tools. Johnson found a correlation between use of 
+            e-books and ability to learn. He observed that education students who embrace e-books perceive themselves as abler learners than 
+            students who do not. E-books enable to find micro contents from the text. This feature works as a better substitute to index in a 
+            printed reference books. Ogden has explained this with the help of electronic version of an 80-year-old Hamilton and Hardy’s book 
+            entitled Industrial Toxicology. </p><br><br> 
+
+            <h3>V. Awareness and use of e-books </h3>
+            <p><br> For increasing use it is important that users are aware
+            about the e-book titles available, various formats of e-books,
+            different e-book platforms, their scope, search features, etc.
+            Sarjoon and Kabir studied the awareness and use of e-books
+            by the doctoral researchers at the Indian Institute of Science
+            Education and Research and found that almost all the users are aware of e-books and 
+            related technologies. However, Wendo and Mwanzu noticed that there is insufficient 
+            awareness amongst the university students in Kenya about e-books. 
+            These differences about awareness are from two different countries.
+            Awareness and use of e-books should ideally be positively correlated. 
+            However, Okocha in case study of a university library found that majority of the 
+            students were aware of e-books, but many had used e-books only once. Wang and Bai
+            too found that there was higher awareness but lower adoption
+            of general e-books by the university students in China.</p><br><br>
+
+        <h3> VI. Reasons Not for using e-books </h3>
+            <p><br>Findability and accessibility of e-books through library
+            website is the most consistent concerns and barriers to use
+            e-books. Goertzen and Bakkalbasi also observed that
+            availability and accessibility limited by platforms and licenses
+            cause frustrations in the use of e-books. Koçak as well as Rafiq
+            and Warraich recognised that eye fatigue is a reason for not preferring e-books. Nikam and Shivraj recognised that lack of
+            awareness amongst the users is the main hindrance in the usage
+            of e-books. Hobbs and Klare observed that the features in
+            e-books have not enhanced with the expected speed and due to
+            this student continue to encounter issues with interface designs
+            as well as the ability to easily control and manipulate their own copies. Whatever may be the reasons for non-use or less use
+            of e-books, Rafiq and Warraich believed that librarians can
+            play a vital role in minimising the barriers. Seth and Kelly
+            observed that readers feel less connected to book when reading
+            e-books and therefore prefer printed books. They further stated
+            that these findings with align ‘self-concept theory’ and indicate that printed books are an extension of the self. </p> <br><br> 
+
+            VII. E-books collection development </h3> 
+            <p><br> A good e-book collection development policy helps ‘to
+            acquire quality e-books at least cost with most suitable terms and
+            conditions and having effective access mechanism’. However,
+            to be effective, an e-book collection development policy
+            needs to be revised regularly. Type and size of library need to
+            be considered while revising e-book collection development
+            policy. Lukes, et al. describe how two different approaches
+            were adopted for revising e-book collection development policy
+            by small college libraries. In addition to policies, quantitative   
+            and qualitative longitudinal studies of students’ perceptions
+            help in collection development of e-books. Similarly, Bozarth
+            and Zhong29 suggested that understanding of users’ preferences
+            about e-books does help in collection development. Tri-Agif30,
+            et al. recognised that satisfaction and perceived ease of use
+            are the determinants of continuance intention of using e-books.
+            The authors suggest that these determinants could be used in
+            evaluating and selecting e-books before purchasing. <br><br>
+            </p>
+
+            <h3>References</h3><br>
+            <p align='justify'> [1] &emsp;
+                Kumbhar, Rajendra. E-books: Review of research  and writing during 2010. The Electronic Library,  2012, 30(6), 777-795.  
+                doi: 10.1108/02640471211282109 </p><br>
+                <p align='justify'> [2] &emsp;
+                Wang, Sufang & Bai, Xue. University students’  awareness, usage and attitude towards e-books:  Experience from China. J. Academic Libr., 2016,  42(3), 247-258.  
+                doi: 10.1016/j.acalib.2016.01.001 </p><br>
+                <p align='justify'> [3] &emsp;
+                Carroll, Alexander J.; Corlett-Rivera, Kelsey; Hackman,  Timothy & Zou, Jinwang. E-book perceptions and use  in STEM and non-STEM Disciplines: A comparative  follow-up study. Portal: Libraries Academy, 2016,  16(1), 131-162.  
+                doi: 10.1353/pla.2016.0002 </p><br>
+                <p align='justify'> [4] &emsp;
+                 Koçak, Ömer; Yildirim, Önder; Kursun, Engin &  Yildirim, Gürkan. Investigating the status of tablet  computers and e-books use of open education faculty  students: A case study. Int. J. Distance Edu. Technol.,  2016, 14(2), 49-63.  
+                doi: 10.4018/IJDET.206040104 </p><br>
+                <p align='justify'> [5] &emsp;
+                Khan, Amjid; Bhatti, Rubina & Khan, Asad. E-books  usage by agricultural, engineering and social science  students in selected universities of Pakistan. The  Electronic Library, 2016, 34(6), 958-973.  
+                doi: 10.1108/EL-08-2015-0163 </p><br>
+                <p align='justify'> [6] &emsp;
+                Lewellen, Rachel; Bischof, Steven & Plum, Terry.  EBL ebook use compared to the use of equivalent  print books and other eresources. Performance  Measurement Metrics, 2016, 17(2), 150-164.  
+                doi: 10.1108/PMM-04-2016-0013 </p><br>
+                <p align='justify'> [7] &emsp;
+                Nikam, Khaiser & Shivraj, M. E-books usage by  the academia at the University of Mysore: A survey.  Nowa Biblioteka, 
+                2016, 2, 37-62. </p><br>
+                <p align='justify'> [8] &emsp;
+                Goertzen, Melissa & Bakkalbasi, Nisa. Exploring  academic e-book use: Part II through focus groups  and interviews. Performance Measurement Metrics,  2016, 17(1), 83-92.  
+                doi: 10.1108/PMM-09-2015-0025 </p><br>
+                <p align='justify'> [9] &emsp;
+                Rafiq, Sadaf & Warraich, Nosheen Fatima. Utilization  of e-books among undergraduate medical students  at Lahore, Pakistan. J. Info. 
+                Manag. Lib., 2016, 17,  191-200. </p><br>
+                 <p align='justify'> [10] &emsp;
+                Mike, McGrath. Interlending and document supply:  A review of the recent literature; 91, Interlending  Document Supply, 2016, 44(1), 1-6.  
+                doi: 10.1108/ILDS-12-2015-0041 </p><br>
+                <p align='justify'> [11] &emsp;
+                 Asai, Sumiko. Format choice for popular fiction  books in Japan. Publishing Research Quarterly,  2016, 32(2), 75-83.  
+                doi: 10.1007/s12109-016-9448-5 </p><br>
+                <p align='justify'> [1] &emsp;
+                 Letchumanan, Malathi & Muniandy, Balakrishnan.  How mathematics postgraduate students use mobile  e-book? Library Hi Tech News, 
+                 2016, 33(7), 6-7. doi: 10.1108/LHTN-02-2016-0009 </p><br>
+                 <p align='justify'> [12] &emsp;
+                Jou, Min; Tennyson, Robert D.; Wang, Jingying  & Huang, Szu-Ying. A study on the usability  of E-books and APP in engineering courses: a case  study on mechanical drawing. Computers Education,  2016, 92, 181-193.  
+                doi: 10.1016/j.compedu.2015.10.004 </p><br>
+                 <p align='justify'> [13] &emsp;
+                Knowlton, Steven A. A two-step model for assessing  relative interest in e-books compared to print. College  Res. Lib., 2016, 77(1), 20-33.  
+                doi: 10.5860/crl.77.1.20 </p><br>
+                <p align='justify'> [14] &emsp;
+                Bhat, Nazir Ahmad & Ganaie, Shabir Ahmad. Use of  e-resources by users of Dr. Y.S. Parmar University  of Horticulture and Forestry. DESIDOC J. Lib. Info.  Technol., 2016, 36(1), 17-22.  
+                doi: 10.14429/djlit.36.1.9062 </p><br>
+                <p align='justify'> [15] &emsp;
+                 Estelle, Lorraine. What students told us about their  experiences and expectations of print and e-books.  Insights, 2016, 29(1), 31-36.  
+                doi: 10.1629/uksg.281 </p><br>
+                <p align='justify'> [16] &emsp;
+                Dean, Matthew D. A call to embrace social reading  in higher education. Innovations Edu. Teaching Int., 2016, 53(3), 296-305.  </p><br>
+                 <p align='justify'> [17] &emsp;
+                Ahmad, Pervaiz & Brogan, Mark. E-book user  behaviour in academic libraries: The role of user  agents in perception and satisfaction. Malaysian J.  Lib. Info. Sci., 2016, 21(3), 95-109.  
+                doi: 10.22452/mjlis.vol21no3.6 </p><br>
+                <p align='justify'> [18] &emsp;
+                Oliva, Victor T. Deselection of print monographs  in the humanities and social sciences in the digital  age. Collection Building, 2016,
+                 35(2), 37-47.  doi: 10.1108/CB-02-2016-0002 </p><br>
+                <p align='justify'> [19] &emsp;
+                Okocha, Foluke. Student acceptance of e-books: A  case study of landmark university. The Information  Technologist, 2016, 13(2), 
+                97-104.</p> <br>
+    </div>
+
+    <div class="research2">        
+                <p align='justify'> [20] &emsp;
+                    Liaw, Shu-Sheng & Huang, Hsiu-Mei. Investigating  learner attitudes toward e-books as learning tools:  Based on the activity theory approach. Interactive  Learning Environments, 2016, 24(3), 625-643.  
+                doi: 10.1080/10494820.2014.915416 </p><br>
+                <p align='justify'> [21] &emsp;
+                Johnson, Genevieve Marie. The influence of student learning  characteristics on purchase of paper book and eBook for  university study and personal interest. Educational  Psychology, 2016, 36(9), 1551-1566.  
+                doi: 10.1080/01443410.2014.1002831 </p><br>
+                <p align='justify'> [22] &emsp;
+                Ogden, Trevor. Hamilton and Hardy for the 21st  century. Ann. Occupational Hygiene, 2016, 60(3),  273-275.  
+                doi: 10.1093/annhyg/mev087 </p><br>
+                <p align='justify'> [23] &emsp;
+                    Sarjoon, N. R., Beegum & Kabir, S. Humayoon.  Utilization of e-books by the doctoral researchers:  A case study of IISER, 
+                    Thiruvananthapuram. SRELS  J. Info. Management, 2016, 53(6), 455-460. </p><br>
+                <p align='justify'> [24] &emsp;
+                    Wendo, Dickens Rodrigues & Mwanzu, Arnold.  Importance of e-books in improving access to scholarly  materials by university students in Kenya. Library  Hi Tech News, 2016, 33(8), 1-4.  
+                doi: 10.1108/LHTN-04-2016-0022 </p><br>
+                <p align='justify'> [25] &emsp;
+                Hobbs, Kendall & Klare, Diane. Are we there yet?  A longitudinal look at e-books through students’  eyes. J. Elect. Resources Librarianship, 2016, 28(1),  9-24.  
+                doi: 10.1080/1941126X.2016.1130451 </p><br>
+                <p align='justify'> [26] &emsp;
+                Seth, Ketron & Kelly, Naletelich. How e-readers have  changed personal connections with books. Qualitative  Market Research: 
+                An Int. J., 2016, 19(4), 433- 452.  </p><br>
+                <p align='justify'> [27] &emsp;
+                    Lukes, Ria; Markgren, Susanne & Thorpe, Angie.  E-book collection development: Formalizing a policy  for smaller libraries. Serials Librarian, 2016, 70(1-4),  106-115.  
+                doi: 10.1080/0361526X.2016.1153329 </p><br>
+                <p align='justify'> [28] &emsp;
+                Bozarth, Sandra & Zhong, Ying. E-books: Are we  on the same page? J. Elect. Resources Librarianship,  2016, 28(4), 232-253.  
+                doi: 10.1080/1941126X.2016.1243436 </p><br>
+                <p align='justify'> [29] &emsp;
+                    Tri-Agif, I.; Noorhidawati, A. & Ghalebandi, S.  Ghazal. Continuance intention of using ebook among  higher education students, Malaysian J. Lib. Info.  Sc., 2016, 21(1), 19-33.  
+                doi: 10.22452/mjlis.vol21no1.2 </p><br>
+                <p align='justify'> [30] &emsp;
+                Ferguson, Christine L. Textbooks in academic libraries.  Serials Review, 2016, 42(3), 252-258.  
+                doi: 10.1080/00987913.2016.1207480 </p><br>
+                <p align='justify'> [31] &emsp;
+                Hendrix, Dean; Lyons, Charles & Aronoff, Nell.  The library as textbook provider: Administering and  assessing a student-based e-textbook pilot. College  Undergraduate Libraries, 2016, 23(3), 265-294.  
+                doi: 10.1080/10691316.2014.987415  </p><br>
+                <p align='justify'> [32] &emsp;
+                Riha, Emily C. & LeMay, Danika. Saving students  money with ebooks: A cross-departmental collaboration  between interlibrary loan and course reserve. Technical  Services Quarterly, 2016, 33(4), 386-408.  
+                doi: 10.1080/07317131.2016.1203644 </p><br>
+                <p align='justify'> [33] &emsp;
+                Carr, Patrick L.; Cardin, James D. & Shouse, Daniel  L. Aligning collections with student needs: East  Carolina University’s project to acquire and promote  online access to course-adopted texts. Serials Review,  2016, 42(1), 1-9.  
+                doi: 10.1080/00987913.2015.1128381 </p><br>
+                <p align='justify'> [34] &emsp;
+                Longley, Dana H. Demand driven acquisition  of e-books in a small online academic library:  Growing pains and assessing gains. J. Library &  Info. Services in Distance Learning, 2016, 10(3/4),  320-331.  
+                doi: 10.1080/1533290X.2016.1221616 </p><br>
+                <p align='justify'> [35] &emsp;
+                Kont, Kate-Riin. Demand-driven e-book program in  Tallinn University of Technology library: The first  two years of experience with the
+                 EBL platform.  Slavic East European Info. Resources, 2016, 17(1-2),  36-67. </p><br>
+                <p align='justify'> [36] &emsp;
+                    Peters, Becca. An academic library e-book model  utilizing Short Term Loans (STL). J. Electronic  Resources Librarianship, 2016, 
+                    28(2), 122-123.  doi: 10.1080/1941126X.2016.1167545 </p><br>
+                <p align='justify'> [37] &emsp;
+                Shapiro, Steven. The “big deal” in e-book. J. Electronic  Resources Librarianship, 2016, 28(4), 287-290.  doi: 
+                10.1080/1941126X.2016.1243888 </p><br>
+                <p align='justify'> [38] &emsp;
+                Burke, John J. & Tumbleson Beth E. Digital collections.  Library Technology Reports, 2016, 52(2), 10-16.  </p><br>
+                <p align='justify'> [39] &emsp;Tovstiadi, Esta & Wiersma, Gabrielle. Comparing  digital apples and oranges: A comparative analysis  of e-books across multiple platforms. Serials Librarian. 2016, 70(1-4), 175-183.  
+                doi: 10.1080/0361526X.2016.1148979 </p><br>
+                <p align='justify'> [40] &emsp;
+                Swindler, Luke. New consortial model for e-books  acquisitions. College Research Libraries, 2016, 77(3),  269-285.  
+                doi: 10.5860/crl.77.3.269 </p><br>
+                <p align='justify'> [41] &emsp;
+                    Hu, Estelle. Finding alternatives when a major  database is gone. J. Medical Library Association,  2016, 104(2), 150-153.  
+                doi: 10.3163/1536-5050.104.2.011 </p><br>
+                <p align='justify'> [42] &emsp;
+                Bain, Cheryl D.; Colosimo, April L.; Mawhinney, Tara  & Houle, Louis. Using WorldShare collection evaluation  to analyze physical science and engineering monograph  holdings by discipline. Collection Management, 2016,  41(3), 133-151.  
+                doi: 10.1080/01462679.2016.1208132 </p><br>
+                <p align='justify'> [43] &emsp;
+                Haugh, Dana. How do you like your books: print  or digital? An analysis on print and e-book usage  at the Graduate School of Education. J. Electronic  Resources Librarianship, 2016, 28(4), 254-268.  
+                doi: 10.1080/1941126X.2016.1243868 </p><br>
+                <p align='justify'> [44] &emsp;
+                    Lugg, Rick. Middlemarch: Working the space between  libraries and publishers. Against the Grain, 2016,  28(2), 16-17. </p><br>
+                <p align='justify'> [45] &emsp;
+                Dresselhaus, Angela. Literature of acquisitions in  review, 2012-13. Library Resources Technical Services, 2016, 60(3), 169-181.  
+                doi: 10.5860/lrts.60n3.169   </p><br>
+                <p align='justify'> [46] &emsp;
+                    Bhat, Nazir Ahmad & Ganaie, Shabir Ahmad. Status  of collection in agricultural libraries of North India  with an overview of the trend 
+                    in acquisition. SRELS  J. Info. Management, 2016, 53(6), 471-477. </p><br>
+                 <p align='justify'> [47] &emsp;
+                Garofalo, Denise A. Tips from the trenches. J.  Electronic Resources Librarianship, 2016, 28(3),  183-185.  
+                doi: 10.1080/1941126X.2016.1200930 </p><br>
+                 <p align='justify'> [48] &emsp;
+                Tingle, Natalia & Tovstiadi, Esta. The impact of  physical book displays on business e-book use. J.  Business Finance Librarianship, 2016, 21(1), 26- 37.  
+                doi: 10.1080/08963568.2015.1110230 </p><br>
+                 <p align='justify'> [49] &emsp;
+                Thomas, Jimmy & Noble, Mark. The Douglas County  Model in Western Colorado. J. Library Administration,  2016, 56(3), 326-334.  
+                doi: 10.1080/01930826.2016.1146538 </p><br>
+                <p align='justify'> [50] &emsp;
+                    Chou, I-Chia. Reading for the purpose of responding  to literature: EFL students’ perceptions of e-books.  Computer Assisted Language Learning, 2016, 29(1),  1-20.  
+                doi: 10.1080/09588221.2014.881388 </p><br>
+                <p align='justify'> [51] &emsp;
+                    Anderson, Stephanie H.; Tarulli, Laurel & Trott, Barry.  Trends and directions in RA education. Reference  User Services Quarterly, 
+                    2016, 55(3), 203-209.  doi: 10.5860/rusq.55n3.203 </p><br>
+                 <p align='justify'> [52] &emsp;
+                Zhang, Haijun; Chow, Tommy W. S. & Wu, Q. M.  Jonathan. Organizing books and authors by multilayer  SOM. IEEE Trans. Neural Networks Learning Syst.,  2016, 27(12), 2537-2550.  
+                doi: 10.1109/TNNLS.2015.2499446 </p><br>
+                 <p align='justify'> [53] &emsp;
+                van Ballegooie, Marlene. Re-envisioning e-resource  holdings management. Serials Librarian, 2016, 70(1-4),  135-148.  
+                doi: 10.1080/0361526X.2016.1144160 </p><br>
+                 <p align='justify'> [54] &emsp;
+                Undhjem, Cathrine & Tveikra, Arnhild. ILL and  collection management in Norwegian public libraries.  Interlending Document Supply, 2016, 44(1), 20- 26.  
+                doi: 10.1108/ILDS-11-2015-0038 </p><br>
+                <p align='justify'> [55] &emsp;
+                    Sewell, Bethany B. & Link, Forrest E. Developing  workflows for short-term loans of ebooks as an  adjunct to ILL: Part one. Technical Services Quarterly,  2016, 33(3), 240-250.  
+                doi: 10.1080/07317131.2016.1169779 </p><br>
+                 <p align='justify'> [56] &emsp;
+                Alipour-Hafezi, Mehdi & Khedmatgozar, Hamid  Reza. E-lending in digital libraries: A systematic  review. Interlending Document Supply, 
+                2016, 44(3),  08-114. </p><br>
+                <p align='justify'> [57] &emsp;
+                Jin, Qiang; Hahn, Jim & Croll, Gretchen. BIBFRAME  transformation for enhanced discovery. Lib. Resources  Technical Services, 2016,
+                 60(4), 223-235.  doi: 10.5860/lrts.60n4.223 </p><br>
+                <p align='justify'> [58] &emsp;
+                Rai, Priya; Bakhshi, Samar Iqbal & Singh, Akash.  Weaving e-books in library collection: An experience  of National Law University Delhi, India, DESIDOC  J. Lib. Info. Technol., 2016, 36(1), 5-9.  
+                doi: 10.14429/djlit.36.1.8912 </p><br>
+                <p align='justify'> [59] &emsp;
+                Chen, Mingyu; Kim, Misu & Montgomery, Debbie.  Ebook record management at the University of Texas  at Dallas. Technical Services Quarterly, 2016, 33(3),  251-267.  
+                doi: 10.1080/07317131.2016.1169781 </p><br>
+                <p align='justify'> [60] &emsp;
+                Turner, Ariel K. Establishing batch processes for  e-books. Technical Services Quarterly, 2016, 33(2),  121-130.  
+                doi: 10.1080/07317131.2016.1134996 </p><br>
+                <p align='justify'> [61] &emsp;
+                Derrot, Sophie & Koskas, Mathilde. My fair metadata:  cataloging legal deposit ebooks at the National Library  of France. Cataloging Classification Quarterly, 2016,  54(8), 583-592.  
+                doi: 10.1080/01639374.2016.1240130 </p><br>
+                <p align='justify'> [62] &emsp;
+                Wu, Ko-Chiu & Hsieh, Tsai-Ying. Affective choosing  of clustering and categorization representations in  e-book interfaces. Aslib J. Info. Management, 2016,  68(3), 265-285.  
+                doi: 10.1108/AJIM-12-2015-0191 </p><br>
+                <p align='justify'> [63] &emsp;
+                    Lagace, Nettie. Improving e-book management,  discovery, and access: Two new NISO initiatives  get working. Serials Librarian, 2016, 71(3/4), 155- 157.  
+                doi: 10.1080/0361526X.2016.1254708 </p><br>
+                <p align='justify'> [64] &emsp;
+                    Kleeman, David. Books and reading are powerful  with kids, but content discovery is challenging.  Publishing Research Quarterly, 2016, 32(1), 38- 43.  
+                doi: 10.1007/s12109-015-9442-3 </p><br>
+                <p align='justify'> [65] &emsp;
+                Ciampa, Katia. Motivating grade 1 children to read:  Exploring the role of choice, curiosity, and challenge  in mobile ebooks. Reading Psychology, 2016, 37(5),  665-705.  
+                doi: 10.1080/02702711.2015.1105337 </p><br>
+                <p align='justify'> [66] &emsp;
+                Ma, Min-Yuan & Wei, Chun-Chun. A comparative  study of children’s concentration performance on  picture books: Age, gender, and media forms. Interactive  Learning Environments, 2016, 24(8), 1922-1937.  
+                doi: 10.1080/10494820.2015.1060505 </p><br>
+                <p align='justify'> [67] &emsp;
+                Barnyak, Natalie & McNelly, Tracy. The literacy  skills and motivation to read of children enrolled  in title I: A comparison of electronic and print  nonfiction books. Early Childhood Education Journal, 
+                2016, 44(5), 527-536.  
+                doi: 10.1007/s10643-015-0735-0 </p><br>
+                <p align='justify'> [68] &emsp;
+                Reich, Stephanie M.; Yau, Joanna C. & Warschauer,  Mark. Tablet-based ebooks for young children: what  does the research say? J. Developmental Behavioral  Pediatrics, 2016, 37(7), 585–591.  
+                doi: 10.1097/DBP.0000000000000335 </p><br>
+                <p align='justify'> [69] &emsp;
+                Wang, Pei-Yu & Yang, Hui-Chun. The impact  of e-book interactivity design on children’s Chinese  character acquisition, Interactive Learning Environments,  2016, 24(4), 784-798.  
+                doi: 10.1080/10494820.2014.917112 </p><br>
+                <p align='justify'> [70] &emsp;
+                Kao, Gloria Yi-Ming; Tsai, Chin-Chung; Liu, Chia Yu & Yang, Cheng-Han. The effects of high/low  interactive electronic storybooks on 
+                elementary school students’ reading motivation, story comprehension  and chromatics concepts. Computers Education,  2016, 100, 56-70.  
+                doi: 10.1016/j.compedu.2016.04.013 
+                 </p><br>
+                <p align='justify'> [71] &emsp;
+                Zeng, Yuanxiang; Bai, Xue; Xu, Jie & He, Chuqi.  The influence of e-book format and reading device on  users’ reading experience: A case study of graduate  students. Publishing Research Quarterly, 2016, 32(4),  319-330.  
+                doi: 10.1007/s12109-016-9472-5 </p><br>
+                <p align='justify'> [72] &emsp;
+                Grover, Alex P. E-books as non-interactive textual  compositions: An argument for simplicity over  complexity in future e-book formats. Publishing  Research Quarterly, 2016, 32(3), 178-186.  
+                doi: 10.1007/s12109-016-9470-7 </p><br>
+                <p align='justify'> [73] &emsp;
+                Ghosh, Maitrayee. E-books in the mobile age:  Advocacy and acceptance in India. Library Hi Tech  News, 2016, 33(6), 5-10.  
+                doi: 10.1108/LHTN-02-2016-0006 </p><br>
+                <p align='justify'> [74] &emsp;
+                Rowberry, Simon Peter. Commonplacing the public  domain: reading the classics socially on the Kindle,  
+                Language Literature, 2016, 25(3), 211-225.  doi: 10.1177/0963947016652782 </p><br>
+                <p align='justify'> [75] &emsp;
+                Letchumanan, Malathi & Muniandy, Balakrishnan.  Exploring the influence of utilitarian, cognitive and  affective factors 
+                on the use of e-books via handheld  mobile devices: A review. Malaysian J. Mathematical  Sciences, 2016, 10, 249-266.  </p><br>
+                <p align='justify'> [76] &emsp;
+                Shim, Dongnyok; Kim, Jin Gyo & Altmann, Jörn.  Identifying key drivers and bottlenecks in the  adoption of E-book readers in Korea. Telematics  Informatics, 2016, 33(3), 860-871.  
+                doi: 10.1016/j.tele.2015.12.009 </p><br>
+                <p align='justify'> [77] &emsp;
+                Kubota, D.; Niikura, Yasuhiro; Hatsumi, Ryo; Hirakata,  Yoshiharu; Miyake, Hiroyuki; Yamazaki, Shunpei;  Chubachi, Yuka & Katayama, Masahiro. Reflective  LCD with high reflectance and color reproducibility  for reduced eye strain. J. Society Info. Display, 2016,  24(3), 168-176.  
+                doi: 10.1002/jsid.426 </p><br>
+                <p align='justify'> [78] &emsp;
+                Ballatore, Andrea & Natale, Simone. E-readers and  the death of the book: Or, new media and the myth  of the disappearing medium. New Media Society,  2016, 18(10), 2379-2394.  
+                doi: 10.1177/1461444815586984 </p><br>
+
+                <h3>Contribution</h3>
+                <p><br>Dr. Rajendra Kumbhar is working as Professor in the  Department of Library & Information Science, Savitribai Phule  Pune University (formerly,
+                     University of Pune). He has been  teaching to the various courses in Library and Information  Science for over 30 years. Research method, 
+                     classification’  and reading habits are topics of his interest. He has over 50  research articles and 10 books to his credit.</p>
+
+                
+</div>
+</div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Research1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

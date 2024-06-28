@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifestation Mastermind</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .educational19{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('THE STORY OF YES AND NO')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Manifestation Mastermind'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+
+
+   <div class="educational19">
+    <h1>Manifestation Mastermind </h1>
+    <h3>Author: Yvonne Decelis | Educational</h3>  
+    <p><span class="first-letter">B</span>OOK DESCRIPTION,
+        The ultimate guide to manifesting effectively – read and learn how to make manifestation a permanent habit! Make your life what you want it to be…
+    </p><br>
+
+
+    <p> Terms and Conditions 
+        <i><u>LEGAL NOTICE</u></i>        
+    </p><br>
+    
+    <p> The Publisher has strived to be as accurate and complete as possible in the creation of this report, notwithstanding the fact that he does
+        not warrant or represent at any time that the contents within are accurate due to the rapidly changing nature of the Internet. <br>
+        While all attempts have been made to verify information provided in this publication, the Publisher assumes no responsibility 
+        for errors, omissions, or contrary interpretation of the subject matter herein. Any perceived slights of specific persons, peoples, or organizations are unintentional.<br>
+        In practical advice books, like anything else in life, there are no guarantees of income made. Readers are cautioned to reply on their
+        own judgment about their individual circumstances to act accordingly.
+        This book is not intended for use as a source of legal, business, accounting or financial advice. 
+        All readers are advised to seek services of competent professionals in legal, business, accounting and finance fields. 
+        You are encouraged to print this book for easy reading. 
+    </p><br>
+  
+    <p> <b>Foreword</b><br> The art of manifestation may be simple for some people. 
+        But, when they start their journey to manifest something they desire, they find it hard to make it possible. Get all the info you need here. 
+    </p><br>
+     
+    <p><i><b>Manifestation Mastermind</i></b></i><br>
+        The Ultimate Guide To Manifesting Effectively 
+    </p><br>
+    
+    <p><b>Chapter 1: Introduction Synopsis</b></p><br>
+
+        <p><u><b>Every individual has reasons why he or she wants to manifest what they like for his or her own life.</b></u> </p><br>
+
+    <p><b>The Basics </b> But, how can you master the art of manifestation? What are the things that you need to consider? Why do you need to manifest something?
+        There are different approaches that you may take for consideration when making manifestations. These approaches may vary depending on how the person handles the situation.
+        But, before everything else, you have to know what manifestation means before you take any necessary steps. 
+        You also have to know the abilities required for you to make successful manifestation. 
+        This is because there are things that may assist you while you are applying the steps to manifest anything.
+        So, what are really the secrets to successful manifestation and why do you need to master it? Is it a requirement in this life? 
+        Or, is it another way for you be successful in life? The answer is simple and it depends on the person.  
+    </p><br>
+
+    <p><b>Chapter 2: What’s All the Big Fuss About Manifestation Synopsis</b> For those who are not familiar with manifestation, 
+        it is best described as co-creating your dreams by facing reality and accepting everything. 
+        It is also getting rid of negatives while you are on your journey.
+    </p><br>
+
+    <p><b>What’s The Fuss</b> These negatives may be anything that holds you back while trying to manifest something that you desire. But, most of the common negatives are fear and lack of patience. 
+        That is the reason why some don’t have the guts to face the changes and don’t like to take risks, as they are afraid to lose something that they may not afford to lose.<br><br>
+        Many individuals have higher levels of fear rather than faith. It is true that it is in the nature of every human being, 
+        but you can do something to get rid of it and that is by embracing them and applying solutions slowly. 
+        Rushing things won’t give you great results. It may provide you a quick solution, but it will never resolve everything.<br><br>
+        There are various tips that you may consider when you want to perfect successful manifestation. First and foremost, you need to be patient. You will obtain success in the right time and right place. <br><br>
+        You can’t rush it unless you have a time machine that will let you enter your future world. Second, clear your state of mind and focus on your goals.<br><br>
+        If you can’t concentrate on your goals, you will always be confused and will face tough times. Clearing your mind involves eliminating negative emotions and letting positive vibes rule.<br><br>
+        When clearing your mind, you also need to get out of your shell and view the beauty of the world. This will keep you energized and will give you strength to face your journey. 
+        With a clear and positive mind, you’ll have the power to manifest anything. All you need to do is believe that you can do it.<br>
+    </p><br>
+
+    <p><b>Chapter 3: Why Some People Don’t Seem to Manifest Effectively Synopsis</b><br> Many people don’t seem to manifest effectively because they let their negative attitudes reign. 
+        They fear facing reality and don’t want to take the challenge because they think that it would be risky for them to face the truth and go with the flow of reality.
+        Also, they think that reality sucks and their life would be much easier if they ignore reality. Since not all people are the same, they have different approaches to every situation. 
+        Some manifest by playing it safe while others manifest without knowing the behind the scene facts of the situation. 
+        This is because some are open-minded about the situation while others just concentrate for their own good and they want to make sure that they will get success in life.
+    </p><br>
+
+    <p><b>What Happens</b><br> Manifesting or co-creating your dreams or wants in life is not easy for everyone. It is a crucial process with various steps and it may take some time for others to master it. 
+        Apart from fears, there are other reasons why some people don’t seem to manifest successfully.<br><br>
+        One of these reasons is that many don’t want to accept the change. There are a number of individuals that don’t want to take a step to accept the change 
+        because they think that it would be just a waste of time and they have a high level of belief in their old ways.<br><br>
+        Some even don’t like to experience change as this could just ruin their overall plan and feel it is just useless if they take any steps to embrace change.<br><br>
+        But, what others really don’t know is that manifesting is about accepting the reality and letting go of their negative attitudes that keep them from manifesting. If you are one of the persons that have these negative things in life, you will never succeed in manifesting. 
+        So, if you want to achieve your dreams in life and want to be successful with your business or personal life, then taking away such negative factors in your life could be your first step. <br><br>
+        Once you have done this successfully, you will never have those tough times and it will be a lot easier for you to proceed to the next level of manifestation.<br><br>
+        If you have experienced any hard times while you are in the process, don’t give up and keep improving your courage because once you pay attention to the bad things, 
+        you will not be effective in manifesting and will keep failing. If this happens, just remember your goals, 
+        why you’re doing it and keep positive vibes so you can master manifestation without encountering tough times.
+    </p><br>
+
+    <p><b>Chapter 4: Emptying Preconceptions About Manifestation Synopsis</b><br> Manifestation is about doing your best to attain your goals and facing the reality without any hesitations. 
+        It is not about expecting the outcome of your decision.<br><br>
+        Of course, many people wait for different things that may come after taking a step because they are afraid to fail. 
+        But, if you will just keep on assuming and not doing anything, you won’t reach your goals in life.<br><br>
+        To get successful manifestation, the first thing that you should do is to empty your preconceptions. 
+        Do not formulate things in your mind as you can’t do it or you don’t have the power to achieve what you want. 
+        Preconceptions about manifestation are like not trying to fix the things that hinder you from making your vision into reality.<br><br>
+    </p><br>
+
+    <p><b>Examine It Well </b><br>If you keep preconceptions, you won’t succeed at anything and stay in the same place where you are right now. 
+        If your life is a vehicle, you will always get stuck in traffic and it would take you too long to get to your destination.<br><br>
+        Preconceptions are sometimes good because they let you imagine the possibilities. But, oftentimes, they are the negative elements that you must get rid of because if they pollute your mind, 
+        you won’t be able to get successful manifestation. <br><br>
+        You can empty preconceptions about manifestation by starting to embrace the good things that it may give you. 
+        Always stay positive and think of your rewards once you have achieved your desires. This will keep your spirit up and you will be energized all the time. 
+        It is okay to have preconceptions about manifestation, but if you will not get rid of it, then, you won’t get the concept of manifestation successfully. 
+        Another step that you may consider when getting rid of preconceptions is by knowing the essential things for consideration. <br><br>
+        Also, don’t forget the things that you should be aware of because they can be a great help in the future. Once you have rid yourself of preconceptions about manifestation, 
+        you will never get lost on your path to development and you will reach your dreams in no time.
+    </p><br>
+
+
+    <p><b>Chapter 5: The Importance Of Setting Your Intention Synopsis </b><br> For every action you take, you should know your intention and why you want to do it 
+        because if you don’t know your goals, you won’t be able to stay on the path and you will keep on failing in getting what you want. 
+        Take note, it is hard to manifest anything that you imagine. So, for you to do it successfully, you have to set your intention before anything else. 
+    </p><br>
+
+    <p><b>Getting It Together </b><br> Setting your intention is very important because this could serve as your guide or note that would remind you what you really want for your life. 
+        If you don’t know your intention, start by determining your goals and the things you want to achieve for your personal or business life. 
+        If you have goals in mind, try to write it down and keep the list with you. You may aim for anything as long as it would make your life much better.<br><br>
+        Your intentions will also determine the things that you need for you to stay on the path to successful manifestation. 
+        If you are still confused about your intentions, try to take everything slow and don’t rush setting your intentions. 
+        The reason behind it is that you may concentrate on one thing and forgot to include the things that you may need while you are in the process. 
+        You also have to bear in mind that it can be complex to consider all the things you want. 
+        It is because this may just confuse you and might not give you the positive results that you want to get. <br><br>
+        When setting your intentions, only include the vital things that would benefit you. If you think that one of your goals may just ruin what you want to achieve, then, remove it. 
+        Don’t set your intentions individually because it would not lead you to the results that you wanted to achieve. 
+        If possible, concentrate only on what you really want and eliminate the things that may not give you any rewards.<br><br>
+    </p><br>
+
+    <p><b>Chapter 6: Why Faith Is Very Important When Manifesting Synopsis</b><br> Faith will serve as your energy when you want to manifest something. 
+        Without this, you will never make it to the top and won’t get what you desire. 
+        Unfortunately, only a few have a huge amount of energy levels in their bodies because they always let negative things invade their mind. <br><br>
+        You likely have relied on faith if you have gone through difficulties in the past few years. 
+        But, if this is your first time to manifest anything, you might find it difficult to gain high levels of faith. <br><br>
+        Everybody needs to have faith in himself or herself. 
+        However, some don’t know how to use this in times that they are experiencing tough times because they react to the situation. 
+        There are tons of reasons why some people can’t manage their faith. 
+        One of these reasons is that they thought when they kept on being positive and believing that everything would turn out fine, it would just get worse. <br><br>
+    </p><br>
+</div>
+</div>
+
+<script>
+function toggleDarkMode() {
+var body = document.body;
+body.classList.toggle('dark-mode');
+
+localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+
+var darkModeToggle = document.getElementById('darkModeToggle');
+if (body.classList.contains('dark-mode')) {
+  darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function loadDarkMode() {
+var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+var body = document.body;
+if (darkModeEnabled) {
+  body.classList.add('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  body.classList.remove('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function addToLibrary(bookTitle) {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'block';
+  }
+
+  function confirmAddToLibrary() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+
+      var bookTitle = 'Manifestation Mastermind'; 
+      var libraryData = localStorage.getItem('library');
+
+      var library = [];
+      if (libraryData) {
+          library = JSON.parse(libraryData);
+      }
+
+      if (library.length >= 10) {
+          alert('You have reached the maximum limit of 10 books in your library.');
+          return; 
+      }
+
+      library.push(bookTitle);
+
+      localStorage.setItem('library', JSON.stringify(library));
+
+      openLibrarySuccessModal();
+
+      displayLibrary();
+  }
+
+  function closeAddToLibraryModal() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+  }
+
+  function openLibrarySuccessModal() {
+      var modal = document.getElementById('librarySuccessModal');
+      modal.style.display = 'block';
+
+      setTimeout(function() {
+          modal.style.display = 'none';
+      }, 2000);
+  }
+
+  function toggleNotes() {
+      var notesSection = document.getElementById('notesSection');
+      if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+          notesSection.style.display = 'flex';
+      } else {
+          notesSection.style.display = 'none';
+      }
+  }
+
+  function addNote() {
+      var noteText = document.getElementById('noteText').value;
+      if (noteText.trim() === '') {
+          alert('Note cannot be empty.');
+          return;
+      }
+
+      var notesList = document.getElementById('notesList');
+      var noteItem = document.createElement('li');
+      noteItem.className = 'note-item';
+      noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+      notesList.appendChild(noteItem);
+
+      saveNotes();
+
+      document.getElementById('noteText').value = '';
+  }
+
+  function deleteNote(button) {
+      var noteItem = button.parentElement;
+      noteItem.remove();
+      saveNotes();
+  }
+
+  function saveNotes() {
+      var notesList = document.getElementById('notesList');
+      var notes = [];
+      for (var i = 0; i < notesList.children.length; i++) {
+          notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+      }
+      localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+      var notes = JSON.parse(localStorage.getItem('notes'));
+      if (notes) {
+          var notesList = document.getElementById('notesList');
+          notesList.innerHTML = '';
+          for (var i = 0; i < notes.length; i++) {
+              var noteItem = document.createElement('li');
+              noteItem.className = 'note-item';
+              noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+              notesList.appendChild(noteItem);
+          }
+      }
+  }
+  function goToBooks() {
+      window.location.href = 'books.html';
+  }
+
+  function goToMyLibrary() {
+      window.location.href = 'mylibrary.html';
+  }
+
+
+  window.onload = function() {
+      loadDarkMode();
+      loadNotes();
+  };
+
+
+      function openModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'block';
+      }
+
+      
+      function closeModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'none';
+      }
+
+      function logout() {
+          localStorage.clear();
+
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'block';
+
+          closeModal();
+
+          setTimeout(function() {
+              window.location.href = 'account.html';
+          }, 2000);
+      }
+
+
+      function closeLogoutSuccessModal() {
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          var modals = document.getElementsByClassName('modal');
+          for (var i = 0; i < modals.length; i++) {
+              if (event.target == modals[i]) {
+                  modals[i].style.display = 'none';
+              }
+          }
+      }
+
+
+</script>
+</body>
+</html>

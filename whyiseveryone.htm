@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why is Everyone Always Picking on Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .educational20{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('THE STORY OF YES AND NO')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Why is Everyone Always Picking on Me'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+   <div class="educational20">
+    <h1>Why is Everyone Always Picking on Me</h1>
+    <h3>Author: Dr. Webster-Doyle</h3>  
+    <p><span class="first-letter">B</span>ook Description,<br>
+        WHY IS EVERYBODY ALWAYS PICKING ON ME? A GUIDE TO HANDLING BULLIES Lively colored illustrations, exciting stories, and practical tips 
+        and role-playing exercises help give children the tools to avoid being victimized. Cope with the "Schoolyard Bully" Stop bullies by using 
+        the "School of No Sword" Gain the confidence to win without fighting! This book is also for adults searching for constructive ways to help young people 
+        peacefully confront hostile aggression. Illustrated by award-winning artist, Rod Cameron."Webster-Doyle's" insight is that by recognizing, understanding, 
+        and accepting our violent tendencies, we can avoid acting them out. These new books are good for teachers and parents of school children 
+        who need appropriate language and activities to help children deal with their fee
+    </p><br>
+
+    <p><b><i>Solving Conflict Nonviolently</i></b></p><br>
+    
+    <p> Have you ever felt:<br>
+        Anxious? Helpless?<br>
+        Worthless? Powerless?<br>
+        Out of control? Unfairly punished?<br>
+        Ridiculed? Harassed?<br>
+        Hurt? Vengeful?<br>
+        Ashamed? Angry?<br>
+        Humiliated? Frustrated?<br>
+        Insecure? Lonely?<br>
+        Enraged? Unloved?<br>
+        Rejected? Violent?<br>
+        Ambitious? Greedy?<br>
+        Pressured to conform? Pressured to compete?<br>
+        Scared? Afraid of not "making it"?<br>
+        Afraid of not living up to the expectations of others?<br>
+        In other words, have you ever felt<br>
+        that everybody is picking on you?<br>
+    </p><br>
+  
+    <p><b>Boys Will Be Boys A Story</b> Whack! You feel a sharp pain in your back. You spin
+        around in anger to see the boy who threw the ball and hit you.<br>
+        "Hey, you, Jack! I'll get you for that!" you yell at him,
+        clenching your fists as you walk in his direction. Your palms
+        sweat and your eyes harden as you approach this smaller and
+        younger boy. "I could put your lights out for hitting me!" you
+        say to him as you grab his shirt.        
+    </p><br>
+     
+    <p> "I'm sorry! I didn't mean to hit you. It was an accident,"
+        the smaller boy says fearfully. He is so afraid of you, his body
+        is shaking. You feel a surge of power from his fear. You know
+        you are in control.
+        
+    </p><br>
+    
+    <p>Other kids on the playground gather about you as you
+        continue to harass this younger boy.
+        "Oh, sure. It was no mistake, punk. You're asking for a
+        bruising!"
+    </p><br>
+
+
+    <p>You feel the eyes of your classmates on you. You feel that
+        they admire your strength, and fear it at the same time. Most
+        of the kids keep away from you. The few buddies you have
+        hang out with you because they also think bullying other kids
+        is having a good time.        
+    </p><br>
+
+    <p> "Stop that, this minute!" you hear Mrs. Potter, the
+        playground supervisor, command from across the yard. She is
+        coming toward you at full steam, her finger wagging "Bad boy!"
+        and her tone threatening the vice principal's office again.        
+    </p><br>
+
+    <p> What a dope she is," you think to yourself. "She can't
+        scare me. All the vice principal can do is send me home. Then
+        what? No one's there and they don't care anyhow."
+        "Let go of Mark right now, or I'll send you to Mr. Nathan.
+        
+    </p><br>
+
+    <p> You are a bully. Don't you think that you can get away with
+        this behavior. I won't tolerate it. Why can't you be good, like
+        Mark? He wouldn't start a fight; he has fine manners. You're
+        a troublemaker, and you always will be as far as I'm
+        concerned," she lectures.
+        Mrs. Potter puts her hand on your arm and you push it off.
+        You let go of Mark to face Mrs. Potter. "You're not one of my
+        parents. You can't tell me what to do," you yell back at her
+        defiantly, your hands on your hips, your feet apart.
+        "Come with me. We are going to the vice principal's office
+        right now," she insists.
+        </p><br>
+
+
+    <p>"No way. I'm out of here!" You run across the yard and to
+        the field beyond the school, yelling names back at the
+        playground supervisor and the group of kids that are standing
+        around. "Jerks, punks! I'll get you yet! All of you! You wait
+        and see!"        
+    </p><br>
+
+    <p> After school you meet your two buddies, Mac and Tom. You
+        hang out behind the stores downtown in the empty lot where
+        you throw rocks at bottles and smoke cigarettes that you stole
+        from your parents.
+    </p><br>
+
+    <p> It's getting dark and your buddies and you start to go
+        home. As you arrive at your house, your mother pulls up in her
+        new, expensive foreign car. Your dad is still at work, as usual.
+        Both of them work six days a week, usually into the late
+        evening hours. Walking into the house, you see your big sister
+        crashed out on the sofa, eating pizza and watching TY.
+        "Hey, weirdo. -How goes it?" she sneers. "Failing all your
+        subjects as usual?" You don't respond. "Got into a fight today,
+        I heard."        
+    </p><br>
+
+    <p> "Aw shut up," you snap back at her, heading into the
+        kitchen to see what you can find to eat.
+        ''You're going to end up a bum or a convict, if you don't
+        watch out, you know," your sister yells with a mouth full of
+        doughy pizza. ''You're just too dumb to learn. You're going to
+        flunk everything if you don't straighten out, ya' hear me?"
+        You get some leftover pizza, a coke and some chocolate
+        doughnuts and go into the living room to watch TV. Your
+        mother has gone into her office upstairs to make some phone
+        calls.        
+    </p><br>
+
+    <p>"Change the channel," you command your bigger sister
+        with a look of anger. "I want to watch 'Rambo IV' and it's on
+        now."        
+    </p><br>
+
+    <p>"You always watch that macho junk," your sister says, not
+        looking at you, and not changing the channel. ''You should
+        watch something more intelligent instead of all that warstuff.
+        It'll pollute your brain." She looks at you. "Maybe it's too late.
+        Your brain has turned to mush already. Why can't you be more
+        like Jason? He gets good grades and everyone likes him. He's
+        a better brother than you," she says, smugly. "Did you hear
+        he's getting a football scholarship to State?"
+        
+    </p><br>
+
+
+    <p>"Jason's a fake. He wants to be just like Dad, a big
+        success. But he's just a phony. You think I'm a bully? So is he.
+        But he's sly like a fox. He sweet-talks all his teachers. They'd
+        do anything for him. He's just like the rest of those phony
+        jocks he hangs out with. They're all alike. They play the same
+        game, and I'm not talking about football. They get into college
+        and get all the big-time lawyer, banker, stock market jobs.
+        They're all phonies. But try to get in their way and they'll
+        knock you over. Rambo's nothing but mush compared to those guys. Talk about aggressive! But everyone loves them
+        for it, because they're playing the success game."        
+    </p><br>
+
+
+    <p> (Secretly, you are jealous of your brother, because your
+        Mom and Dad always seem to favor him. When you and Jason
+        were younger, he used to beat you up a lot. He really hurt you.
+        When you told Mom and Dad, Jason would lie and say that you
+        started it. You always got the blame and Jason usually got off
+        with a slight reprimand. "Boys will be boys," your father used
+        to say, patting Jason on the back while giving you a
+        disapproving look. The memory fuels your anger and you're
+        boiling inside.)        
+    </p><br>
+
+    <p>"Change the channel before I give you one," you threaten
+        your sister. She knows you mean business.
+        "I might as well. You probably can't understand this
+        program anyhow. Your level of mentality is just above a cave
+        man's. You can't even talk intelligently. No wonder you don't
+        have any friends - only those jerks, Mac and Tom. You'll all
+        land up in jail together someday."        
+    </p><br>
+    
+     <p>Your sister gets up to leave. You notice how overweight
+        she is. She never gets any exercise. She eats way too much
+        junk food and reads trashy movie magazines. She looks at you
+        with contempt. "All that those G.I. Joe characters do is grunt.
+        No wonder you understand them," she says coldly as she turns
+        her back on you to leave the room.        
+    </p><br>
+
+        <u><p><b>Relationships</b></p></u><br>
+     
+    <p> You make a rude face and turn your attention to the movie.
+        Rambo has just been trapped in the jungle and is fighting his
+        way past the enemy patrol. He is big and harsh looking, with
+        his M-16 gun spraying bullets everywhere. With a defiant
+        scream, he throws a grenade at the oncoming "gooks," blowing
+        them up.               
+    </p><br>
+
+         
+    <p>Suddenly he is jumped from behind by one of the patrol.
+        You watch Rambo fight in hand-to-hand combat with this
+        violent looking creature.
+        They roll down into the river, where they continue to
+        punch, kick, and strike at each other. Rambo grabs the enemy
+        by the throat and holds him underwater with a look of crazed
+        intensity on his face. Finally Rambo pulls out his commando
+        knife and plunges it beneath the surface into the gut of the
+        quivering body. The river runs blood red as Rambo, unscathed,
+        climbs ashore to meet his next "patriotic" and violent
+        adventure.
+        
+    </p><br>
+
+    <p>There is a strange attraction to these films. You feel the
+        excitement; you feel like Rambo. You experience his every
+        emotion; your palms sweat and your fists go hard. You want to
+        be like him. You have even thought of joining the Commando
+        Forces after high school. You want to serve your country
+        against the enemy.
+        
+    </p><br> 
+
+
+    <p>When you were younger, you used to read war comics and
+        play with war toys. G.I. Joe and other action figures were your
+        favorites. You took a few lessons in Karate, but you didn't like
+        the teacher or the class because they talked about feelings.
+        The teacher wasn't a patriot or hero like Rambo, anxious to go
+        to battle to defend our country's image. This Karate teacher
+        was soft and gentle. He told you that Karate wasn't for
+        promoting fighting, but rather for learning about how to
+        defend yourself so you don't have to fight. He talked about
+        being peaceful and caring, and you thought he was a wimp.
+        You bought some Martial Arts weapons instead - nun-chucks
+        and a butterfly knife - which you carried until they were
+        taken away by Mr. Nathan one day at school.
+        </p><br>
+
+
+    <p>Suddenly your thoughts are interrupted by your father's
+        voice coming from the front hall. "Hello, I'm home. Hey,
+        anyone here? Come on, let's celebrate!" You can tell he's been
+        drinking again. Your stomach suddenly becomes tight and
+        starts to ache. Your palms sweat as you clench your fists.
+        "Hey buddy, what's the good word?" your father asks,
+        entering the family room where you are watching TV.
+    </p><br>
+
+    <p>"Nothing," you grunt, not taking your eyes off the TV. You
+        can sense your father's anger and frustration behind you. Your
+        father and you do not get along very well. Sometimes when he
+        drinks, he tries to hit you. When you were little, he did; but
+        now you are too quick. One night last year, on your thirteenth
+        birthday, you and he finally went at it. He was drunk and
+        heard that you had been caught stealing cigarettes from a local
+        store.
+    </p><br>
+
+    <p>''You bum!" he shouted then. "Why can't you be more like
+        your brother Jason? He'd never do anything like that." He
+        swung at you, but you ducked and let him have it. Jason, your
+        mother, and sister had to break it up.
+        You remember that time now and you think angrily, "If he
+        only knew who taught me how to steal, he'd die." Jason is the
+        biggest thief. He takes his parents' money, liquor, and
+        cigarettes right from under their noses, and they don't ever
+        seem to notice.
+    </p><br>
+
+    <p>You sink down in your chair as your father comes over to
+        you. You are ready for whatever happens. You don't care any
+        more. Sometimes he gets violent, sometimes he spoils you by
+        giving you a bunch of money when he's drunk. You can never
+        tell which way he will go. "Hey, buddy, watching old Rambo.
+        Great, isn't he? Kills all those gooks. Blows them away. They
+        deserve it." He looks at you. "How are you? Get into any
+        fights lately? Hope you stand up for yourself, if you're getting
+        picked on. Here's a little something to get a treat with (as he
+        stuffs a twenty dollar bill into your shirt pocket). Sorry I'm
+        late again. Lots of work to do. This family is very expensive to
+        support!"
+    </p><br>
+
+    <p>You sink even lower in your chair, letting his words and
+        his smelly breath go over your head. Rambo is moving across
+        the jungle to the enemy airstrip. He is trying to get an Attack
+        Hawk Helicopter. You've seen this scene before. He captures
+        the helicopter and flies over the enemy compound shooting
+        rockets into the enemy barracks, bodies flying in all directions,
+        fire and smoke everywhere. You fix your eyes on that
+        flickering screen, hands sweaty, fists clenched, waiting for the
+        big kill.
+    </p><br>
+
+    
+   
+</div>
+</div>
+
+<script>
+function toggleDarkMode() {
+var body = document.body;
+body.classList.toggle('dark-mode');
+
+localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+
+var darkModeToggle = document.getElementById('darkModeToggle');
+if (body.classList.contains('dark-mode')) {
+  darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function loadDarkMode() {
+var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+var body = document.body;
+if (darkModeEnabled) {
+  body.classList.add('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  body.classList.remove('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function addToLibrary(bookTitle) {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'block';
+  }
+
+  function confirmAddToLibrary() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+
+      var bookTitle = 'Why is Everyone Always Picking on Me'; 
+      var libraryData = localStorage.getItem('library');
+
+      var library = [];
+      if (libraryData) {
+          library = JSON.parse(libraryData);
+      }
+
+      if (library.length >= 10) {
+          alert('You have reached the maximum limit of 10 books in your library.');
+          return; 
+      }
+
+      library.push(bookTitle);
+
+      localStorage.setItem('library', JSON.stringify(library));
+
+      openLibrarySuccessModal();
+
+      displayLibrary();
+  }
+
+  function closeAddToLibraryModal() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+  }
+
+  function openLibrarySuccessModal() {
+      var modal = document.getElementById('librarySuccessModal');
+      modal.style.display = 'block';
+
+      setTimeout(function() {
+          modal.style.display = 'none';
+      }, 2000);
+  }
+
+  function toggleNotes() {
+      var notesSection = document.getElementById('notesSection');
+      if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+          notesSection.style.display = 'flex';
+      } else {
+          notesSection.style.display = 'none';
+      }
+  }
+
+  function addNote() {
+      var noteText = document.getElementById('noteText').value;
+      if (noteText.trim() === '') {
+          alert('Note cannot be empty.');
+          return;
+      }
+
+      var notesList = document.getElementById('notesList');
+      var noteItem = document.createElement('li');
+      noteItem.className = 'note-item';
+      noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+      notesList.appendChild(noteItem);
+
+      saveNotes();
+
+      document.getElementById('noteText').value = '';
+  }
+
+  function deleteNote(button) {
+      var noteItem = button.parentElement;
+      noteItem.remove();
+      saveNotes();
+  }
+
+  function saveNotes() {
+      var notesList = document.getElementById('notesList');
+      var notes = [];
+      for (var i = 0; i < notesList.children.length; i++) {
+          notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+      }
+      localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+      var notes = JSON.parse(localStorage.getItem('notes'));
+      if (notes) {
+          var notesList = document.getElementById('notesList');
+          notesList.innerHTML = '';
+          for (var i = 0; i < notes.length; i++) {
+              var noteItem = document.createElement('li');
+              noteItem.className = 'note-item';
+              noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+              notesList.appendChild(noteItem);
+          }
+      }
+  }
+  function goToBooks() {
+      window.location.href = 'books.html';
+  }
+
+  function goToMyLibrary() {
+      window.location.href = 'mylibrary.html';
+  }
+
+
+  window.onload = function() {
+      loadDarkMode();
+      loadNotes();
+  };
+
+
+      function openModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'block';
+      }
+
+      
+      function closeModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'none';
+      }
+
+      function logout() {
+          localStorage.clear();
+
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'block';
+
+          closeModal();
+
+          setTimeout(function() {
+              window.location.href = 'account.html';
+          }, 2000);
+      }
+
+
+      function closeLogoutSuccessModal() {
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          var modals = document.getElementsByClassName('modal');
+          for (var i = 0; i < modals.length; i++) {
+              if (event.target == modals[i]) {
+                  modals[i].style.display = 'none';
+              }
+          }
+      }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .research2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 1200px;
+            padding: 50px;
+            font-size: large;
+            margin-left: 6%;
+            column-count: 1;
+            text-align: justify;
+        }
+        h1 {
+    text-align: center;
+    margin-top: 5%;
+}
+h2 {
+    text-align: center;
+    margin-top: .1%;
+}
+h3 {
+    text-align: left;
+}
+h4 {
+    text-align: center;
+}
+.first-letter{
+    font-size: 50px;
+    font-family: serif;
+    font-weight: bolder;
+}
+.department{
+    text-align: center;
+}
+.visual{
+    text-align: center;
+}
+.email{
+    text-align: center;
+}
+.along{
+    text-align: center;
+    margin-left: 6%;
+    margin-right: 2%;
+}
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h5{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #fff4c3;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Si Langgam at si Tipaklong')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h5>Notes</h5>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Research 2'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+<h1>The Importance Of E-Books In Improving Students' Skills In
+    Physics Learning In The 21st Century: A Literature Review</h1>
+    <h2>Silvi Yulia Sari, Fanny Rahmatina Rahim, Putri Dwi Sundari, Fauzan Aulia</h2> 
+    <div class="container">
+        <p class="department">Department of Physics, Faculty of Mathematics and Natural Sciences, 
+            Universitas Negeri Padang, Jl. Prof Hamka, Padang 25131, Indonesia </p>
+        <p class="visual">Department of Visual Communication of Design, Faculty of Language and Art, 
+            Universitas Negeri Padang, Jl. Prof Hamka, Padang 25131, Indonesia</center></p> 
+        <p class="email">E-mail: silviyuliasari@fmipa.unp.ac.id </center></p><br>
+        </div>
+        <h4> ABSTRACT </h4>
+        <div class="container">
+            <p class="along"><b><i>Along with the development of technology, the education system began to change
+                from face-to-face learning to blended learning. Blended learning uses a combination of print
+                and digital learning media. Most digital learning resources are e-books that replace the 
+                function of printed books and the role of the teacher in the classroom. The focus of research 
+                in this paper is how e-books can improve student skills in the 21st century. There has been a 
+                number of researches related to e-books and their use in high schools. In-depth literature study 
+                is needed to get a conclusion on how e-books affect students' skills, especially after studying 
+                Physics. This research provides invaluable insight into how educators were maximizing the use of 
+                e-books so as to improve student learning outcomes which in turn impact 21st century skills. 
+                These studies describe a lot of data which enables other researchers to understand how teachers use 
+                and wish to use e-books. The analysis of these empirical results is used as the basis for developing
+                e-books that have effective content and features that are relevant to e-book literacy.</i></b></p> <br> 
+        </div>
+  
+<div>
+    <div class="research2">
+        <h3> I. Introduction </h3>
+        <p> <br>The role of technology is necessary for enabling the development of 
+            innovations [1]. The latest virtual or social media will make a great breakthrough in the provision 
+            of education. Innovation is recommended because it will provide changes to the conventional learning 
+            process [2]. At the very least, it is expected that existing conventional learning should adopt new 
+            methods [3]. In some schools, teachers have increased the use of technology-based content and resources 
+            in their learning process. This evolution is often driven by a small number of teachers who are 
+            diligently looking for new ways to provide content that enriches and extends learning beyond class 
+            hours and the school day [4]. So teachers need to know to integrate technology into their learning activities. </p> <br> 
+        <p> One of the integrations of technology into the current learning curriculum is the application of online
+            learning or what we often know as electronic learning (e-learning) [5]. E-learning is essentially learning
+            through the use of computer or internet technology that provides effectiveness and efficiency in learning
+            [6]. The advantages of e-learning include ease of carrying out the learning process anywhere and anytime,
+            improving student learning, ease of collecting information by accessing the internet, and increasing the 
+            effectiveness and efficiency of learning [7].  </p> <br>
+        <p> Students tend to listen to the teacher's explanation during learning activities so that learning becomes
+            less interactive and collaborative [8]. This is the teacher's complaint when observing the classroom 
+            management in the learning process. However, this can also be caused by teachers who are not innovative 
+            in providing learning in the classroom. Teachers should know more about what students need and understand 
+            better about using appropriate methods and media to attract students' interest and motivation so that they 
+            are more active and learning becomes more effective.   </p> <br> 
+        <p> Effectiveness in learning can be observed from the achievement of learning objectives through
+            interactions that occur during the learning process [9]. It will be effective depending on the teacher's
+            ability to manage the class [10]. A teacher who does not master the concepts will not be able to teach 
+            well. Likewise, if a teacher does not master various ways of delivering material, it will be difficult 
+            for students to understand the material. In addition, a good teacher must have the ability to apply
+            psychological principles, organize the teaching and learning process, and adapt to new situations [11].  </p> <br>
+        <p> The situation has changed. In the modern era, information and technology have developed rapidly.
+            Nowadays, technological advances have enormous potential in developing a constructivist learning 
+            environment to facilitate learning. The application of technology-based learning has many advantages, 
+            especially in learning resources and activities.  </p> <br>
+        <p> The use of technology in learning does not necessarily prove the advantages it promises. No matter
+            how sophisticated technology is, technology is not the most powerful medicine to cure all diseases, nor
+            is it a magic wand that can easily solve problems, especially problems in the learning process.
+            Technology cannot provide its effectiveness in learning because it is very dependent on how the
+            technology is integrated or utilized in learning activities [12].  </p> <br>
+        <p> The utilization of technology in the learning process, especially the use of electronic books, certainly has 
+            a major influence on the learning process. However, students are not familiar with the learning system, so the
+            application of online learning is less effective. Students are still accustomed to conventional learning. Kirna 
+            found that the cause of the ineffectiveness of online learning is due to the student's learning culture [13]. 
+            Most students are not used to active and productive learning. Students' learning styles that have been formed 
+            from traditional learning require sufficient adaptation time to shift their passive learning such as those 
+            offered by online learning. That is, the integration of technology in learning should not ignore the 
+            characteristics of students. Dabbagh & Ritland also stated that the success of online learning also requires
+            students who are disciplined, directed, independent, and comfortable with written communication, have the 
+            character of sharing information, and have technical technology skills [14]. Morin, et al. stated that 
+            “Perception is an important consideration when integrating technology into learning, especially virtual learning” [15].</p> <br>
+        <p> 21st century skills of students can be improved through the application of technology-based learning
+            [16]. In the 21st century, every student will learn differently, so teachers are challenged to find ways to help 
+            all students learn effectively. The competencies consist of : (1) Critical thinking skills and problem-
+            solving, (2) Communication skills, (3) Collaboration skills, and (4) Creativity skills and innovation [17][18][19][20].
+            These skills are the goals of Curriculum 2013. Of course, this is a challenge for
+            teachers to be able to create the nation's next generation who can answer the challenges of the 21st century. Therefore, 
+            these skills need to be developed in the learning process, as well as in solving problems related to physics subject matter. </p> <br>
+        <p> Physics is part of the natural sciences. In the process of learning physics, students certainly need to
+            have basic skills that must be built. The basic skills in question are generic science skills that are useful
+            for students in solving problems that exist in the surrounding environment and during the learning
+            process [21][22].</p> <br> 
+        <p> Many students think that physics is a difficult science because there are many formulas, so it is difficult to 
+            understand the concept [23]. The ability of students in solving physics problems is also still low. This is 
+            because students directly use equations, memorize formulas only, and guess answers, without analyzing physics 
+            problems. Therefore, students need suitable media to enhance their skill in problem solving. One of them is books. </p> <br>
+        <p> Technology is used in the world of education by using electronic books. An electronic book or digital
+            book is an electronic version of a book. In contrast to printed books, e-books present digital information
+            in the form of text, images, animations, and videos that are more easily accessible to sources. </p> <br>
+        <p> In the market, e-books have experienced significant development. E-book enthusiasts are very much
+            due to their small size and affordability. Another advantage of an e-book is the e-book can display 
+            animation [24]. The vision of the e-book is as an alternative format of a book/document that can be 
+            downloaded. So it can be used easily anytime and anywhere. It also can save expenses for buying printed books.</p> <br> 
+        <p> With the existence of e-books, it will be very helpful in the learning process especially in online learning. 
+            Usually, the learning process is carried out with media sources that have been used for a long time so that 
+            learning becomes less interactive. E-books provide the latest variations so that the learning
+            process is not monotonous. This can trigger the curiosity of students in physics which is very closely 
+            related to everyday life. The e-book presented physical phenomena that can be observed in everyday life. 
+            To find out more fully and in detail the benefits of e-books in improving 21st-century skills, the author 
+            conducts an in-depth literature review that will show previous research data regarding the use of
+            e-books in the learning process. </p> <br>
+    
+ 
+        <h3> II. Methodology</h3>
+            <p><br>This type of research is descriptive research. The research method is document study. 
+                The documentary study is conducted to explore historical data through data collection from various literatures. 
+                This method is more widely used in social research. Furthermore, Sugiyono explained that the document can be in the
+                form of a record of an event, an image, or the monumental work of another person [25]. </p><br><br> 
+
+        <h3>  III. Result and Discussion </h3>
+        <p> Nowadays, due to the Covid-19 pandemic, government agencies made various efforts for changes and
+            adjustments, one of which was the education sector. The sector has implemented recommendations according to the policy that each 
+            level of education carries out activities remotely. In line with Sa'diyah that the process is no longer carrying out conventional 
+            learning but digital learning so that it requires information technology assistance to achieve the success of the teaching and learning process [26]. <br>
+            The determining factors in the success of the distance education system include attention, confidence, and creativity in using assistive 
+            devices so that students can easily socialize with students [27]. The teacher as a facilitator maximizes learning methods that are 
+            following the characteristics of the subject matter so that students can easily receive knowledge and skills even though they 
+            use the online learning system.  </p> <br>
+        <p> The application of offline learning and the implementation of the Curriculum 2013 have affected the
+            learning process in Indonesia. Teachers and students often experience a lack of time to get optimal
+            learning outcomes. Therefore, teaching materials can support the learning process. Teaching materials 
+            will make it easier for teachers to manage the learning activities [28]. Teaching materials in learning
+            activities will involve teachers and students, where there are aspects to facilitate the process of providing 
+            information related to the material so that the teaching materials are systematically presented. Of course, these 
+            teaching materials will make it easier for students to absorb information. </p> <br> 
+        <p> One of the non-printed teaching materials is an e-book. It is the same as a printed book but contains not only text or images,
+            but also animation, video, or audio. It is served to be interactive and communicative. The components of an e-book are also the same as printed teaching materials.
+            According to Yulaika et al., the e-book component contains competencies, indicators, learning objectives, materials, practice questions, and references [29]. 
+            </p> <br> 
+        <p> E-books have advantages and disadvantages. E-books have become digital teaching materials that have been widely used in recent years. 
+            Its use in learning is supported by the government, especially in the context of the success of distance learning and learning in the 
+            digital era. E-books play an important role in the learning process because they have advantages. The advantages of E-books can be 
+            seen from the functions and benefits.</p> <br>
+        <p> E-books as learning media play an important role, especially in increasing learning productivity. It is also an unlimited reference, 
+            so teachers are not fixated on one learning resource. It helps teachers in managing learning time effectively. E-books are very easy 
+            to carry even in large quantities, so teachers have diverse and easily accessible sources of material. </p> <br> 
+        <p> The use of e-books in learning can make it easier for teachers to convey information. This happens because the information presented 
+            in the e-book is more contextual so that students can learn independently and construct their own knowledge. The presentation of 
+            material in the e-book can be adjusted to the interests, talents, learning styles, and abilities of students. Thus, learning can 
+            be more focused and allow the provision of wider information to students. </p> <br>
+        <p> E-books have had a tremendous impact on technological advancements in education. It provides a lot of convenience for teachers in 
+            finding and adding references to learning resources. The use of e-books can improve learning efficiency because of 
+            its very easy access. 
+         <br>
+            In addition to having several advantages, e-books also have disadvantages. Copyright issues are the main point of this weakness. 
+            It is very easy to copy, it is certainly a problem in itself. It is very susceptible to damage, such as being exposed to viruses 
+            or damage to files due to misuse. The marketing side can also be a weakness of e-books. In this era, there are still many people 
+            who do not have devices to access them. Most people are also more comfortable using printed books.</p> <br> 
+        <p> Education today requires learning resources that can improve 21st-century skills. By developing 21st-century skills in learning, 
+            every individual has the skills to live in the 21st century with various opportunities and challenges in the era of technological
+            progress and information. Several experts explain the importance of mastering various 21st-century skills as a means of success in 
+            a century where the world is developing rapidly and dynamically.
+        <br>
+            The success indicator is based on the ability to communicate, share information and use it to solve complex problems, be able to 
+            innovate in the face of rapidly changing conditions, and use technology to create new knowledge. The inability of children to express
+            their desires, feelings and actualize what is within them makes the problems faced by children even bigger. So that children need the 
+            ability and skill to express the problems they face to others. The achievement of these skills can be supported through the teacher's 
+            efforts in designing learning activities that direct students to think critically in solving the problems given. Learning activities 
+            must also support the creation of good collaboration and communication during the learning process.</p> <br> 
+        <p> Communication is a process of language exchange that takes place in the human world. Therefore, It always involves humans both in 
+            intrapersonal, group, and mass contexts. Researchers prove that until now language is recognized as the most effective medium in 
+            communicating in an interaction between individuals as well as in the teaching and learning process. Communicating means speech 
+            and social development, namely how communication can take place in two directions. Communication is said to
+            be acceptable if the message can be received well.
+        <br>
+            Along with the times, effective communication is very much needed. Effective communication can produce changes in attitudes in 
+            others that can be seen in the communication process. Effective communication is so that the delivery of information and feedback 
+            can be balanced so that it is not monotonous. To achieve this, the e-book used should also be communicative.</p> <br> 
+        <p> Some researchers have proven that students will study harder if they are actively involved in the
+            learning process in groups. Students with groups will more easily remember the concept compared to conventional ways [30]. 
+            Collaborative forms of social interaction as a means to build knowledge [31]. Learning includes collaborative learning if the group 
+            members are not certain or predetermined, can consist of two people, several people, or even more than seven people. 
+            Furthermore, Wasono argue that collaborative learning can occur at any time, not necessarily at school, for example, a group of students
+            helping each other in doing homework, even it can take place between students from different classes or different schools. 
+            So, it can be informal, that is, it does not have to be carried out in the classroom and learning does not need to be structured strictly [30].</p> <br>
+        <p> E-books not only help students in developing communication and collaboration but also develop critical problem-solving skills. 
+            Critical thinking is a systematic skill used in problem solving, decision making, analyzing a case, and conducting scientific 
+            research steps. Critical thinking shows a person's way of thinking in an organized manner. Critical thinking is the ability to 
+            systematically weigh personal ideas and the assumptions of others [32].
+        <br> 
+            Thinking is essentially an active process in which critical thinking about things in-depth, asking questions for yourself, finding 
+            relevant information for yourself rather than accepting things from others [33]. Elaine B. Johnson states that critical thinking 
+            aims to produce a deep understanding [32]. Critical thinking is to guarantee, as far as possible, that our thinking is valid and correct. 
+            With the ability to think critically students will be able to solve the problems they face. </p> <br> 
+        <p> The next 21st-century skill is creativity and innovation. Creativity is an idea of a human being. It is
+            innovative, efficient, and understandable. It is the ability to produce new methods in problem-solving. It is an imaginative activity that manifests (embodiment) the ingenuity of a mind which is capable of
+            producing a product or solving a problem in its way.
+       <br> The creative process will only occur if it is generated through problems that show five kinds of
+            creative behavior as follows: 
+            1) fluency - the ability to express similar ideas to solve a problem, 
+            2) flexibility - the ability to generate various kinds of ideas to solve a problem, 
+            3) originality - the ability to provide a unique or extraordinary response, 
+            4) elaboration - the ability to state the direction of ideas in detail to make ideas into reality, 
+            and 5) sensitivity - to catch and produce problems in response to a situation. Children's creativity 
+            can develop well if it is supported by several factors such as 1) providing good mental stimulation, 
+            2) creating a conducive environment, 3) teacher participation in developing creativity, and 
+            4) parental participation. Innovation is a new method or idea that a person has to achieve
+            certain goals or to solve problems.  </p> <br> 
+        <p> In previous studies, it was explained that e-books are very important to improve 21st-century skills.
+            Research conducted by Heni Pujiastuti showed that there were significant changes in student learning 
+            outcomes in urban areas after using e-books. The developed e-book is said to be feasible to use with 
+            achievement scores obtained from content experts 87.50%, media experts 90%, student responses 88.57%,
+            and student learning outcomes 84.33% [34].
+       <br> Another study conducted by López-Escribano showed that e-books were very helpful in increasing children's 
+            reading literacy [35]. The availability and use of digital devices in the 21st century is increasing. 
+            Significant advantages of the e-book intervention were found for phonological awareness and vocabulary 
+            learning in 14 randomized controlled trials (RCTs) based on data from 1,138 children. The proper selection 
+            and use of e-books can develop students' literacy skills better than the use of printed books. 
+            In addition, the e-book intervention outperformed regular school programs in literacy skills development. 
+            Similarly, the enhanced state of the e-book revealed the benefits of the non-enhanced e- book intervention 
+            in the acquisition of literacy skills. The effect of these findings related to health issues, e-book design, 
+            and disadvantaged populations. </p> <br>
+        <p> Research by Huang shows e-books encourage better reading practices and increase student motivation [36]. 
+            Moreover, They consider e-books to be more available, portable, and eco-friendly than print-based texts.
+            However, students also noted difficulties with reading e-books in terms of eye fatigue and dealing with 
+            long texts. Suggestions for improving future e-book reading programs can serve as a model for integrating 
+            new literacy formats such as the iPad, Amazon Kindle, or other mobile device into the L2 reading curriculum.
+       <br> Yager notes that e-book users benefit from the rich features in it [37]. The features in the e-book provide students 
+            with opportunities to develop better study skills as technology skills improve. It is hoped that by 
+            combining technology and good pedagogical methods, students will more effectively learn content and develop 
+            better knowledge and technology skills. </p> <br> 
+        <p> Previous research has proven that interactive e-books can build students' knowledge and metacognitive through a 
+            series of comprehensive e-book reading activities [38]. In a study in Taiwan, it was found that the use of 
+            interactive e-books was very effective in increasing students' visual attention in learning vocabulary. 
+            Students spend quite a lot of time reading text but not with text accompanied by animation or graphic data [39]. 
+            Many students rarely read and are less motivated to read. If teachers fail to provide support for students who 
+            have difficulty getting used to reading, these students will experience academic problems for years [40]. 
+            Therefore, interactive e-books are very necessary for fostering students' interest in reading which can 
+            then be continued to improve HOTS and 4C abilities. </p> <br> 
+        <p> HOTS is an abstract ability that includes the ability to analyze, evaluate, and be creative. HOTS
+            contains 4 indicators, namely problem solving, decision-making skills, critical thinking skills, and 
+            creative thinking skills [41]. In learning Physics, high-level thinking skills are needed because it 
+            require students to reason, analyze, solve problems, and critically and creatively apply the theories 
+            obtained to solve Physics problems [42]. Not only the ability to think (ways of thinking), the skills 
+            and attitudes that are expected to develop in the 21st century (industrial revolution 4.0) also include 
+            literacy and soft skills (ways to learning), and personal, social, and civic responsibility 
+            (ways to learning with other people) which is hereinafter referred to as 4C [43].</p> <br> 
+    
+        <p>  Based on the literature review, it was concluded that e-books have more advantages than disadvantages. The advantages of e-books are summarized in Table 1.</p> <br> 
+             <p> <center> <b>Table 1. </b> Advantages of using e-book in learning </p> 
+             <hr>  <p> Benefits of e-book in learning </center></p> <hr> <br> 
+                <p> 1. &emsp; The use of e-books can improve 21st century  skills consisting of critical thinking skills, creativity, collaboration, and communication. </p> <br> 
+                <p> 2. &emsp; E-books can increase the effectiveness of distance learning    </p> <br> 
+                <p> 3. &emsp; The information provided through e-books is more concrete and allows students to study independently </p> <br>
+                <p> 4. &emsp; E-books are very easy to carry in many files </p> <br> 
+                <p> 5. &emsp; The use of e-books can make the learning atmosphere more interactive</p> <br> <hr> <br> 
+        <p align='justify'> The many advantages of e-books are the basis for consideration for developing e-books that can improve the quality of learning. E-books need to be developed in schools so that distance learning can
+                    run well. Thus, it is hoped that the quality of learning both face-to-face and online can be better. </justify></p> <br>
+
+            <h3>IV. Conclusion </h3> 
+            <p align='justify'>E-books are a recent achievement that can be implemented in schools. This provides many advantages for students and teachers - making the learning process run effectively and communicatively. Several previous studies have shown that e-books can improve 21st-century skills consisting of critical thinking, creativity, collaboration, and communication skills. E-books need to be developed in schools so that
+                    distance learning can proceed well. </justify></p> <br>
+
+            <h3>Acknowledgement </h3>
+            <p align='justify'> The authors would like to thank Lembaga Penelitian dan Pengabdian Masyarakat Universitas Negeri
+                Padang for funding this work with a contract number : 877/UN35.13/LT/2021.  </justify></p><br>
+
+            <h3>References</h3><br>
+            <p align='justify'> [1] &emsp; Dodgson M, Gann D, Salter A 2006 R&d Management 36(3) 333-346   </p>
+            <p align='justify'> [2] &emsp; Salmon G 2005 ALT-J 13(3) 201-218</p>
+            <p align='justify'> [3] &emsp; Fleck J 2012 Journal of Management Development</p>
+            <p align='justify'> [4] &emsp; Watson J 2008 Promising Practices in Online Learning. North American Council for Online
+                Learning</p>
+            <p align='justify'> [5] &emsp; Soni V D 2020 Available at SSRN 3630073</p>
+            <p align='justify'> [6] &emsp; Hodhod R, Ibrahim M., Khafagy M., Abdel-Wahab M S 2010 Issues of choosing the suitable
+                virtual learning environment</p>
+            <p align='justify'> [7] &emsp; Zhang D and Nunamaker J F 2003 Information systems frontiers 5(2) 207-218</p>
+            <p align='justify'> [8] &emsp; Chesebro J L and McCroskey J C 2001 Communication Education 50(1) 59-68</p>
+            <p align='justify'> [9] &emsp; Wijanayu A, Hardyanto W, Isnaeni W 2018 Journal of primary education 7(1) 88-95</p>
+            <p align='justify'> [10] &emsp; Wijanayu A, Hardyanto W, Isnaeni W 2018 Journal of primary education 7(1) 88-95</p>
+            <p align='justify'> [11] &emsp; Jabborov U 2020 Архив Научных Публикаций JSPI</p>
+            <p align='justify'> [12] &emsp; Harms C M, Niederhauser D S, Davis N E, Roblyer M D, Gilbert S B 2006 Journal of
+                Communication 16(1) 17-24</p>
+            <p align='justify'> [13] &emsp; Kirna I M 2013 Prosiding Seminar Nasional MIPA</p>
+            <p align='justify'> [14] &emsp; Dabbagh N and Bannan-Ritland B 2005 Online learning: Concepts, strategies, and
+                application. Prentice Hall</p>
+            <p align='justify'> [15] &emsp; Morin D, Thomas J D, Saadé R G 2015 Journal of Information Technology Education 14</p>
+            <p align='justify'> [16] &emsp; Jannah M, Prasojo L D, Jerusalem M A 2020 Al Ibtida: Jurnal Pendidikan Guru MI, 7(1) 1-
+                18</p>
+            <p align='justify'> [17] &emsp; Sipayung D H, Sani R A, Bunawan W 2018 In 3rd Annual International Seminar on
+                Transformative Education and Educational Leadership (AISTEEL 2018) 200 440-445 </p>
+            <p align='justify'> [18] &emsp; Erdoğan V 2019 International Journal of Education and Research 7(11) 113-124</p>
+            <p align='justify'> [19] &emsp; Triana D, Anggraito Y U, Ridlo S 2020 Journal of Innovative Science Education 9(2) 181-
+                187</p>
+            <p align='justify'> [20] &emsp; Triana D, Anggraito Y U, Ridlo S 2020 Journal of Innovative Science Education 9(2) 181-
+                187</p>
+            <p align='justify'> [21] &emsp; Giancoli, D C 2014 Physics for scientists & engineers with modern physics p. 762 (Pearson)</p>
+            <p align='justify'> [22] &emsp; Alonso M and Finn E J 1967 Fundamental university physics Vol. 2 pp. p-818 (MA: Addison-
+                Wesley)</p>
+            <p align='justify'> [23] &emsp; Ornek F, Robinson, W R, Haugan M P 2008 International Journal of Environmental and
+                Science Education 3(1) 30-34</p>
+            <p align='justify'> [24] &emsp; Tuah T, Herman N D, Maknun J 2019 In 5th UPI International Conference on Technical and
+                Vocational Education and Training (ICTVET 2018) 299 281-287</p>
+            <p align='justify'> [25] &emsp; Sugiyono 2010 Metode Penelitian Kuantitatif kualitatif dan R&D (Bandung: Alfabeta)</p>
+            <p align='justify'> [26] &emsp; Sa'diyah K 2021 EDUKATIF: JURNAL ILMU PENDIDIKAN 3(4) 1298-1308</p>
+            <p align='justify'> [27] &emsp; Uno H B 2014 Model pembelajaran menciptakan proses belajar mengajar yang kreatif dan
+                efektif.</p>
+            <p align='justify'> [28] &emsp; Kirana R W C and Susilowibowo J 2020 Jurnal Pendidikan Akuntansi Indonesia 18(1) 80-90</p>
+            <p align='justify'> [29] &emsp; Yulaika N F, Harti H, Sakti N C 2020 JPEKA: Jurnal Pendidikan Ekonomi, Manajemen dan
+                Keuangan 4(1) 67-76</p>
+            <p align='justify'> [30] &emsp; Warsono H and Hariyanto M S 2012 Pembelajaran aktif teori dan asesmen (Bandung: PT
+                Remaja Rosdakarya)</p>
+            <p align='justify'> [31] &emsp; Warsono H and Hariyanto M S 2012 Pembelajaran aktif teori dan asesmen (Bandung: PT
+                Remaja Rosdakarya)</p>
+            <p align='justify'> [32] &emsp; Johnson Elaine B 2002 Contextual teaching and Learning (Califonia. MLC) p15</p>
+            <p align='justify'> [33] &emsp; Fisher A 2009 Berpikir kritis sebuah pengantar (Jakarta: Erlangga) p4</p>
+            <p align='justify'> [34] &emsp; Pujiastuti H and Haryadi R 2018 In First International Conference on Technology and
+                Educational Science. European Alliance for Innovation (EAI)</p>
+            <p align='justify'> [35] &emsp; López-Escribano C, Valverde-Montesino S, García-Ortega V 2021 International Journal of
+                Environmental Research and Public Health 18(12) 6510</p>
+            <p align='justify'> [36] &emsp; Huang H C 2013 Computer assisted language learning 26(3) 258-281</p>
+            <p align='justify'> [37] &emsp; Yager S E, and Szabo Z 2011 In Proceedings of the 49th SIGMIS annual conference on
+                Computer personnel research 6-10</p>
+            <p align='justify'> [38] &emsp; Connor C M, Day S L, Zargar E, Wood T S, Taylor K S, Jones, M R, Hwang J K 2019
+                Computers & education 128 284-311</p>
+            <p align='justify'> [39] &emsp; Wang C C, Hung J C, Chen S N, Chang H P 2019 Multimedia Tools and Applications 78(4)
+                4813-4834</p>
+            <p align='justify'> [40] &emsp; Morgan H 2013 Early Childhood Education Journal 41(6) 477-483</p>
+            <p align='justify'> [41] &emsp; Wahyuni D E 2015 Inovasi Pendidikan Fisika 4(3)</p>
+            <p align='justify'> [42] &emsp; Miaz Y 2020 Jurnal Mutiara Pendidikan Indonesia 5(1) 25-35</p>
+            <p align='justify'> [43] &emsp; Zubaidah S 2018 In 2nd Science Education National Conference 13)</p> </p>
+    </div>
+
+
+                
+</div>
+</div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Research1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

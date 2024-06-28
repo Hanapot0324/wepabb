@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Excellence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .educational15{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('THE STORY OF YES AND NO')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Essay Excellence'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+
+   <div class="educational15">
+    <h1>Essay Excellence</h1>
+    <h3>By: HELEN COX | Educational</h3>  
+    <p><span class="first-letter">U</span>nlock Your Writing Potential: Get Better Grades and Boost Your Confidence with This Essential Guide. 
+        Reading this book will give you the tools and knowledge you need to drastically improve your essay writing skills and achieve higher grades. 
+        Not only will you see an improvement in your academic performance, but you will also gain a newfound confidence in your writing abilities.
+        - Master the Four Types of Sentences. - Craft Captivating Introductions. - Perfect Your Body Paragraphs. - Use Transition Signals Like a Pro. 
+        - Nail Your Conclusions. In this pocket-sized guide, you will find all the essential elements of essay writing condensed into an easy-to-follow format. 
+        With practical tips and examples, this book will guide you toward writing stronger, more polished essays.
+    </p><br>
+
+
+    <p><i>Copyright © 2024 by Helen Cox</p><br>
+    
+    <p> All rights reserved. No part of this publication may be reproduced, stored, or transmitted in any form or by any means, electronic, mechanical, photocopying, 
+        recording, scanning, or otherwise without written permission from the publisher. It is illegal to copy this book, post it to a website, 
+        or distribute it by any other means without permission. 
+    </p><br>
+  
+    <p> Helen Cox asserts the moral right to be identified as the author of this work.</p><br>
+     
+    <p> Helen Cox has no responsibility for the persistence or accuracy of URLs for external or third-party Internet Websites referred to in this publication 
+        and does not guarantee that any content on such Websites is, or will remain, accurate or appropriate.
+    </p><br>
+    
+    <p> Designations used by companies to distinguish their products are often claimed as trademarks. 
+        All brand names and product names used in this book and on its cover are trade names, service marks, trademarks and registered trademarks of their respective owners. 
+        The publishers and the book are not associated with any product or vendor mentioned in this book. None of the companies referenced within the book have endorsed the book. 
+    </p><br>
+
+        <p><u><b>First edition</b></u> </p><br>
+
+        <p> This book was professionally typeset on Reedsy. Find out more at reedsy.com 
+            This little book is dedicated to the memory of my mother and father. They both believed in the power of education to change lives. 
+            They had the most incredible work ethic, which they instilled in me. 
+            I will forever be grateful to them.               
+        </p><br></i>
+
+    <p>You don’t have to be anything but yourself to be worthy. <br>
+        - Tarana Burke </p><br>
+
+
+        <u><p><b>Introduction</b></p></u><br>
+
+    <p> My name is Helen and I am the founder of Aspire Global Education and Training Limited. I founded this company in order to help people who are studying courses in law, 
+        finance and/or accounts and who need that little bit extra in order to get the best grades possible.
+        Many university courses expect their students to be able to write essays or assignments and being able to write these well, 
+        will have a significant impact upon a student’s overall grade. This little book was written as a handy guide to help university or
+        A-level students improve their grades in their studies and feel more confident with essay/assignment writing in general. 
+    </p><br>
+
+    <p> I hope you find this book useful.</p><br>
+
+     
+        <u><p><b>The four types of sentences</b></p></u><br>
+
+
+    <p> There are four main types of sentences that you might be expected to write during your studies. It will not be directly stated in your essay or assignment instructions, 
+        but the person marking your work will want to see you use different types of sentences, for example, not just simple sentences (which may not make your work 
+        look academic enough) or solely compound-complex sentences (which could stop your writing from flowing naturally). The key is to be able to use all four types of sentences 
+        and being able to construct them correctly.
+    </p><br>
+
+        <u><p><b>Clauses</b></p></u><br>
+
+    <p> Before we start to study the four types of sentences, we very quickly need to learn about or review clauses. 
+        Why? The answer is that these will feature later on when we come to learn about the different types of sentences that you may be expected to write. 
+        It will be a considerable help to you to be able to recognize and use them now.
+    </p><br>
+
+    <p> There are two main types of clauses; independent and dependent clauses. An independent clause has both a subject and an object and it shows a complete thought. 
+        This means that an independent clause can be a sentence on its own.
+    </p><br>
+
+    <p> You might have heard of English being described as an “SVO” language. This means that it contains a subject, verb, and object. 
+        The subject is the topic of the sentence and is usually a noun or pronoun e.g. the city, she. The verb is the word used to describe an action (to eat), 
+        a state (to be hungry), or something that happens (to change). The object is the person or thing to which a feeling or action is directed e.g. 
+        She helped him. Here “She” is the subject and “him” is the object. An independent clause can therefore be a complete sentence.
+    </p><br>
+
+    <p>Dependent clauses, on the other hand, do not begin with a subject. Instead, they start with a subordinator. 
+        These are words such as “who”, “that”, “because”, “if” or “when”, for example “because he did not study hard enough” or “if the recession continues for another two years”. 
+        Dependent clauses are not complete sentences and, as such, cannot be a sentences on their own. They are sometimes referred to as “sentence fragments”. 
+        If you were to write a dependent clause in your work believing that it was a complete sentence, it would be a grammatical error.
+    </p><br>
+
+    <p> What did you do while at the school? How did you challenge yourself to reach new levels of intellect or gain new perspectives on life? 
+         I want the individuals who want to work harder than anyone else. I want the individuals who are going to be the first to try out a new prospecting method. 
+         I want the individuals who are obsessed with the process and lessons learned throughout the process.
+    </p><br>
+
+        <u><p><b>Simple sentences</b></p></u><br>
+        
+
+    <p> A simple sentence is one independent clause. For example, London is the capital city of England. Sometimes the sentences are longer and contain two verbs e.g 
+        London is the capital city of England and also functions as a leading financial and legal centre. Here, we have the verbs “is” and “functions”. 
+        This is still a simple sentence though, because there is only one clause.
+    </p><br>
+
+        <u><p><b>Compound sentences</b></p></u><br>
+
+
+    <p> A compound sentence contains two or more independent clauses that are
+        joined together. According to Oshima & Hogue (2005), there are three
+        ways that these clauses can be joined:<br>
+        1. By using a coordinator<br>
+        2. By using a conjunctive adverb<br>
+        3. By using a semi-colon (this is more widely used in the USA).   <br>     
+    </p><br>
+
+    <p><i>Compound sentences with coordinators</i></p><br>
+
+    
+    <p>These are formed by using an independent clause a coordinator and another independent clause</p><br>
+    
+     <p>Example: 
+        The food was served on smaller trays so that people would eat less.<br>
+        The word “so” is one of the seven so-called FANBOYS, which are the coordinating conjunctions using in compound sentences.<br>
+        The seven FANBOYS are:<br>
+        1. For – used to give a reason<br>
+        2. And – used to give a similar idea<br>
+        3. Nor – used to add a negative equal idea<br>
+        4. But – used to give the opposite idea<br>
+        5. Or – used to give an alternative possibility<br>
+        6. Yet – used to show a continuation which is not expected or that is a surprise<br>
+        7. So – used to show an expected result<br>
+    </p><br>
+
+        <u><p><i>Compound sentences with conjunctive adverbs.</i></p></u><br>
+     
+    <p> These are formed using an independent clause and a conjunctive adverb and another independent clause.<br>
+        Conjunctive adverbs that give a similar or equal idea include;<br>
+        • Also<br>
+        • Besides<br>
+        • furthermore<br>
+        • in addition<br>
+        • moreover<br>
+        • as well<br>
+        • too<br>
+
+
+        Conjunctive adverbs that give a continuation which was not expected or was a surprise include:<br>
+
+        • however<br>
+        • nevertheless<br>
+        • nonetheless<br>
+        • Still<br>
+
+        Conjunctive adverbs that show a complete contrast include: <br>
+
+        • in contrast <br>
+        • on the other hand<br>
+
+        A conjunctive adverb which gives an alternative possibility is: <br>
+
+       • otherwise.<br>
+
+        A conjunctive adverb which gives an unexpected result includes:<br>
+
+        • Hence<br>
+        • Thus<br>
+        •Therefore<br>
+        • Accordingly<br>
+        • As a result<br>
+        •Consequently<br>
+
+        A conjunctive adverb which adds an example includes: <br>
+
+        • For example <br>
+        • For instance<br>
+
+        (Oshima & Hogue, 2005) 
+        <br>   
+    </p><br>
+
+        <u><p><i>Compound sentences with semicolons </i></p></u><br>
+         
+    <p> This style tends to be used more in North America. 
+        These sentences are formed by using an independent clause and a semicolon and another independent clause. 
+        The two independent clauses need to be connected in meaning though. This type of structure will not work otherwise. 
+        If this is the situation, then there will need to be two separate sentences written.
+    </p><br>
+
+  
+    
+</div>
+</div>
+
+<script>
+function toggleDarkMode() {
+var body = document.body;
+body.classList.toggle('dark-mode');
+
+localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+
+var darkModeToggle = document.getElementById('darkModeToggle');
+if (body.classList.contains('dark-mode')) {
+  darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function loadDarkMode() {
+var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+var body = document.body;
+if (darkModeEnabled) {
+  body.classList.add('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  body.classList.remove('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function addToLibrary(bookTitle) {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'block';
+  }
+
+  function confirmAddToLibrary() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+
+      var bookTitle = 'Essay Excellence'; 
+      var libraryData = localStorage.getItem('library');
+
+      var library = [];
+      if (libraryData) {
+          library = JSON.parse(libraryData);
+      }
+
+      if (library.length >= 10) {
+          alert('You have reached the maximum limit of 10 books in your library.');
+          return; 
+      }
+
+      library.push(bookTitle);
+
+      localStorage.setItem('library', JSON.stringify(library));
+
+      openLibrarySuccessModal();
+
+      displayLibrary();
+  }
+
+  function closeAddToLibraryModal() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+  }
+
+  function openLibrarySuccessModal() {
+      var modal = document.getElementById('librarySuccessModal');
+      modal.style.display = 'block';
+
+      setTimeout(function() {
+          modal.style.display = 'none';
+      }, 2000);
+  }
+
+  function toggleNotes() {
+      var notesSection = document.getElementById('notesSection');
+      if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+          notesSection.style.display = 'flex';
+      } else {
+          notesSection.style.display = 'none';
+      }
+  }
+
+  function addNote() {
+      var noteText = document.getElementById('noteText').value;
+      if (noteText.trim() === '') {
+          alert('Note cannot be empty.');
+          return;
+      }
+
+      var notesList = document.getElementById('notesList');
+      var noteItem = document.createElement('li');
+      noteItem.className = 'note-item';
+      noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+      notesList.appendChild(noteItem);
+
+      saveNotes();
+
+      document.getElementById('noteText').value = '';
+  }
+
+  function deleteNote(button) {
+      var noteItem = button.parentElement;
+      noteItem.remove();
+      saveNotes();
+  }
+
+  function saveNotes() {
+      var notesList = document.getElementById('notesList');
+      var notes = [];
+      for (var i = 0; i < notesList.children.length; i++) {
+          notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+      }
+      localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+      var notes = JSON.parse(localStorage.getItem('notes'));
+      if (notes) {
+          var notesList = document.getElementById('notesList');
+          notesList.innerHTML = '';
+          for (var i = 0; i < notes.length; i++) {
+              var noteItem = document.createElement('li');
+              noteItem.className = 'note-item';
+              noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+              notesList.appendChild(noteItem);
+          }
+      }
+  }
+  function goToBooks() {
+      window.location.href = 'books.html';
+  }
+
+  function goToMyLibrary() {
+      window.location.href = 'mylibrary.html';
+  }
+
+
+  window.onload = function() {
+      loadDarkMode();
+      loadNotes();
+  };
+
+
+      function openModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'block';
+      }
+
+      
+      function closeModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'none';
+      }
+
+      function logout() {
+          localStorage.clear();
+
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'block';
+
+          closeModal();
+
+          setTimeout(function() {
+              window.location.href = 'account.html';
+          }, 2000);
+      }
+
+
+      function closeLogoutSuccessModal() {
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          var modals = document.getElementsByClassName('modal');
+          for (var i = 0; i < modals.length; i++) {
+              if (event.target == modals[i]) {
+                  modals[i].style.display = 'none';
+              }
+          }
+      }
+
+
+</script>
+</body>
+</html>

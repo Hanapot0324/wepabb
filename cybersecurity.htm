@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction To Cyber Security</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .Education5 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Introduction To Cyber Security')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Introduction To Cyber Security'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="Education5">
+    <h1>Introduction To Cyber Security</h1>
+    <h3>By: Jeetendra Pande</h3> <br> <br>
+    <p>Internet is among the most important inventions of the 21stcentury which have affected our life. Today internet have crosses every barrier and have changed the way we use to talk, play games, work, shop, make friends, listen music, see movies, order food, pay bill, greet your friend on his birthday/ anniversary, etc. 
+      You name it, and we have an app in place for that. It has facilitated our life by making it comfortable. Gone are the days when we have to stand in a long queue for paying our telephone and electricity bills. Now we can pay it at a click of a button from our home or office.</p><br>
+
+    <p>The technology have reached to an extent that we don’t even require a computer for using internet. 
+      Now we have internet enabled smartphone, palm tops, etc. through which we can remain connected to our friends, family and office 24x7. Not only internet has simplified our life but also it has brought many things within the reach of the middle class by making them cost effective. It was not long back, while making an ISD or even a STD call, the eyes were stricken on the pulse meter.</p><br>
+   
+    <p>The calls were very costly. ISD and STD were used to pass on urgent messages only and the rest of the routine communication was done using letters since it was a relatively very cheap. 
+      Now internet have made it possible to not only talk but use video conference using popular applications like skype, gtalk etc. at a very low price to a level where a one hour video chat using internet is cheaper that the cost of sending a one page document from Delhi to Bangalore using speed-post or courier service. Not only this, internet has changed the use of the typical devices that were used by us. </p><br>
+    
+    <p>Television can be used not only for watching popular tv shows and movies but can be used for calling/ video chatting with friend using internet. Mobile phone is not only used for making a call but viewing a latest movie. We can remain connected to everyone, no matter what our location is. 
+      Working parents from office can keep eye on their children at home and help them in their homework. A businessman can keep eye on his staff, office, shop, etc with a click of a button. It has facilitated our life in more than one way. Have you ever wondered from where this internet came? Let us discuss the brief history of internet and learn how this internet was invented and how it evolved to an extent that now we cannot think of our lives without it.</p><br>
+
+    <p>Russia Launched the world‟s first satellite, SPUTNIK into the space on 4th October, 1957. This was clearly the victory of Russia over the cyber space and as a counter step, Advanced Research Projects Agency, the research arm of Department of Defence, United States, declared the launch of ARPANET(Advanced Research Projects Agency NETwork) in early 1960‟s. This was an experimental network and was designed to keep the computers connected to the this network to communicate with each other even if any of the node, due to the bomb attack, fails to respond.
+      The first message was sent over the ARPANET, a packing switching network, by Leonard Kleinrock's laboratory at University of California, Los Angeles (UCLA). You will be surprised to know that the fist message that was sent over internet was “LO”. Actually they intended to send work “LOGIN” and only the first two letters reached its destination at second network node at Stanford Research Institute (SRI) and before the last three letters could reach the destination the network was down due to glitch. Soon the error was fixed and the message was resent and it.</p><br>
+
+    <p>The major task that ARPANET have to play is to develop rules for communication i.e. protocols for communicating over ARPANET. The ARPANET in particular led to the development of protocols for internet working, in which multiple separate networks could be joined into a network of networks. It resulted in the development if TCP/IP protocol suite, which specifies the rules for joining and communicating over APRANET.</p><br>
+</div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+     var body = document.body;
+     body.classList.toggle('dark-mode');
+ 
+     localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+ 
+     var darkModeToggle = document.getElementById('darkModeToggle');
+     if (body.classList.contains('dark-mode')) {
+         darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function loadDarkMode() {
+     var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+     var body = document.body;
+     if (darkModeEnabled) {
+         body.classList.add('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         body.classList.remove('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function addToLibrary(bookTitle) {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'block';
+         }
+ 
+         function confirmAddToLibrary() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+ 
+             var bookTitle = 'Introduction To Cyber Security'; 
+             var libraryData = localStorage.getItem('library');
+ 
+             var library = [];
+             if (libraryData) {
+                 library = JSON.parse(libraryData);
+             }
+ 
+             if (library.length >= 10) {
+                 alert('You have reached the maximum limit of 10 books in your library.');
+                 return; 
+             }
+ 
+             library.push(bookTitle);
+ 
+             localStorage.setItem('library', JSON.stringify(library));
+ 
+             openLibrarySuccessModal();
+ 
+             displayLibrary();
+         }
+ 
+         function closeAddToLibraryModal() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+         }
+ 
+         function openLibrarySuccessModal() {
+             var modal = document.getElementById('librarySuccessModal');
+             modal.style.display = 'block';
+ 
+             setTimeout(function() {
+                 modal.style.display = 'none';
+             }, 2000);
+         }
+ 
+         function toggleNotes() {
+             var notesSection = document.getElementById('notesSection');
+             if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                 notesSection.style.display = 'flex';
+             } else {
+                 notesSection.style.display = 'none';
+             }
+         }
+ 
+         function addNote() {
+             var noteText = document.getElementById('noteText').value;
+             if (noteText.trim() === '') {
+                 alert('Note cannot be empty.');
+                 return;
+             }
+ 
+             var notesList = document.getElementById('notesList');
+             var noteItem = document.createElement('li');
+             noteItem.className = 'note-item';
+             noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+             notesList.appendChild(noteItem);
+ 
+             saveNotes();
+ 
+             document.getElementById('noteText').value = '';
+         }
+ 
+         function deleteNote(button) {
+             var noteItem = button.parentElement;
+             noteItem.remove();
+             saveNotes();
+         }
+ 
+         function saveNotes() {
+             var notesList = document.getElementById('notesList');
+             var notes = [];
+             for (var i = 0; i < notesList.children.length; i++) {
+                 notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+             }
+             localStorage.setItem('notes', JSON.stringify(notes));
+         }
+ 
+         function loadNotes() {
+             var notes = JSON.parse(localStorage.getItem('notes'));
+             if (notes) {
+                 var notesList = document.getElementById('notesList');
+                 notesList.innerHTML = '';
+                 for (var i = 0; i < notes.length; i++) {
+                     var noteItem = document.createElement('li');
+                     noteItem.className = 'note-item';
+                     noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                     notesList.appendChild(noteItem);
+                 }
+             }
+         }
+         function goToBooks() {
+             window.location.href = 'books.html';
+         }
+ 
+         function goToMyLibrary() {
+             window.location.href = 'mylibrary.html';
+         }
+ 
+ 
+         window.onload = function() {
+             loadDarkMode();
+             loadNotes();
+         };
+ 
+       
+             function openModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'block';
+             }
+ 
+             
+             function closeModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'none';
+             }
+ 
+             function logout() {
+                 localStorage.clear();
+ 
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'block';
+ 
+                 closeModal();
+ 
+                 setTimeout(function() {
+                     window.location.href = 'account.html';
+                 }, 2000);
+             }
+ 
+ 
+             function closeLogoutSuccessModal() {
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'none';
+             }
+ 
+             window.onclick = function(event) {
+                 var modals = document.getElementsByClassName('modal');
+                 for (var i = 0; i < modals.length; i++) {
+                     if (event.target == modals[i]) {
+                         modals[i].style.display = 'none';
+                     }
+                 }
+             }
+ 
+ 
+     </script>
+ </body>
+ </html>   
+

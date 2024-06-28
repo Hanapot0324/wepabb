@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research 5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .main-div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 2%;
+        }
+        .research1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        .research2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        h1 {
+        text-align: center;
+        margin-top: 5%;
+        color: #4B443F;
+        }
+        h2 {
+            text-align: center;
+            margin-top: .1%;
+            margin-bottom: 2%;
+        }
+        h3 {
+            text-align: left;
+        }
+        h4 {
+            text-align: center;        
+        }
+        .first-letter{
+           font-size: 50px;
+           font-family: serif;
+           font-weight: bolder;
+         }
+        .department {
+    
+           text-align: center;
+        }
+        .info{
+            text-align: center;
+        }
+        .electronic{
+            text-align: center;
+        }
+        .keywords {
+    
+           text-align: center;
+        }
+        .web{
+            text-align: center;
+            margin-left: 6%;
+            margin-right: 2%;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h5{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #fff4c3;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Si Langgam at si Tipaklong')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h5>Notes</h5>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Research 5'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+    <h1>A Survey on Current Technologies for Web Development</h1>
+        <h2>A. V. Akhil Krishna, Student</h2> 
+        <h2> Dr. Padmashree T, Assistant Professor</h2>
+        <div class="container">
+        <p class="department">Dept. of Information Science and Engineering, 
+            R.V. College of Engineering, Bengaluru, India </p>
+        <p class="info">Dept. of Information Science and Engineering, 
+            R.V. College of Engineering, Bengaluru, India </p><br>
+        </div>
+
+        <h4> ABSTRACT </h4>
+        <div class="container">
+        <p class="web"><b><i>-Web-based application developers are presented with a
+            dizzying variety of option formats, languages, frameworks and
+            technological objects. We survey, identify and compare
+            technologies that help the creation of Web apps. We conclude that,
+            while the Web's connectivity problems have been largely solved,
+            the cacophony of Web-based applications technologies represents
+            the lack of a solid model tailored to this domain. </p> <br>
+        <p class="keywords"> Keywords: Technology, NoSQL, MySQL, Angular, NodeJS</i></b></p>
+        </div>
+<div class="main-div">
+    <div class="research1">
+        <h3> I. Introduction </h3>
+        <p><br>The world has changed to a mobile era, but still today no app
+            could be as effective as web-based applications. The prevalence
+            of progressive web apps which perform functions identical to
+            mobile apps is surfacing on top of this. So, it's pretty clear that
+            web apps will remain and continue for a long time to come.
+            What makes this web applications worth investing in is the use
+            for development of high-end scalable technologies or in simpler
+            words, using state-of-the-art quality stack technology.
+            In addition, the business penetration and performance of the
+            application can be maximized with the most suitable
+            technology stack. The use of a poor technology stack could also
+            lead to a failure of the entire project. Therefore, it is important
+            to have a thorough look at the web development stack that will
+            be used for the development of a project. </p> <br>
+
+          <h3>II. DIFFERENT SOLUTIONS </h3>
+            <p> <br>This section reviews various technologies currently available for
+            web development </p> <br>
+            <p> 1. In [1] this paper it has presented a comparative study of
+                non-relational databases and relational databases. It mainly
+                focuses on presentation on one implementation of the
+                NoSQL database technology, namely MongoDB, and
+                draws a comparison with MYSQL which is another
+                database and tries to justify why MySQL is less preferable
+                and less efficient than MongoDB. It also discusses the
+                disadvantages of using a relational database compared to a
+                non-relational database.</p> <br>
+            <p> The forum is developed using MongoDB, a NoSQL
+                database chosen from a variety of non-relational databases.
+                The database integration in the framework is also be
+                presented. If the application is data-intensive and stores
+                many data and queries, we can choose MongoDB instead of MySQL. It should also be noted that in certain situations,
+                each user requires his or her own individual settings in the
+                same application and connection database does not permit a
+                full customization based only on the user's needs.
+                Therefore, increasingly more applications start using a non-
+                relational database, as they provide a more versatile
+                framework that can be formed according to the needs of
+                each user.</p> <br>
+            <p> 2. The advantages of using AngularJS to create the front-end
+                framework, NodeJS to design the Back-end Web server
+                and the performance benefits of storing data based on
+                MongoDB are discussed in [2] this paper. This paper
+                concentrates on MongoDB storage solutions for the
+                storage of large data and on MapReduce-based analysis
+                solutions. This paper discusses on how Web services are
+                designed that have the requirements of large data
+                visualization based on NodeJS. Within this paper, the
+                design of the express monitoring system is implemented.
+                The primary technologies used in system design was first
+                discussed. It also primarily introduces the framework
+                architecture, MongoDB database-based storage solutions
+                and the MapReduce-based analysis solutions. Finally, this
+                paper introduces the Express Supervision Framework
+                interface application and statistical analysis modules.
+                Machine learning is to be used in future. </p> <br>
+            <p> 3. In [3] this paper, it characterizes the runtime behaviors on
+                an evolving server-side application JavaScript, Node.js,
+                compared to JavaScript's client-side code. The runtime
+                profile reveals that the V8 C++ library used for server load
+                is spent a considerable amount (47.5% on average) of the
+                total CPU time, while it is only 3.2% on the client-side.
+                The study on the server-side system of complex call
+                contexts shows that function calls to the V8 runtime to
+                handle JavaScript objects lead significantly towards high
+                CPU utilization in the V8 library. We focused on the
+                overuse of the V8 library code with CPUs and analyzed
+                the call stacks in detail during the execution of the library
+                code. The function executes the C++ code of the server-
+                side JavaScript framework which implements the node.js
+                API, and native code in the package node module is one
+                reason for the excess of the CPU use in the V8 library.</p> <br>
+            <p> 4. In [4] this paper discusses the latest developments which
+                received popularity in the server-side JavaScript space, Node.js. It's a framework for designing high-performance,
+                concurrent programs that are based on asynchronous I/O
+                and event driven programming model and not the
+                multithreading approach. </p> <br> 
+            <p> As we are aware that JavaScript knowledge is essential for
+                exceptional UI interactions, the idea of using one
+                programming language for everything becomes quite
+                tempting. The architecture of Node.js makes it easy to use
+                a functional and highly meaningful language for server
+                programming, without any performance issues and
+                stepping out of the programming mainstream. </p> <br>
+            <p> 5. In [5] this paper few possible security measures are
+                outlined to be aware of when using Node.js platform and
+                server-side JavaScript. It also identifies two vulnerabilities
+                and provides recommendations for the development and
+                configuration of secure and resilient Node.js web
+                applications.
+                It analyzed the security implications of the architecture and
+                technologies used in the Node.js platform. Two new denial
+                of service vulnerabilities in the platform are discussed in
+                the paper. Its analysis showed that while the platform is
+                suitable for production use for some applications, it should
+                be avoided in security critical applications. This is because
+                the model is immature and other safety flaws are inherent.
+                Security-conscious programming will avoid many of the
+                problems we have highlighted. However, errors with
+                Node.js applications are much more common as 
+                programmers lack extensive experience in writing long-
+                standing server-side JavaScript asynchronous applications. </p>
+    </div>
+    <div class="research2"> 
+        <p> 6. In [6] this paper discusses the issues of utilizing the
+           Aspect-Oriented Programming concept, and demonstrates
+           this approach through Angular 2, a JavaScript framework
+           and compares it with the traditional development
+           approach.
+           The new Angular framework develops better programming
+           paradigms. TypeScript with type control and support for
+           ANGULAR annotations provides a high degree of
+           language sensation to the customer program. This will
+           however increase the volume of code and restatement of
+           information. This article addresses the library and makes
+           form creation a better experience in this context. Easy
+           library usage enables programmers to specify shape entries
+           to a server application, when the entries are serialized into
+           JSON and transmitted to the Angular. The rendering is
+           carried out in the dynamic forms. Writing the code is
+           easier, looks more comfortable and is much more durable.
+           This is especially noteworthy when it comes to multiple
+           types or supports context-aware user interfaces. The study
+           shows an impact on reading, the volume of code and
+           maintenance efforts for fragments in practice.</p> <br>
+       <p> 7. In [7] In this paper, the specific characteristic traits of
+           MongoDB and the design principles were studied and
+           based on the analysis an anti-normal form model was
+           proposed. This method is based on the theory of data
+           dependency and uses a breakdown or joint data strategy to
+           develop the logic schema of non-related databases for
+           different dependencies. This article gives the application of MongoDB in BBS
+           information collection system. The data storage structure
+           and queries are designed, and the advantages and
+           disadvantages of data structure, query and scalability are
+           listed. Relational database contains several tables with
+           external keys, a sharp decrease in query efficiency with a
+           lot of data and high cost vertical scalability. </p> <br>
+       <p> 8. In this paper [8] a pragmatic study was performed to
+           understand how JavaScript developers make use of various
+           language features and assist future extensions of
+           JavaScript. The study displays that there is a clear
+           uncertainty about newly introduced features. Tool
+           developers can study the requirement for better IDEs and
+           tools and programmers can study about the good parts of
+           JavaScript. </p> <br>
+       <p> 9. In this paper [9] it addresses the test and difficulty of the
+           scalability, versatility and processing capacities of
+           traditional relational database management systems
+           (RDBMS) by incorporating hierarchical, semi-structural
+           and unstructured data. The new frameworks require the
+           databases to be scaled horizontally. The data in the
+           databases must be stored and processed in various formats,
+           including unstructured data. These questions are answered
+           by NoSQL methodologies. The conventional approach to
+           relationship and objective-driven DBMS can’t adapt to
+           today's systems with the flexible scaling necessary.
+           Similarly, large databases have been created. But
+           specialized technologies that can support these databases
+           have not emerged. These massive repositories can’t be
+           preserved in a single physical device. A collaborative
+           system for this is recommended. A NoSQL framework can
+           be used with a particular objective to improve unstructured
+           data processing. To investigate the merits of NoSQL
+           databases, a NoSQL database, MongoDB which is
+           document oriented, that typically uses JSON data is
+           discussed. An administrative tool has been developed in
+           the research to evaluate the MongoDB database scheme.
+           There are two algorithms: one for local analysis and the
+           other for aggregate analysis. Automated testing and real
+           users tested the created solution. The solution was
+           calculated to be quicker than the solutions already
+           available. </p> <br>
+       <p> 10. The aim of the paper [10] was to create a web
+           administration interface for the MongoDB database to
+           conduct analysis on the stored data. The needs of potential
+           users and solutions similar that already existed were taken
+           into accounts and the application was designed. The tool is
+           composed of a console application that analyzes the results
+           and a web application that visualizes the results. Console
+           application can also be used and integrated into other tools
+           separately. The app is quicker than existing solutions,
+           more feature-rich and automatic testing and actual user
+           testing have been performed. <br> 
+           The system also has a solution for processing 3D parcels. It
+           also proposes the use of Robots empowered with computer
+           vision in material handling. Autonomous Guided Vehicles 
+           which is a flexible solution are based on active sensors for
+           self-orientation. This is seen as the best solution that
+           removes most of the manual efforts in station loading and
+           unloading and also in material handling with the premises. </p><br>
+
+       <h3> References</h3>
+           <p align='justify'><br>[1] Cornelia Győrödi, Robert Győrödi, George Pecherle , Andrada Olah,”
+               A comparative study: MongoDB vs. MySQL”, 2015 13th International
+               Conference on Engineering of Modern Electric Systems (EMES) </p>
+           <p align='justify'>[2] Li Liang, Ligu Zhu, Wenqian Shang, Dongyu Feng, Zida Xiao,
+               “Expresssupervision system based on NodeJS and MongoDB”, 2017
+               IEEE/ACIS 16th International Conference on Computer and
+               Information Science (ICIS) </p>
+           <p align='justify'>[3] Takeshi Ogasawara, “Workload characterization of server-side
+               JavaScript”, 2014 IEEE International Symposium on Workload
+               Characterization (IISWC) </p>
+           <p align='justify'>[4] Stefan Tilkov ; Steve Vinoski, “Node.js: Using JavaScript to Build
+               High-Performance Network Programs” , 2010 IEEE Internet
+               Computing </p>
+           <p align='justify'>[5] Andres Ojamaa ; Karl Düüna, “Assessing the security of Node.js
+               platform” 2012 International Conference for Internet Technology and
+               Secured Transactions </p>
+           <p align='justify'>[6] Zdenek Brabec ; Tomas Cerny ; Jiri Sebek, “On Metadata Extension to
+               Derive Data Presentations with Angular 2”, 2016 6th International
+               Conference on IT Convergence and Security (ICITCS) </p>
+           <p align='justify'>[7] Yunhua Gu; Shu Shen; Jin Wang ; Jeong-Uk Kim, “Application of
+               NoSQL database MongoDB” 2015 IEEE International Conference on
+               Consumer Electronics - Taiwan </p>
+           <p align='justify'>[8] Sharath Gude, Munawar Hafiz, Allen Wirfs-Brock, “JavaScript: The
+               Used Parts”, IEEE 38th Annual Computer Software and Applications
+               Conference 2014 </p>
+           <p align='justify'>[9] Benymol Jose, Sajimon Abraham, “Exploring the merits of nosql: A
+               study based on mongodb” 2017 International Conference on Networks
+               & Advances in Computational Technologies (NetACT) </p>
+           <p align='justify'>[10] Liberies Vokorokos , “MongoDB scheme analysis” 2017 IEEE 21st
+               International Conference on Intelligent Engineering Systems (INES) </p>
+   </div>
+   </div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Research1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

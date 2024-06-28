@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Programming Using Java</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .Education8 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Introduction to Programming Using Java')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Introduction to Programming Using Java'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="Education8">
+    <h1>Introduction to Programming Using Java</h1>
+    <h3>By: David J. Eck Hobart and William Smith Colleges</h3> <br> <br>
+    <p> A computer is a complex system consisting of many different components. But at the heart—or the brain, if you want—of the computer is a single component that does the actual computing. This is the Central Processing Unit, or CPU. In a modern desktop computer, the CPU is a single “chip” on the order of one square inch in size. The job of the CPU is to execute programs.</p><br>
+    
+    <p>A program is simply a list of unambiguous instructions meant to be followed mechanically by a computer. A computer is built to carry out instructions that are written in a very simple type of language called machine language. Each type of computer has its own machine language, and the computer can directly execute a program only if the program is expressed in that language. (It can execute programs written in other languages if they are first translated into machine language).</p><br>
+    
+    <p>When the CPU executes a program, that program is stored in the computer’s main memory (also called the RAM or random access memory). In addition to the program, memory can also hold data that is being used or processed by the program. Main memory consists of a sequence of locations. These locations are numbered, and the sequence number of a location is called its address. An address provides a way of picking out one particular piece of information from among the millions stored in memory. When the CPU needs to access the program instruction or data in a particular location, it sends the address of that information as a signal to the memory; the memory responds by sending back the data contained in the specified location. The CPU can also store information in memory by specifying the information to be stored and the address of the location where it is to be stored.</p><br>
+
+    <p>On the level of machine language, the operation of the CPU is fairly straightforward (al-though it is very complicated in detail). The CPU executes a program that is stored as a sequence of machine language instructions in main memory. It does this by repeatedly reading, or fetching, an instruction from memory and then carrying out, or executing, that instruction. This process—fetch an instruction, execute it, fetch another instruction, execute it, and soon forever—is called the fetch-and-execute cycle. With one exception, which will be covered in the next section, this is all that the CPU ever does.</p><br>
+
+    <p>The details of the fetch-and-execute cycle are not terribly important, but there are a few basic things you should know. The CPU contains a few internal registers, which are small memory units capable of holding a single number or machine language instruction. The CPU uses one of these registers—the program counter, or PC—to keep track of where it is in the program it is executing. The PC stores the address of the next instruction that the CPU should execute. At the beginning of each fetch-and-execute cycle, the CPU checks the PC to see which instruction it should fetch. During the course of the fetch-and-execute cycle, the number in the PC is updated to indicate the instruction that is to be executed in the next cycle. (Usually, but not always, this is just the instruction that sequentially follows the current instruction in the program).</p><br> 
+
+    <p>A computer executes machine language programs mechanically—that is without understanding them or thinking about them—simply because of the way it is physically put together. This is not an easy concept. A computer is a machine built of millions of tiny switches called transistors, which have the property that they can be wired together in such a way that an output from one switch can turn another switch on or off. As a computer computes, these switches turn each other on or off in a pattern determined both by the way they are wired together and by the program that the computer is executing.</p><br>
+
+    <p>Machine language instructions are expressed as binary numbers. A binary number is made up of just two possible digits, zero and one. So, a machine language instruction is just a sequence of zeros and ones. Each particular sequence encodes some particular instruction. The data that the computer manipulates is also encoded as binary numbers. A computer can work directly with binary numbers because switches can readily represent such numbers: Turn the switch on to represent a one; turn it off to represent a zero. Machine language instructions are stored in memory as patterns of switches turned on or off. When a machine language instruction is loaded into the CPU, all that happens is that certain switches are turned on or off in the pattern that encodes that particular instruction. The CPU is built to respond to this pattern by executing the instruction it encodes; it does this simply because of the way all the other switches in the CPU are wired together.</p><br>
+
+    <p>So, you should understand this much about how computers work: Main memory holds machine language programs and data. These are encoded as binary numbers. The CPU fetches machine language instructions from memory one after another and executes them. It does this mechanically, without thinking about or understanding what it does—and therefore the program it executes must be perfect, complete in all details, and unambiguous because the CPU can do nothing but execute it exactly as written.</p><br> 
+</div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+     var body = document.body;
+     body.classList.toggle('dark-mode');
+ 
+     localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+ 
+     var darkModeToggle = document.getElementById('darkModeToggle');
+     if (body.classList.contains('dark-mode')) {
+         darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function loadDarkMode() {
+     var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+     var body = document.body;
+     if (darkModeEnabled) {
+         body.classList.add('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         body.classList.remove('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function addToLibrary(bookTitle) {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'block';
+         }
+ 
+         function confirmAddToLibrary() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+ 
+             var bookTitle = 'Introduction to Programming Using Java'; 
+             var libraryData = localStorage.getItem('library');
+ 
+             var library = [];
+             if (libraryData) {
+                 library = JSON.parse(libraryData);
+             }
+ 
+             if (library.length >= 10) {
+                 alert('You have reached the maximum limit of 10 books in your library.');
+                 return; 
+             }
+ 
+             library.push(bookTitle);
+ 
+             localStorage.setItem('library', JSON.stringify(library));
+ 
+             openLibrarySuccessModal();
+ 
+             displayLibrary();
+         }
+ 
+         function closeAddToLibraryModal() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+         }
+ 
+         function openLibrarySuccessModal() {
+             var modal = document.getElementById('librarySuccessModal');
+             modal.style.display = 'block';
+ 
+             setTimeout(function() {
+                 modal.style.display = 'none';
+             }, 2000);
+         }
+ 
+         function toggleNotes() {
+             var notesSection = document.getElementById('notesSection');
+             if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                 notesSection.style.display = 'flex';
+             } else {
+                 notesSection.style.display = 'none';
+             }
+         }
+ 
+         function addNote() {
+             var noteText = document.getElementById('noteText').value;
+             if (noteText.trim() === '') {
+                 alert('Note cannot be empty.');
+                 return;
+             }
+ 
+             var notesList = document.getElementById('notesList');
+             var noteItem = document.createElement('li');
+             noteItem.className = 'note-item';
+             noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+             notesList.appendChild(noteItem);
+ 
+             saveNotes();
+ 
+             document.getElementById('noteText').value = '';
+         }
+ 
+         function deleteNote(button) {
+             var noteItem = button.parentElement;
+             noteItem.remove();
+             saveNotes();
+         }
+ 
+         function saveNotes() {
+             var notesList = document.getElementById('notesList');
+             var notes = [];
+             for (var i = 0; i < notesList.children.length; i++) {
+                 notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+             }
+             localStorage.setItem('notes', JSON.stringify(notes));
+         }
+ 
+         function loadNotes() {
+             var notes = JSON.parse(localStorage.getItem('notes'));
+             if (notes) {
+                 var notesList = document.getElementById('notesList');
+                 notesList.innerHTML = '';
+                 for (var i = 0; i < notes.length; i++) {
+                     var noteItem = document.createElement('li');
+                     noteItem.className = 'note-item';
+                     noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                     notesList.appendChild(noteItem);
+                 }
+             }
+         }
+         function goToBooks() {
+             window.location.href = 'books.html';
+         }
+ 
+         function goToMyLibrary() {
+             window.location.href = 'mylibrary.html';
+         }
+ 
+ 
+         window.onload = function() {
+             loadDarkMode();
+             loadNotes();
+         };
+ 
+       
+             function openModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'block';
+             }
+ 
+             
+             function closeModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'none';
+             }
+ 
+             function logout() {
+                 localStorage.clear();
+ 
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'block';
+ 
+                 closeModal();
+ 
+                 setTimeout(function() {
+                     window.location.href = 'account.html';
+                 }, 2000);
+             }
+ 
+ 
+             function closeLogoutSuccessModal() {
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'none';
+             }
+ 
+             window.onclick = function(event) {
+                 var modals = document.getElementsByClassName('modal');
+                 for (var i = 0; i < modals.length; i++) {
+                     if (event.target == modals[i]) {
+                         modals[i].style.display = 'none';
+                     }
+                 }
+             }
+ 
+ 
+     </script>
+ </body>
+ </html>   
+
+

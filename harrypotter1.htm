@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter and the Sorcerer's Stone 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .story2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Harry Potter and the Sorcerers Stone 1')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Harry Potter and the Sorcerer's Stone 1'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="story2">
+    <h1>Harry Potter and the Sorcerer's Stone 1</h1>
+    <h3>by: J.K. Rowling</h3> <br> <br>
+    <p><span class="first-letter">M</span>r. Dursley, a well-off Englishman, notices strange happenings on his way to work one day. That night, Albus Dumbledore, the
+     head of a wizardry academy called Hogwarts, meets Professor McGonagall, who also teaches at Hogwarts, and a giant named 
+     Hagrid outside the Dursley home. Dumbledore tells McGonagall that someone named Voldemort has killed a Mr. and Mrs. 
+     Potter and tried unsuccessfully to kill their baby son, Harry. Dumbledore leaves Harry with an explanatory note in a basket in 
+     front of the Dursley home.  
+  </p> <br>
+
+  <p>Ten years later, the Dursley household is dominated by the Dursleys’ son, Dudley, who torments and bullies Harry. Dudley is 
+     spoiled, while Harry is forced to sleep in a cupboard under the stairs. At the zoo on Dudley’s birthday, the glass in front of a 
+     boa constrictor exhibit disappears, frightening everyone. Harry is later punished for this incident.
+  </p> <br>
+
+  <p>Mysterious letters begin arriving for Harry. They worry Mr. Dursley, who tries to keep them from Harry, but the letters keep 
+     arriving through every crack in the house. Finally, he flees with his family to a secluded island shack on the eve of Harry’s 
+     eleventh birthday. At midnight, they hear a large bang on the door and Hagrid enters. Hagrid hands Harry an admissions letter 
+     to the Hogwarts School of Witchcraft and Wizardry. Harry learns that the Dursleys have tried to deny Harry’s wizardry all these 
+     years.
+  </p> <br>
+
+  <p>The next day, Hagrid takes Harry to London to shop for school supplies. First they go to the wizard bank, Gringotts, where 
+     Harry learns that his parents have left him a hefty supply of money. They shop on the wizards’ commercial street known as 
+     Diagon Alley, where Harry is fitted for his school uniform. Harry buys books, ingredients for potions, and, finally, a magic wand
+     —the companion wand to the evil Voldemort’s.
+  </p> <br>
+
+  <p>A month later, Harry goes to the train station and catches his train to Hogwarts on track nine and three quarters. On the 
+     train, Harry befriends other first-year students like Ron Weasley and Hermione Granger, a Muggle girl chosen to attend 
+     Hogwarts. At school, the first-years take turns putting on the “Sorting Hat” to find out in which residential house they will live. 
+     Harry fears being assigned to the sinister Slytherin house, but he, Ron, and Hermione end up in the noble Gryffindor house.  
+  </p> <br>
+
+  <p>As the school year gets underway, Harry discovers that his Potions professor, Snape, does not like him. Hagrid reassures 
+     Harry that Snape has no reason to dislike him. During their first flying lesson on broomsticks, the students are told to 
+     stay grounded while the teacher takes an injured boy named Neville to the hospital. Draco Malfoy, a Slytherin bully, snatches 
+     Neville’s prized toy and flies off with it to the top of a tree. Harry flies after him. Malfoy throws the ball in the air, and Harry 
+     speeds downward, making a spectacular catch. Professor McGonagall witnesses this incident. Instead of punishing Harry, 
+     she recommends that he play Quidditch, a much-loved game that resembles soccer played on broomsticks, for Gryffindor. Later 
+     that day, Malfoy challenges Harry to a wizard’s duel at midnight. Malfoy doesn’t show up at the appointed place, and Harry 
+     almost gets in trouble. While trying to hide, he accidentally discovers a fierce three-headed dog guarding a trapdoor in the 
+     forbidden third-floor corridor.
+  </p> <br>
+
+  <p>On Halloween, a troll is found in the building. The students are all escorted back to their dormitories, but Harry and Ron 
+     sneak off to find Hermione, who is alone and unaware of the troll. Unwittingly, they lock the troll in the girls’ bathroom along 
+     with Hermione. Together, they defeat the troll. Hermione tells a lie to protect Harry and Ron from being punished. During 
+     Harry’s first Quidditch match, his broom jerks out of control. Hermione notices Snape staring at Harry and muttering a curse. 
+     She concludes that he is jinxing Harry’s broom, and she sets Snape’s clothes on fire. Harry regains control of the broom and 
+     makes a spectacular play to win the Quidditch match.
+  </p> <br>
+
+  <p>For Christmas, Harry receives his father’s invisibility cloak, and he explores the school, unseen, late at night. He discovers the 
+     Mirror of Erised, which displays the deepest desire of whoever looks in it. Harry looks in it and sees his parents alive. After 
+     Christmas, Harry, Ron, and Hermione begin to unravel the mysterious connection between a break-in at Gringotts and the 
+     three-headed guard dog. They learn that the dog is guarding the Sorcerer’s Stone, which is capable of providing eternal life 
+     and unlimited wealth to its owner and belongs to Nicolas Flamel, Dumbledore’s old partner.
+  </p> <br>
+
+  <p>A few weeks later, Hagrid wins a dragon egg in a poker game. Because it is illegal to own dragons, Harry, Ron, and Hermione 
+     contact Ron’s older brother, who studies dragons. They arrange to get rid of the dragon but get caught. Harry, Ron, and 
+     Hermione are severely punished, and Gryffindor is docked 150 points. Furthermore, part of their punishment is to go into the 
+     enchanted forest with Hagrid to find out who has been killing unicorns recently. In the forest, Harry comes upon a hooded 
+     man drinking unicorn blood. The man tries to attack Harry, but Harry is rescued by a friendly centaur who tells him that his 
+     assailant was Voldemort. Harry also learns that it is Voldemort who has been trying to steal the Sorcerer’s Stone.
+  </p> <br>
+
+  <p>Harry decides that he must find the stone before Voldemort does. He, Ron, and Hermione sneak off that night to the 
+     forbidden third-floor corridor. They get past the guard dog and perform many impressive feats as they get closer and closer 
+     to the stone. Harry ultimately finds himself face to face with Quirrell, who announces that Harry must die. Knowing that Harry 
+     desires to find the stone, Quirrell puts Harry in front of the Mirror of Erised and makes him state what he sees. Harry sees 
+     himself with the stone in his pocket, and at that same moment he actually feels it in his pocket. But he tells Quirrell that he 
+     sees something else. A voice tells Quirrell that the boy is lying and requests to speak to Harry face to face. Quirrell removes 
+     his turban and reveals Voldemort’s face on the back of his head. Voldemort, who is inhabiting Quirrell’s body, instructs 
+     Quirrell to kill Harry, but Quirrell is burned by contact with the boy. A struggle ensues and Harry passes out.
+  </p> <br>
+
+  <p>When Harry regains consciousness, he is in the hospital with Dumbledore. Dumbledore explains that he saved Harry from 
+     Quirrell just in time. He adds that he and Flamel have decided to destroy the stone. Harry heads down to the end-of-year 
+     banquet, where Slytherin is celebrating its seventh consecutive win of the house championship cup. Dumbledore gets up and 
+     awards many last-minute points to Gryffindor for the feats of Harry and his friends, winning the house cup for Gryffindor. 
+     Harry returns to London to spend the summer with the Dursleys.
+  </p>
+</div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Harry Potter and the Sorcerers Stone 1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>

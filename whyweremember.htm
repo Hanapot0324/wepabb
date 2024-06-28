@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Remember</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .Education9 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Why We Remember')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Why We Remember'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="Education9">
+    <h1>Why We Remember</h1> <br> </br>
+    <h3>UNLOCKING MEMORY'S POWER TO HOLD ON TO WHAT MATTERS</h3> <br>
+    <h3> By: Charan Ranganath</h3>
+    <p>ABOUT  WHY WE REMEMBER<br> </br>
+    <p> Memory is far more than a record of the past. In this groundbreaking tour of the mind and brain, one of the world’s top memory researchers reveals the powerful role memory plays in nearly every aspect of our lives, from recalling faces and names, to learning, decision-making, trauma and healing.  </p>
+
+    <p> <i>“Why We Remember</i> offers a radically new and engaging explanation of how and why we remember.” —Dr. Matthew Walker, author of <i>Why We Sleep</i></p><br>
+    
+    <p>“Prominent neuroscientist and Guggenheim Fellow Charan Ranganath guides us through the science of our memories with incredible insight and clear science. He combines fascinating tales of the peculiarities of memory with practical, actionable steps. Not only will every reader remember better afterward, they’ll also never forget this life-changing book.” —Siddhartha Mukherjee, Pulitzer Prize-winning author of <i>The Emperor of Maladies</i> and <i>Gene</i></b></p><br>
+
+    <p>	A new understanding of memory is emerging from the latest scientific research. In <i>Why We Remember</i>, pioneering neuroscientist and psychologist Charan Ranganath radically reframes the way we think about the everyday act of remembering. Combining accessible language with cutting-edge research, he reveals the surprising ways our brains record the past and how we use that information to understand who we are in the present, and to imagine and plan for the future.</p><br>
+      
+    <p>Memory, Dr. Ranganath shows, is a highly transformative force that shapes how we experience the world in often invisible and sometimes destructive ways. Knowing this can help us with daily remembering tasks, like finding our keys, and with the challenge of memory loss as we age. What’s more, when we work with the brain’s ability to learn and reinterpret past events, we can heal trauma, shed our biases, learn faster, and grow in self-awareness.</p><br>
+      
+    <p> <u> <i> Take a moment to think about who you are right now. </i> </u></p><br>
+      
+    <p>Think about your closest relationships, your job, your geographic location, your current life circumstances. What would you consider your most indelible life experiences-the ones that have made you who you are? What are your most deeply held beliefs? What choices, large and small, good and bad, have led you to this place, to this moment in time?</p><br>
+      
+    <p>These choices are routinely influenced, and sometimes completely determined, by memory. To paraphrase Nobel-winning psychologist Danny Kahneman, your "experiencing self" does the living, but your "remembering self" makes the choices. Sometimes these choices are small and mundane, such as what to eat for lunch or which brand of laundry detergent you grab from a crowded supermarket shelf. Other times, they are the driving force behind life-changing deci- sions, from what career to pursue and where to live to what causes you believe in, even how you raise your children and what sort of people you want around you. And further, memory shapes the way you feel about those choices. Kahneman and others have shown in many studies that the happiness and satisfaction you gain from the outcomes of your decisions do not come from what you experienced, but rather from what you remember.</p><br>
+      
+    <p>In short, your remembering self is constantly-and profoundly- shaping your present and your future, by influencing just about every decision you make. That's not necessarily a bad thing, but it does mean we need to understand the remembering self, and the mecha- nisms of its far-reaching influence.</p><br>
+      
+    <p>Yet the pervasive involvement of memory in our thoughts, actions, emotions, and decisions often passes unnoticed, except for those moments when it fails us. I know this because, whenever I meet someone new and they discover I study memory for a living, the most common question I get is, <i>"Why am I so forgetful?"</i> I often ask myself the same question. Daily, I forget names, faces, conversations, even what I'm supposed to be doing at any given moment. We all wring our hands over those moments that we can't remember, and as we get older, forgetting can be downright scary.</p><br>
+      
+    <p>Severe memory loss is undoubtedly debilitating, but our most typ- ical complaints and worries around everyday forgetting are largely driven by deeply rooted misconceptions. Contrary to popular belief, the most important message to come from the science of memory is not that you can or even should remember more. The problem isn't your memory, it's that we have the wrong expectations for what memory is for in the first place.</p><br>
+      
+    <p>  We are not supposed to remember everything from our past. The mechanisms of memory were not cobbled together to help us remember the name of that guy we met at that thing. To quote British psychologist Sir Frederic Bartlett, one of the most important figures in the history of memory research, "literal recall is extraor dinarily unimportant."</p><br>
+      
+    <p>   So instead of asking "Why do we forget?" we should really be asking. <i>"Why do we remember?"</i></p><br>
+
+</div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+     var body = document.body;
+     body.classList.toggle('dark-mode');
+ 
+     localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+ 
+     var darkModeToggle = document.getElementById('darkModeToggle');
+     if (body.classList.contains('dark-mode')) {
+         darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function loadDarkMode() {
+     var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+     var body = document.body;
+     if (darkModeEnabled) {
+         body.classList.add('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+     } else {
+         body.classList.remove('dark-mode');
+         document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+     }
+ }
+ 
+ 
+ function addToLibrary(bookTitle) {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'block';
+         }
+ 
+         function confirmAddToLibrary() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+ 
+             var bookTitle = 'Why We Remember'; 
+             var libraryData = localStorage.getItem('library');
+ 
+             var library = [];
+             if (libraryData) {
+                 library = JSON.parse(libraryData);
+             }
+ 
+             if (library.length >= 10) {
+                 alert('You have reached the maximum limit of 10 books in your library.');
+                 return; 
+             }
+ 
+             library.push(bookTitle);
+ 
+             localStorage.setItem('library', JSON.stringify(library));
+ 
+             openLibrarySuccessModal();
+ 
+             displayLibrary();
+         }
+ 
+         function closeAddToLibraryModal() {
+             var modal = document.getElementById('addToLibraryModal');
+             modal.style.display = 'none';
+         }
+ 
+         function openLibrarySuccessModal() {
+             var modal = document.getElementById('librarySuccessModal');
+             modal.style.display = 'block';
+ 
+             setTimeout(function() {
+                 modal.style.display = 'none';
+             }, 2000);
+         }
+ 
+         function toggleNotes() {
+             var notesSection = document.getElementById('notesSection');
+             if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                 notesSection.style.display = 'flex';
+             } else {
+                 notesSection.style.display = 'none';
+             }
+         }
+ 
+         function addNote() {
+             var noteText = document.getElementById('noteText').value;
+             if (noteText.trim() === '') {
+                 alert('Note cannot be empty.');
+                 return;
+             }
+ 
+             var notesList = document.getElementById('notesList');
+             var noteItem = document.createElement('li');
+             noteItem.className = 'note-item';
+             noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+             notesList.appendChild(noteItem);
+ 
+             saveNotes();
+ 
+             document.getElementById('noteText').value = '';
+         }
+ 
+         function deleteNote(button) {
+             var noteItem = button.parentElement;
+             noteItem.remove();
+             saveNotes();
+         }
+ 
+         function saveNotes() {
+             var notesList = document.getElementById('notesList');
+             var notes = [];
+             for (var i = 0; i < notesList.children.length; i++) {
+                 notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+             }
+             localStorage.setItem('notes', JSON.stringify(notes));
+         }
+ 
+         function loadNotes() {
+             var notes = JSON.parse(localStorage.getItem('notes'));
+             if (notes) {
+                 var notesList = document.getElementById('notesList');
+                 notesList.innerHTML = '';
+                 for (var i = 0; i < notes.length; i++) {
+                     var noteItem = document.createElement('li');
+                     noteItem.className = 'note-item';
+                     noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                     notesList.appendChild(noteItem);
+                 }
+             }
+         }
+         function goToBooks() {
+             window.location.href = 'books.html';
+         }
+ 
+         function goToMyLibrary() {
+             window.location.href = 'mylibrary.html';
+         }
+ 
+ 
+         window.onload = function() {
+             loadDarkMode();
+             loadNotes();
+         };
+ 
+       
+             function openModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'block';
+             }
+ 
+             
+             function closeModal() {
+                 var modal = document.getElementById('logoutModal');
+                 modal.style.display = 'none';
+             }
+ 
+             function logout() {
+                 localStorage.clear();
+ 
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'block';
+ 
+                 closeModal();
+ 
+                 setTimeout(function() {
+                     window.location.href = 'account.html';
+                 }, 2000);
+             }
+ 
+ 
+             function closeLogoutSuccessModal() {
+                 var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                 logoutSuccessModal.style.display = 'none';
+             }
+ 
+             window.onclick = function(event) {
+                 var modals = document.getElementsByClassName('modal');
+                 for (var i = 0; i < modals.length; i++) {
+                     if (event.target == modals[i]) {
+                         modals[i].style.display = 'none';
+                     }
+                 }
+             }
+ 
+ 
+     </script>
+ </body>
+ </html>   
+
+

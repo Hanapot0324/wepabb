@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree of Success The Right Career, The Right College, and the Financial Aid to Make It All Possible</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .educational14 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('THE STORY OF YES AND NO')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Degree of Success The Right Career, The Right College, and the Financial Aid to Make It All Possible'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+   <div class="educational14">
+    <h1>Degree of Success The Right Career, The Right College, and the Financial Aid to Make It All Possible</h1><br>
+    <h3>Author: Tom and Maria Geffers</h3>  
+    <p><span class="first-letter">H</span>igh school students are experiencing the most competitive college admissions period in U.S. history. 
+        Adding to the stress, 80% of college students change their major at least once, and more than $2 billion in financial aid goes unclaimed. 
+        Degree of Success: The Right Career, The Right College, and the Financial Aid to Make It All Possible is an important guide for families dealing with this difficult 
+        and challenging time. Tom and Maria Geffers, and the experts they interviewed, share valuable insights that make this book a one-stop shopping for parents. 
+        Tom and Maria Geffers are the owners of Career and College Counselors, where theyve been helping families since 2010.
+    </p><br>
+
+
+    <p><u>ACKNOWLEDGMENTS</u></p><br>
+    
+    <p> We would like to thank Seth Greene of Market Domination who gave us the opportunity to create and publish our own podcast and book, 
+        Bruce Corris who through humor and guidance gave the book soul, Tétan Brannen and Kristin Watt, who are the publishing and creative arm of this book, 
+        and Garrett Hicks and his team who dealt with the nitty gritty and day-to-day production of our podcasts. They have shown great patience, guidance, and endless devotion 
+        in making this the best and most informative book possible. This book is a compilation of the many college, career, and financial experts we interviewed on our podcasts 
+        who we sincerely want to thank. We also want to thank our friends and family, especially our daughters, Brenna Geffers and Dr. Marlaina Kloepfer. Both are experienced 
+        in higher education and shared their insights and experiences with us. Most of all, we would like to thank God for all the blessings in our lives. We wrote this book 
+        to help parents and their children navigate the college admissions journey and to provide a path to future happiness and success.
+    </p><br>
+
+        <p><u><b>INTRODUCTION</b></u></p><br>
+  
+    <p> Weve all heard the jokes about “senioritis”. When a student reaches their senior year of high school, they shift into low gear. 
+        Theyre not motivated, they dont do the work, they miss more classes than they attend…its their chance to take it easy before they go to college and 
+        the pressure begins all over again.
+
+    </p><br>
+     
+    <p>But in reality, senior year can be one of the most pressure packed years in a child’s life. Not to mention their parents. There’s so much to think about.<br><br>
+        Do they know what career they want?<br><br>
+        What will they major in?<br><br>
+        What college do they want to go to?<br><br>
+        Can they get in?<br><br>
+        Can they afford it?<br><br>
+        How can they get the financial aid they need?<br>
+    </p><br>
+    
+    <p>Those can be very difficult questions which can lead to incredible stress for the student and their family.</p><br>
+
+    <p>Let’s start with the career choice. Is it fair to expect a 17- year-old to know what they want to do for the rest of their life?</p><br>
+
+    <p> What about the college? How many kids know which is the right college for them and why? Waiting for that admissions letter to arrive 
+        and wondering what it will say has everyone filled with anticipation and in many cases fear.
+    </p><br>
+
+    <p> Then there’s the cost. The numbers are staggering, especially if you want to go to a prestigious private university. 
+        Sure, there’s financial aid out there, but how do you find it and how do you get what you need?
+    </p><br>
+
+    <p> No wonder it’s such a stressful time. And it’s only getting worse. The 2021-22 admissions cycle was the most competitive ever.</p><br>
+
+    <p> Okay, now that we’ve scared you and made you more stressed out than ever, take a deep breath.</p><br>
+
+    <p> It doesn’t have to be that way. With the right information and the right guidance, families can go into this process with confidence. 
+        Students can learn what careers fit their skills and their passions. They can identify the college that’s best for their field and their lifestyle.
+    </p><br>
+
+    <p> Parents can learn about every possible option for financial aid and how to get it, even if they think they make too much money to qualify 
+        This book is your guide to all of this. It will answer your questions (even the ones you may not think to ask), and help you get through 
+        this because this is one of the most important times in a family’s life. It shouldn’t be one of the worst.
+    </p><br>
+
+    
+
+        <p><u><b> MEET THE GEFFERS</b></u></p><br>
+
+        <p>Before you hear from all the professionals who share their<br><br>
+            expertise with you, we’d like you to learn a little about us<br><br>
+            and how helping kids get into the right college for the right<br><br>
+            What college do they want to go to?<br><br>
+            cost became our passion. It’s been an interesting journey.<br><br>
+        </p><br>
+
+    <p> Satan, who was once an honored angel in heaven, had been ambitious for the more exalted honors which God had bestowed upon His Son.
+         He became envious of Christ, and represented to the angels, who honored him as covering cherub, that he had not the honor conferred upon him which his position demanded. 
+         He asserted that he should be exalted equal in honor of Christ. Satan obtained sympathizers. Angels in heaven joined him in his rebellion, and fell with their 
+         leader from their high and holy estate, and were therefore expelled from heaven with him.
+    </p><br>
+
+         <p><u><b>Maria’s story:</b></u> </p><br>
+
+    <p> I came up through the ranks as a teacher, and they were some pretty tough ranks. 
+        That’s because I started out in Catholic schools, which really put you through the wringer.
+        My first job was in the Bronx, in New York City, where I taught seventh and eighth grade, teaching multiple subjects with 50 kids in each class. 
+        The good news is that it taught me discipline and organizational skills, and showed me how much I truly love working with students.
+    </p><br>
+
+    <p> I also learned that if you can teach 50 kids in a class and hold their interest, you can do pretty much anything. 
+        I continued in Catholic schools after Tom and I moved to the Poconos, but as so many others have done, they closed down, so I became a teacher in the public school system.
+        I'm certified in English literature, Communication, Social Studies, and Geography. I had the wonderful privilege of being chosen as a 
+        National Geographic Teacher Consultant, which was great fun, especially during the 200th anniversary of Christopher Columbus landing in the New World.
+    </p><br>
+
+
+    <p> Then our daughter Brenna was identified as a gifted student, and she had a hard time. She was very inquisitive and asked a lot of questions. 
+        Often teachers consider students like that to be aggressive and unruly. So, through her, I became interested in gifted education. 
+        I got a Master’s degree in Gifted Education and Leadership, and continued my studies after that, to really solidify my thoughts 
+        on what makes a gifted student and how to teach them.
+    </p><br>
+
+    <p> That led me to work with high school gifted students. One of the things I did with them was start to get them ready for college. 
+        These students are high-achieving, but still need assistance, and don’t necessarily get the help they need because guidance counselors tend to 
+        concentrate on the students who have a more visible need, such as those with emotional or social issues.
+        So, I put a program together and worked with them to make sure they were able to properly compete, 
+        and help to find the right school for them. Not just looking at their grades, looking at their interests and finding their passion.        
+    </p><br>
+
+    <p> Many gifted students just don’t know who they are and what they want to be.  
+        They actually have so much talent it’s hard for them to really concentrate.
+        I did that for more than 10 years while still working in public schools, 
+        then retired and took a few years off to catch up on my sleep after all those years of getting up at 4:00 in the morning. 
+        Then Tom and I decided to combine our skills and start our business.        
+    </p><br>
+
+        <u><p><b>Tom’s story:</b></p></u><br>
+    
+    <p> We met during our senior year of high school. We went to different schools but we both worked part-time at the same supermarket. 
+        Then we went to different universities in New York City and pursued different things. She’s the educator, I’m the business side of things.
+    </p><br>
+
+    <p> After getting a degree in Business Administration I started out in retail, working at J.C. Penney’s Corporate Headquarters doing marketing and advance planning. 
+        Older readers may remember the Penney’s catalog. I worked on that, and made presentations to company directors and other executives on marketing the catalog.
+    </p><br>
+
+    <p> It was a fun job, but by then we were living in Pennsylvania and it was a two-hour commute to Manhattan, which ages you very quickly. 
+        I was recruited by an insurance company and began selling life insurance, annuities, and other investments. 
+    </p><br>
+
+    <p> I then expanded into the commercial insurance field, which I liked much more because every day you're 
+        talking to somebody different, getting their life story, and trying to come up with an insurance solution for them. 
+        If you’re bored one day, you’re going to meet somebody new tomorrow.
+    </p><br>
+
+    
+
+    
+</div>
+</div>
+
+<script>
+function toggleDarkMode() {
+var body = document.body;
+body.classList.toggle('dark-mode');
+
+localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+
+var darkModeToggle = document.getElementById('darkModeToggle');
+if (body.classList.contains('dark-mode')) {
+  darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function loadDarkMode() {
+var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+var body = document.body;
+if (darkModeEnabled) {
+  body.classList.add('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  body.classList.remove('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function addToLibrary(bookTitle) {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'block';
+  }
+
+  function confirmAddToLibrary() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+
+      var bookTitle = 'The Hunger Games'; 
+      var libraryData = localStorage.getItem('library');
+
+      var library = [];
+      if (libraryData) {
+          library = JSON.parse(libraryData);
+      }
+
+      if (library.length >= 10) {
+          alert('You have reached the maximum limit of 10 books in your library.');
+          return; 
+      }
+
+      library.push(bookTitle);
+
+      localStorage.setItem('library', JSON.stringify(library));
+
+      openLibrarySuccessModal();
+
+      displayLibrary();
+  }
+
+  function closeAddToLibraryModal() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+  }
+
+  function openLibrarySuccessModal() {
+      var modal = document.getElementById('librarySuccessModal');
+      modal.style.display = 'block';
+
+      setTimeout(function() {
+          modal.style.display = 'none';
+      }, 2000);
+  }
+
+  function toggleNotes() {
+      var notesSection = document.getElementById('notesSection');
+      if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+          notesSection.style.display = 'flex';
+      } else {
+          notesSection.style.display = 'none';
+      }
+  }
+
+  function addNote() {
+      var noteText = document.getElementById('noteText').value;
+      if (noteText.trim() === '') {
+          alert('Note cannot be empty.');
+          return;
+      }
+
+      var notesList = document.getElementById('notesList');
+      var noteItem = document.createElement('li');
+      noteItem.className = 'note-item';
+      noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+      notesList.appendChild(noteItem);
+
+      saveNotes();
+
+      document.getElementById('noteText').value = '';
+  }
+
+  function deleteNote(button) {
+      var noteItem = button.parentElement;
+      noteItem.remove();
+      saveNotes();
+  }
+
+  function saveNotes() {
+      var notesList = document.getElementById('notesList');
+      var notes = [];
+      for (var i = 0; i < notesList.children.length; i++) {
+          notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+      }
+      localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+      var notes = JSON.parse(localStorage.getItem('notes'));
+      if (notes) {
+          var notesList = document.getElementById('notesList');
+          notesList.innerHTML = '';
+          for (var i = 0; i < notes.length; i++) {
+              var noteItem = document.createElement('li');
+              noteItem.className = 'note-item';
+              noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+              notesList.appendChild(noteItem);
+          }
+      }
+  }
+  function goToBooks() {
+      window.location.href = 'books.html';
+  }
+
+  function goToMyLibrary() {
+      window.location.href = 'mylibrary.html';
+  }
+
+
+  window.onload = function() {
+      loadDarkMode();
+      loadNotes();
+  };
+
+
+      function openModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'block';
+      }
+
+      
+      function closeModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'none';
+      }
+
+      function logout() {
+          localStorage.clear();
+
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'block';
+
+          closeModal();
+
+          setTimeout(function() {
+              window.location.href = 'account.html';
+          }, 2000);
+      }
+
+
+      function closeLogoutSuccessModal() {
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          var modals = document.getElementsByClassName('modal');
+          for (var i = 0; i < modals.length; i++) {
+              if (event.target == modals[i]) {
+                  modals[i].style.display = 'none';
+              }
+          }
+      }
+
+
+</script>
+</body>
+</html>

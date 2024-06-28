@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fisheyes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .story10 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Fisheyes')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Fisheyes'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="story10">
+    <h1>Fisheyes</h1>
+    <h3>by: Ai Jiang</h3> <br> <br>
+    <p><i><span class="first-letter">I</span> am not a horrible person,</i> I murmur to myself in the basement at night when my family is at home—half my family. 
+            Voices of actors and actresses from a Cantonese drama drift down the stairs, mingling with the words in my head, 
+            the ones leaving my lips, as I sit with my legs folded against my chest in darkness. The chair I sit in sways, 
+            though I remain still. The only light comes from the computer screen in front of me, flickering as the storm outside 
+            batters the electricity lines barely tethered to the streetlights.<i> Tap taptap tap. </i> wires smack against the branches 
+            of nearby trees in desperate need of trimming, but no one does it, and no one files a complaint for someone to come fix 
+            it before it becomes an issue either.
+        </p><br>
+
+        <p>I am not a horrible person. </i>My whispers are a little louder this time when Mother’s sick laughter bounces down the 
+            steps, disappearing right before it reaches me. Thankfully, my brother’s not home tonight—he always has his computer 
+            volume too high, the sound of violent video games penetrating the wall that separates our rooms.
+        </p><br>
+
+        <p><i>I am not—</i></p><br>
+
+        <p>“Darling,” Mother’s boyfriend drawls.</p><br>
+
+        <p>The chill of the basement burns my lungs, but my frozen feet begin to thaw, my earlobes warm, blood rushes down my arms 
+            and into the tips of my fingers. There is nothing wrong with the man’s voice, or the words that leave his lips, or the way 
+            he looks at my mother with love—sometimes hunger. But he is not Dad. He is not a terrible person. Right. Right? But—
+        </p><br>
+
+        <p>“Elaine.” Mother’s voice snaps me from my frenzy of thoughts and calms me for a moment.
+            <br<br>
+            “Yes, mother?”
+            <br><br>
+            I wait.
+            <br><br>
+            Silence stretches, compresses, pops.
+            <br><br>
+            “Yes—”
+            <br><br>
+            “Could you head out and grab takeout from that restaurant in the plaza across the street?”
+            <br><br>
+            It’s a miracle she never remembers the name. The place is the only one she ever orders from. The others are too expensive, 
+            she’d say.
+            <br><br>
+            “Yes. Mother.”</p><br>
+
+            <p>The laugher from the living room follows me to the front door. I watch Mother’s and her boyfriend’s shadows—only the top 
+                halves; the bottoms obscured by the couch—shuffle against the wall, lit by the TV. I want to laugh with them, too.
+            </p><br>
+
+            <p>Just as I opened the door, the sound of the TV turning off causes me to turn. The filter from the fish tank sputter to a 
+                stop, its vibrant white light flickering to darkness. The only light remaining is the yellow glow from the streetlight in 
+                front of our house, a slim beam slipping in through the door. A groan from both adults. Creaking follows the cracking of 
+                joints and necks, along with the crinkling of once still clothing. Mother must be wearing her only dressy shirt, the mauve one. 
+                The boyfriend always wears his white work shirt—I’m convinced he only has the one. There’s a strange sour smell coming from 
+                it each time I walk past him.
+            </p><br>
+
+            <p>“Could you also grab some candles?”
+                <br><br>
+                “Yes. Mother.”</p><br>
+
+                <p>There are no issues with the electricity at the superstore in the plaza, but the surrounding restaurants and smaller shops 
+                    sat like dark arms on both sides of the large illuminated building. It’s too bright. I raise a hand, shielding my eyes as I 
+                    amble towards the restaurant connected to the superstore. Takeout boxes sit in a plastic bag outside. The owners had given up 
+                    and headed home early for the day, it seems. I want to lie and say the food isn’t there, to leave the takeout, to go home 
+                    empty-handed.
+                </p><br>
+
+                <p>I linger by the front door, swinging the takeout like a pendulum. It bangs against my leg. One of the boxes inside pops open, 
+                    smearing sauce on the plastic. The pungent smell of fish oil wafts across my nose for only a moment before the wind whisks it away. 
+                    I don’t head back until the food cools. Condensation collects along the inner skin of the bag, drips, pools at the bottom—some of 
+                    it dilutes the fried rice with the Styrofoam lid having holes poked in them by the restaurant staff.
+                </p><br>
+
+                <p>My phone rings in my pocket.
+                        <br><br>
+                        “What—” My mother was irritated—as usual.
+                        <br><br>
+                        “Sorry. Coming.”</p><br>
+
+                    <p>As I walk home, I watch the flap of the open takeout box on top flop up and down. Bits and pieces of carrots, peas, and pork 
+                        spill over the side. Beneath the rice sat the container with steamed fish still in perfect condition. <i>Don’t waste food. Don’t 
+                        make a mess. That’s what pigs do. </i> The bag bangs against my knees again.
+                    </p><br>
+
+                    <p>“It’s cold.” An accusation. Mother stares directly at me as she takes a bite of the food. Her face crinkles, causing faint new 
+                        wrinkle lines to appear alongside already deepening crevices.
+                    </p><br>
+
+                    <p>“Now, darling. It’s not her fault,” the boyfriend said.
+                        <br><br>
+                        I look down at my food, stab at a carrot. Why does he defend me? <i>It’s not my fault. I’m not a horrible person.</i>
+                        <br><br>
+                        “—horrible.” I look up. “Cold food tastes horrible.” I look down again when I see Mother’s attention is focused on the rice.
+                    </p><br>
+
+                    <p>“Could you throw that out?” The boyfriend points to the fish head, its beady eyes watching me. Its fleshless body floats above the soy sauce.
+                        <br><br>
+                        Mother shrugs and reaches for the takeout box, but I swipe it before her fingers could close around the lid.
+                        <br><br>
+                        “I’ll eat it,” I say. Dad’s words when I was eight, a few months before he left, echoes.
+                    </p><br>
+
+                    <p><i>Fisheyes are good for you. Eating them gives you better vision, helps you see better. </i> eyes had a wild glint as he digs his spoon 
+                        into the eye socket of the fish, scooping out the small round sphere covered in slimy fluid and dropping it into my bowl. <i>Try it.</i>
+                    </p><br>
+
+                    <p>My tongue wraps around the eye, the liquid ooze dissolving on my tongue before my teeth digs into the solid, like breaking apart grime 
+                        that had been packed together. But it only took a moment for the small sphere to disappear. I flipped the head, the remaining eye locks 
+                        with my own, before I gouge it out with the spoon.
+                    </p><br>
+
+                    <p>Mother shakes her head, lips dipping towards her dimpled chin—a meaty, sagging mound. “Just like your father.”
+                        <br><br>
+                        She says it as though it was a bad thing.
+                        <br><br>
+                        I stare at the eyeless fish, remembering Dad, imagining it as my mother, imagining it as the boyfriend.
+                        </p><br>
+
+                    <p>“Watch your brother while we’re out,” Mother says. She grabs her counterfeit Coach purse from the coat rake next to the door and pulls 
+                        on her Louis Vuitton jacket with a VL rather than LV logo.
+                    </p><br>
+
+                    <p>He’s only two years younger, a high school freshman. He doesn’t need watching.
+                        <br><br>
+                       The dull pulse of video game music thud against the door and wall of Milan’s room upstairs.
+                    </p><br>
+
+                    <p>“Yes. Moth—” The door slams shut. The shadow of the boyfriend’s arm around Mother’s shoulder minimizes until only the still shadow of 
+                        the streetlight’s pole remains. The engine rumbles. Rubber against gravel and rubble. Snaps from the broken bodies of severed twigs. 
+                        Open fires and static from walkie-talkies humming from Milan’s room.
+                    </p><br>
+
+                    <p>I head to the kitchen, grab dirty scissors that still have bits of raw chicken stuck to the blades, and head for the living room. 
+                        The usually gentle trickle from the fish tank’s filter sounds more agitating today. I lift the lid, plunge the scissors inside, and 
+                        create the living whirlwind I left in my mind. The goldfish swim against the currents, their fins futile against turbulent waters, 
+                        their eyes remain dead, lifeless. Do they feel panic?
+                    </p><br>
+
+                    <p>The bodies of several fish gravitate towards the middle of the small tornado, golden bodies slamming against one another, propelling 
+                        each other in the opposite direction. I stop, leaving the water still churning, the fish still disorientated, bits of chicken now 
+                        floating among gold. The blades of the scissors unlock between my fingers. I drive it towards the nearest fish, close the metal 
+                        across the middle of its body before it could slip away. Guts spill. Release of pellets consumed just moments ago when Mother fed 
+                        the fish instead of Milan and me before she left.
+                    </p><br>
+
+                    <p>I cradle the head of the largest fish, its body floats with those of its siblings, and head to the kitchen. I pull out the leftovers 
+                        from the night before: the rice Mother abandoned in the end and the eyeless fish.
+                    </p><br>
+
+                    <p>“Dinner!”</p><br>
+
+                    <p>Milan always hears everything, even with his game on full blast. The sound of violence stops, leaving a comforting silence. The door 
+                        to his bedroom opens, slams shut. Heavy steps drag down the stairs. Milan enters the kitchen with lazy eyes, half open, lined with 
+                        dark petals, and plops down in front of his steaming plate. In the middle of the table sits the fish head, both eyes in place, though 
+                        the small spheres were sinking into the socket from misfit. Its body was still fleshless from being picked at by the boyfriend yesterday.
+                    </p><br>
+
+                    <p>“Have a fisheye,” I say, pointing at the eyes I didn’t bother to wash before placing in.
+                        <br><br>
+                        Milan shrugs, his mind no doubt still thinking about his game, wanting to return to it, wanting to get lost in it. I wish I could do the same.
+                        <br><br>
+                        Milan makes a face when the eye meets his tongue but says nothing.
+                        <br><br>
+                        “Good?” I prod.
+                        <br><br>
+                        He doesn’t answer, as usual, but nods. I smile in triumph.
+                        <br><br>
+                        “It tastes just like what Dad used to make, doesn’t it?”
+                        <br><br>
+                        Another nod.
+                        <br><br>
+                        “We should get Mother to try it, shouldn’t we?” I ask with a smile.
+                        <br><br>
+                        Milan pauses, spoon halfway to his mouth. He stares—unflinching—then lowers his spoon.
+                        <br><br>
+                        Silence.
+                        <br><br>
+                        He doesn’t help me with the dishes and heads upstairs when he’s finished. The other eye remains. I flip the fish over so I can see it.
+                        </p><br>
+
+                        <p>“I made dinner,” I say when Mother finally returns home. She smells of earth and wood, but there is nothing natural about it. 
+                            The boyfriend reeks of the whiskey Dad used to break out on special occasions.
+                        </p><br>
+
+                        <p>“Do you want the last eye?” I lift the plate under her nose. Mother frowns, maybe realizing the fish was eyeless last night, 
+                            but uncertain enough in her hazy mind to be certain she is remembering correctly. “Do you want it?”
+                        </p><br>
+
+                        <p>“Get that away from me!” Her screech scraps against my eardrums.
+                            <br><br>
+                            “Do you—”
+                            <br><br>
+                            Mother throws out a hand, lashing out at the plate. It falls. The ill-fitting eye dislodges from the socket.
+                            <br><br>
+                            “Get. It. Away.”
+                            <br><br>
+                            “Yes—”
+                        </p><br>
+
+                        <p>Mother’s bare feet meet the body of the fish, bones crunching under her toes. Her mind is subdued enough not to feel the pain, 
+                            or maybe she doesn’t care.
+                        </p><br>
+
+                        <p>“She’s had a long day,” the boyfriend says, patting me on the head as he walks by. Why is he nicer than Mother? Why does
+                            he remind me of Dad?
+                        </p><br>
+
+                        <p>When Mother and the boyfriend settle in the living room, I head for the stairs, but Mother’s question stops me.</p><br>
+
+                        <p>“Where did the fish go?”</p><br>
+
+                        <p>I turn. She squints at the fish tank, then gets up from the couch while the boyfriend remains, scrolling through his phone, uninterested. 
+                            A scream rips through Mother’s throat, more inhuman than what would have left the fish’s mouths if they could wail. Mother stomps out
+                            of the living room and rushes towards me, claws locking around my elbow.
+                            <br><br>
+                            “What happened?” Her voice is muffled by the sound of my blood and heartbeat pounding in my ears. “What—”
+                            <br><br>
+                            I raise a finger, point at the fish on the ground. The single remaining eye, sunken into the bottom of the socket, stares at us both.
+                            <br><br>
+                            “Do you want the last eye?” I ask, lowering my voice to sound more like Dad. “I can make more next time.”
+                            <br><br>
+                            Maybe now Mother will see better. Maybe the boyfriend will finally leave. Maybe Dad will come home.
+                            <br><br>
+                            <i>I am not a horrible person, am I?</i>
+                        </p>
+</div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Fisheyes'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   

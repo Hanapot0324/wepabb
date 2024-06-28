@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Genres</title>
+    
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+    body {
+        background-color: #FDEFB2;
+        overflow-y: scroll; 
+        overflow-x: hidden;
+      }
+      /* Hide scrollbar for webkit-based browsers (Chrome, Safari) */
+    body::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for Firefox */
+    body {
+        scrollbar-width: 5%;
+      }
+    .bg{
+        max-width: 100%;
+        background-size: 100%;
+    }
+    .hero{
+        width: 100%;
+        height: 100vh;          
+        padding: 0, 2%;
+    }
+
+    nav{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #865940;
+    }
+    nav .logo{
+        width: 110px;
+        cursor: pointer;
+        margin-right: 2%;
+        margin-left: 20%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        align-items: center;
+
+    }
+    nav ul{
+            flex: 1;
+            text-align: center;
+            margin-left: 130px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        nav ul li{
+            list-style: none;
+            display: inline-flex;
+            margin: 10px 12px;
+            margin-bottom: 0%;
+            margin-right: 0%;
+            position: relative;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color:white;
+            font-weight: 600;
+            font-size: 23px;
+            padding: 3px;
+            position: relative;
+            transition: color 0.3s ease; /* Added transition for smooth effect */
+            z-index: 1; /* Ensure text is above rectangle */
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 45%;
+            bottom: -33px;
+            width: 100%;
+            height: 5px;
+            background: #FDEFB2;
+            transition: width 0.3s ease, left 0.3s ease;
+            z-index: -1; /* Ensure rectangle is behind text */
+            transform: translateX(-15%) scaleX(0); /* Initially hide the rectangle */
+            transform-origin: center; /* Ensure transformation starts from left */
+            border-radius: 10%;
+        }
+        nav ul li a:hover::after,
+            nav ul li a.active::after {
+                width: 125%;
+                height: 260%;
+                left: -0.25%;
+                transform: translateX(-9%) scaleX(0.9);
+            }
+            nav ul li a:hover,
+            nav ul li a.active {
+                color: #5f3e2a;
+            }
+        .login-signup {
+        margin-left: 2%;
+        margin-right: 2%;
+        }
+      header {
+        background-color: #664229;
+        color: #f0e2d3;
+        text-align: center;
+        padding: 50px;
+        border: 7px solid #FDEFB2;
+        margin-bottom: 0;
+      }
+
+      .tabs {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        background-color: #664229;
+        margin: 0;
+        justify-content: center; 
+        margin-top: -1%;
+        margin-left: 7px;
+        margin-right: 7px;
+      }
+      .tab {
+        cursor: pointer;
+        padding: 20px 105px;
+        border: 3px solid #FDEFB2;
+        border-radius: 5px 5px 0 0;
+        margin-right: 30px;
+        margin-left: 2px;
+        color: #FDEFB2;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 100%;
+        font-weight: bold;
+      }
+      .tab:hover {
+        background-color: #FDEFB2;
+      }
+      .tab-content {
+        display: none;
+        
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 37px;
+        margin-top: 5%;
+        padding-bottom: 1%;
+        margin-left: 2.5%;
+        
+      }
+      .gallery img {
+        width: 100%;
+        max-width: 210px; 
+        height: auto;
+        cursor: pointer;
+        margin-left: 16%;
+        transition: transform 0.3s ease-in-out;
+        
+        box-shadow: 10px 10px 5px black;
+      }
+      .gallery img:hover {
+        /* Scale up the image slightly on hover */
+        transform: scale(1.05);
+      }
+      .gallery1 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 37px;
+        margin-top: 5%;
+        padding-bottom: 1%;
+        margin-left: 2.5%;
+        
+      }
+      .gallery1 img {
+        width: 100%;
+        max-width: 210px; 
+        height: auto;
+        cursor: pointer;
+        margin-left: 7%;
+        transition: transform 0.3s ease-in-out;
+        margin-top: 27%;
+        box-shadow: 10px 10px 5px black;
+      }
+      .gallery1 img:hover {
+        /* Scale up the image slightly on hover */
+        transform: scale(1.05);
+      }
+      .tab-content.active {
+        display: block;
+        
+               
+      }
+      .tab.active,
+          .tab:hover {
+              background-color: #FDEFB2;
+              color: #664229;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+              font-size: 100%;
+              font-weight: bold;
+        }
+          h1 {
+            font-size: 300%;
+            padding-bottom: 30px;
+            text-align: center;
+            color: #FDEFB2;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h2{
+            font-size: 300%;
+            padding-bottom: 50px;
+            text-align: center;
+            color: #664229;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position: absolute;
+
+            
+        }
+  
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #FDEFB2;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #664229;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+        color: #664229;
+    }
+
+    .modal-buttons button {
+        background-color: #865940;
+        color: #F6E8B9;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 0 10px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .modal-buttons button:hover {
+        background-color: #664229;
+        color: #FDEFB2;
+    }
+
+    .close {
+        color: #F6E8B9;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #F6E8B9;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .privacy-concern{
+      margin-top: 2%;
+      margin-bottom: 0;
+      font-size: medium;
+    }
+    p{
+      display: inline;
+    }
+  
+</style>
+  </head>
+  <body>
+    <div class="hero">
+        <nav id="navbar">
+            <a href="home.html"><img src="wisbuchlogo.png" class="logo"></a>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="books.html" class="active">Books</a></li>
+                <li><a href="mylibrary.html">My Library</a></li>
+            </ul>
+            <div class="login-signup">
+                <ul>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </div>
+      </nav>
+
+      <header>
+        <h1>Book Genres</h1>
+      </header>
+      
+      <ul class="tabs">
+        <li class="tab" onclick="openTab('tab1')" data-tab="tab1" id="entertainmentTab">Entertainment</li>
+        <li class="tab" onclick="openTab('tab2')" data-tab="tab2">Kids</li>
+        <li class="tab" onclick="openTab('tab3')" data-tab="tab3">Education</li>
+        <li class="tab" onclick="openTab('tab4')" data-tab="tab4" id="researchTab">Research</li>
+    </ul>    
+      
+      <!--ENTERTAINMENT-->
+      
+      <div id="tab1" class="tab-content active">
+        <div class="gallery">
+          <a href="hungergames.htm" target="_self"><img src="img/hungergaames.jpg" alt="Image1"></a>
+          <a href="harrypotter1.htm" target="_self"><img src="img/harrypotter1.jpg" alt="Image2"></a>
+          <a href="harrypotter2.htm" target="_self"><img src="img/harrypotter2.jpg" alt="Image3"></a>
+           <a href="harrypotter3.htm" target="_self"><img src="img/harrypotter3.jpg" alt="Image4"></a>
+          <a href="harrypotter4.htm" target="_self"><img src="img/harrypotter4.jpg" alt="Image5"></a>
+          <a href="harrypotter5.htm" target="_self"><img src="img/harrypotter5.jpg" alt="Image6"></a>
+          <a href="harrypotter6.htm" target="_self"><img src="img/harrypotter6.jpg" alt="Image7"></a>
+          <a href="harrypotter7.htm" target="_self"><img src="img/harrypotter7.jpg" alt="Image8"></a>
+          <a href="horror1.htm" target="_self"><img src="img/horror1.jpg" alt="Image9"></a>
+          <a href="horror2.htm" target="_self"><img src="img/horror2.jpg" alt="Image10"></a>
+          
+
+        </div>
+      </div>
+      
+      <!--KIDS-->
+
+      <div id="tab2" class="tab-content">
+        <div class="gallery">
+          <a href="langgam.htm" target="_self"><img src="img/langgam.jpg" alt="Image11"></a>
+          <a href="pagong.htm" target="_self"><img src="img/pagong.jpg" alt="Image12"></a>
+          <a href="pinya.htm" target="_self"><img src="img/pinya.jpg" alt="Image13"></a>
+          <a href="ibongadarna.htm" target="_self"><img src="img/ibongadarna.jpg" alt="Image14"></a>
+          <a href="Butiki.htm" target="_self"><img src="img/Butiki.jpg" alt="Image15"></a>
+          <a href="Paru.htm" target="_self"><img src="img/Paru.jpg" alt="Image16"></a>
+          <a href="Treehouse.htm" target="_self"><img src="img/Treehouse.jpg" alt="Image17"></a>
+          <a href="Kwago.htm" target="_self"><img src="img/Kwago.jpg" alt="Image18"></a>
+          <a href="Mangga.htm" target="_self"><img src="img/Mangga.jpeg" alt="Image19"></a>
+          <a href="Sili.htm" target="_self"><img src="img/Sili.jpeg" alt="Image20"></a>
+          <a href="Yes and No.htm" target="_self"><img src="img/YES AND NO.jpg" alt="Image21"></a>
+          <a href="WEREBOY.htm" target="_self"><img src="img/WEREBOY.jpg" alt="Image22"></a>
+          <a href="In Space.htm" target="_self"><img src="img/SPACE.jpg" alt="Image23"></a>
+          <a href="Monster Manners.htm" target="_self"><img src="img/MONSTER.png" alt="Image24"></a>
+          <a href="The Particular Way.htm" target="_self"><img src="img/MCKAY.jpg" alt="Image25"></a>
+          <a href="King Michael.htm" target="_self"><img src="img/KING.jpg" alt="Image26"></a>
+          <a href="HIPPO.htm" target="_self"><img src="img/HIPPO.jpg" alt="Image27"></a>
+          <a href="HILL.htm" target="_self"><img src="img/HILL.jpg" alt="Image28"></a>
+          <a href="Cricket.htm" target="_self"><img src="img/CRICKET.jpg" alt="Image29"></a>
+          <a href="ATROCIOUS.htm" target="_self"><img src="img/ATROCIOUS.png" alt="Image30"></a>
+          <div class="gallery1">
+            <h2>KID'S VIDEO</h2>
+
+            <!-- Move the video link below the h2 title -->
+              <a href="https://www.youtube.com/watch?v=l9vch7yfZJA" class="video-link" data-video-id="LeiOhsORPUo">
+                <img src="img/video1.jpg" alt="Video1"></a>
+              <a href="https://www.youtube.com/watch?v=vi9Aeq01ypM" class="video-link"><!--diyamante-->
+                <img src="img/video2.jpg" alt="Video2"></a>
+              <a href="https://www.youtube.com/watch?v=M4antwnQgHU" class="video-link"><!--uhaw na uwak-->
+                <img src="img/video3.jpg" alt="Video3"></a>
+              <a href="https://www.youtube.com/watch?v=RkVocbvoJqI" class="video-link"><!--unggoy at buwaya-->
+                 <img src="img/video4.jpg" alt="Video4"></a>
+              <a href="https://www.youtube.com/watch?v=T3IQzLJl8P0" class="video-link"><!--saging-->
+                <img src="img/video5.jpg" alt="Video5"></a>
+              <a href="https://www.youtube.com/watch?v=qLy_CAOnuWY" class="video-link"><!--singkamas-->
+                <img src="img/video6.jpg" alt="Video6"></a>
+              <a href="https://www.youtube.com/watch?v=3MvZu_nT_XE" class="video-link"><!--maliit na sisiw-->
+                <img src="img/video7.png" alt="Video7"></a>
+              <a href="https://www.youtube.com/watch?v=OvZ7bEsYXNA" class="video-link"><!--pinya-->
+                <img src="img/video8.jpg" alt="Video8"></a>
+              <a href="https://www.youtube.com/watch?v=RQMo9wsOoNg" class="video-link"><!--ampalaya-->
+                <img src="img/video9.jpg" alt="Video9"></a>
+              <a href="https://www.youtube.com/watch?v=RExiLbcsY_c" class="video-link"><!--patatas at bully na talong-->
+                <img src="img/video10.jpg" alt="Video10"></a>
+          </div>
+        </div>
+        </div>      
+
+      <!--EDUCATION-->
+
+      <div id="tab3" class="tab-content">
+        <div class="gallery">
+          <a href="fundamentals.htm" target="_self"><img src="img/fundamentals.jpg" alt="Image 21"></a>
+          <a href="entangledlife.htm" target="_self"><img src="img/entangledlife.jpg" alt="Image 22"></a>
+          <a href="languishing.htm" target="_self"><img src="img/languishing.jpg" alt="Image 23"></a>
+          <a href="eve.htm" target="_self"><img src="img/eve.jpg" alt="Image 24"></a>
+          <a href="cybersecurity.htm" target="_self"><img src="img/cybersecurity.jpg" alt="Image 25"></a>
+          <a href="machinelearning.htm" target="_self"><img src="img/machinelearning.jpg" alt="Image 26"></a>
+          <a href="medicine.htm" target="_self"><img src="img/medicine.jpg" alt="Image 27"></a>
+          <a href="programming.htm" target="_self"><img src="img/programming.jpg" alt="Image 28"></a>
+          <a href="whyweremember.htm" target="_self"><img src="img/whyweremember.jpg" alt="Image 29"></a>
+          <a href="javascript.htm" target="_self"><img src="img/javascript.jpg" alt="Image 30"></a>
+          <a href="Whatami.htm" target="_self"><img src="img/whatami.jpg" alt="Image36"></a>
+          <a href="bookreview.htm" target="_self"><img src="img/bookreview.jpg" alt="Image37"></a>
+          <a href="confrontation.htm" target="_self"><img src="img/confrontation.jpg" alt="Image38"></a>
+          <a href="degree.htm" target="_self"><img src="img/degree.png" alt="Image39"></a>
+          <a href="essay.htm" target="_self"><img src="img/essay.jpg" alt="Image40"></a>
+          <a href="future.htm" target="_self"><img src="img/future.jpg" alt="Image41"></a>
+          <a href="greenliving.htm" target="_self"><img src="img/greenliving.png" alt="Image42"></a>
+          <a href="drivecar.htm" target="_self"><img src="img/drivecar.png" alt="Image43"></a>
+          <a href="manifestation.htm" target="_self"><img src="img/manifestation.jpg" alt="Image44"></a>
+          <a href="whyiseveryone.htm" target="_self"><img src="img/why is everyone.jpg" alt="Image45"></a>
+          
+        </div>
+      </div>
+
+      <!--RESEARCH-->
+
+      <div id="tab4" class="tab-content">
+        <div class="gallery">
+          <a href="research1.htm" target="_self"> <img src="img/research1.jpg" alt="Image 31"></a>
+          <a href="research2.htm" target="_self"> <img src="img/research2.jpg" alt="Image 32"></a>
+          <a href="research3.htm" target="_self"> <img src="img/research3.jpg" alt="Image 33"></a>
+          <a href="research4.htm" target="_self"> <img src="img/research4.jpg" alt="Image 34"></a>
+          <a href="research5.htm" target="_self"> <img src="img/research5.jpg" alt="Image 35"></a>
+
+        </div>
+      </div>
+      
+
+      <div id="guestModeModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+            <p><b>Research Genre</b> is locked in <b> Guest Mode</b>, <br> Please <b>Login</b> to continue!</p>
+            <div class="modal-buttons">
+                <button id="loginBtn"><b>Login</b></button>
+                <button id="cancelBtn"><b>Cancel</b></button>
+            </div>
+            <div class="privacy-concern">
+              <p>Why is this Tab Locked? <a href="privacy.html">Privacy Policy</a></p>
+            </div>
+        </div>
+    </div>
+
+    
+      <script>
+        window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+    if (window.pageYOffset > sticky) {
+        navbar.classList.add("sticky");
+    } else {
+        navbar.classList.remove("sticky");
+    }
+}
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the active tab from localStorage
+            const activeTab = localStorage.getItem("activeTab");
+            if (activeTab) {
+                openTab(activeTab);
+            }
+        });
+    
+        function openTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+            // Add active class to the selected tab
+            document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+            // Store the active tab in localStorage
+            localStorage.setItem("activeTab", tabId);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const isGuestMode = localStorage.getItem('guestMode') === 'true';
+        const researchTab = document.getElementById('researchTab');
+        const entertainmentTab = document.getElementById('entertainmentTab'); // Add this line
+        const modal = document.getElementById('guestModeModal');
+        const span = document.getElementsByClassName('close')[0];
+        const loginBtn = document.getElementById('loginBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        if (isGuestMode && researchTab) {
+            researchTab.addEventListener('click', function(event) {
+                event.preventDefault();
+                modal.style.display = 'block';
+            });
+
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            loginBtn.onclick = function() {
+                // Redirect to login page or handle login action
+                window.location.href = 'account.html';
+            }
+
+            cancelBtn.onclick = function(event) {
+                event.preventDefault();
+                modal.style.display = 'none';
+                // Simulate click on entertainment tab
+                simulateClick(entertainmentTab);
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+
+        // Function to simulate click event
+        function simulateClick(element) {
+            if (!element) return;
+            var event = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            element.dispatchEvent(event);
+        }
+    });
+    </script>
+    
+      
+      </body>
+      </html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>About</title>
+
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+        
+        <style>
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+    body {
+    background-color: #FDEFB2;
+    overflow-y: scroll; /* Always show vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+      }
+      /* Hide scrollbar for webkit-based browsers (Chrome, Safari) */
+      body::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for Firefox */
+      body {
+          scrollbar-width: 5%;
+      }
+    .bg{
+        max-width: 100%;
+        background-size: 100%;
+    }
+    .hero{
+        width: 100%;
+        height: 100vh;          
+        padding: 0, 2%;
+    }
+
+    nav{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #865940;
+    }
+    nav .logo{
+        width: 110px;
+        cursor: pointer;
+        margin-right: 2%;
+        margin-left: 20%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        align-items: center;
+
+    }
+    nav ul{
+            flex: 1;
+            text-align: center;
+            margin-left: 130px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        nav ul li{
+            list-style: none;
+            display: inline-flex;
+            margin: 10px 12px;
+            margin-bottom: 0%;
+            margin-right: 0%;
+            position: relative;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color:white;
+            font-weight: 600;
+            font-size: 23px;
+            padding: 3px;
+            position: relative;
+            transition: color 0.3s ease; /* Added transition for smooth effect */
+            z-index: 1; /* Ensure text is above rectangle */
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 45%;
+            bottom: -33px;
+            width: 100%;
+            height: 5px;
+            background: #FDEFB2;
+            transition: width 0.3s ease, left 0.3s ease;
+            z-index: -1; /* Ensure rectangle is behind text */
+            transform: translateX(-15%) scaleX(0); /* Initially hide the rectangle */
+            transform-origin: center; /* Ensure transformation starts from left */
+            border-radius: 10%;
+        }
+        nav ul li a:hover::after,
+            nav ul li a.active::after {
+                width: 125%;
+                height: 260%;
+                left: -0.25%;
+                transform: translateX(-9%) scaleX(0.9);
+            }
+            nav ul li a:hover,
+            nav ul li a.active {
+                color: #5f3e2a;
+            }
+        .login-signup {
+        margin-left: 2%;
+        margin-right: 2%;
+        }
+        .content{
+            text-align: center;
+            margin-top: 5%;
+            color: #865940;
+            font-size: 10vh;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+        }
+        h1{
+        color: #5f3e2a ;
+        padding-left: 10%;
+        padding-top: 50px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+   h2{
+        color: #5f3e2a ;
+        text-align: left;
+        margin-bottom: 2%;
+   }
+   .wrapper{
+        margin: 50px auto;
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 25px;
+        padding: 10%;
+        padding-top: 0;
+        padding-bottom: 0%;
+   }
+   .image4{
+        max-width: 100%;
+        float: left;
+        border: 3px solid #7f5539;
+        border-radius: 5px;
+        margin-right: 25px;
+        margin-bottom: 5px;
+   }
+   .text-box{
+        color: #5f3e2a;
+        max-width: 100%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   }
+   .text-box p{
+        font-size: 16px;
+        text-align: justify;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   }
+   .image5{
+        max-width: 100%;
+        float: right;
+        border: 3px solid #7f5539;
+        border-radius: 5px;
+        margin-right: 1%;
+        margin-bottom: 5px;
+        margin-left: 1%;
+   }
+   .image6 {
+        max-width: 100%;
+        float: left;
+        border: 3px solid #7f5539;
+        border-radius: 5px;
+        margin-right: 50px;
+        margin-bottom: 20px;
+   }
+
+        </style>
+
+<body background="bglogin.png" class="bg">
+    <div class="hero">
+        <nav id="navbar">
+            <a href="home.html"><img src="wisbuchlogo.png" class="logo"></a>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="mylibrary.html">My Library</a></li>
+            </ul>
+            <div class="login-signup">
+                <ul>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </div>
+        </nav>
+        <h1>What is WisBuch?</h1>
+
+        <div class="wrapper">
+            <img src="img/intro.jpg" alt="image 4" class="image4" width="450" height="250">
+            <div class="text-box">
+                <p> WisBuch is an online platform aligns with the concept of open access and the idea,
+                    that information and education should be freely available to everyone.
+                    Where you can read everything while enjoying the processof learning.<br><br>
+
+                    Nowadays, libraries can be accessed through digital. These libraries have revolutionized the traditional
+                    concept of libraries by enabling users to access information from anywhere in the world. Digital libraries
+                    have been around for a while and have evolved over the years. They offer the same services as 
+                    traditional libraries, but with the added benefit of networking systems.<br><br> Digital libraries are especially 
+                    useful for people who are far away from local or national libraries. They provide access to digital 
+                    resources such as e-books, journals, and research papers that can be accessed anytime  and are flexible
+                    (Khan, 2021). <br><br><br><br> </p>
+
+                    <img src="img/gutenberg.jpg" alt="image 5" class="image5" width="275" height="300">
+                    <h3><br><b>WisBuch<i> &#40;wis-booh&#41; </i></b></h3>
+                    <p><br>The german term "Wisbuch" means "Book of Knowledge," with its components derived from the
+                    words "Wissen," which means "Knowledge," and "Buch," signifying the word "Book." 
+
+                    <br><br> These words originated in Germany, 
+                    where Johannes Gutenberg, the first inventor 
+                    of movable books, came from.
+                    
+                    Johannes Gutenberg revolutionized the production of books 
+                    by introducing the mechanical movable-type printing 
+                    press that played a crucial role in developing books. <br><br>
+
+                    Basically, we want to create a webpage that 
+                    is visually appealing and time-efficient, while also
+                    conveying significant meaning to it!
+
+                    <br><br><br><br><br><br><br>
+
+                    <h2>What is the purpose of WisBuch?</h2>
+
+                    <img src="img/efficient.jpg" alt="image 6" class="image6" width="400" height="225">
+                    <ul><br>
+                        <li>To save the time of the users</li>
+                        <li>this library webpage provides a user-friendly platform. </li>
+                        <li>It is convinient for people to read</li>
+                        <li>It aims to provide convenient access for those users who are far from the Local/National Library.</li>
+                        <li>To provide options for introverted users. </li>
+                        <li>To promote and acknowledge Filipino Culture/ Literature</li>
+                      </ul>
+                    </p><br><br><br><b><i>It is timely and relevant to have WisBuch...</i></b>
+            </div>
+        </div>
+
+    </div>
+    </body>
+    </head>
+    </html>

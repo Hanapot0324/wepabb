@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Drive a Car Made Simple A Step-By-Step Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .educational18{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('THE STORY OF YES AND NO')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'How to Drive a Car Made Simple A Step-By-Step Guide'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+
+
+   <div class="educational18">
+    <h1>How to Drive a Car Made Simple A Step-By-Step Guide</h1>
+    <h3>Author: Bernard Pierre-Paul | Educational</h3>  
+    <p><span class="first-letter">B</span>ook Description
+        A simple step-by-step guide on how to drive a car whether mechanical or automatic. 
+        Learn the insider car driving tips to help you become the most confident, safe, and best driver in your town!
+    </p><br>
+
+        <p><b>Introduction</b></p><br>
+
+
+    <p> If you haven’t known how to drive, it may look intimidating, especially from the passenger’s seat. 
+        However, the moment you get into the driver’s seat and place your foot on the pedal, the entire process becomes super intuitive.
+        When starting out, try to keep things slow first. Soon, you’ll master the driving basics.
+        If it’s your first time to drive, fear can easily consume you. In fact, some people aren’t confident even after attending a driving school.
+        In this guide, you will learn how to drive a car with confidence even if it’s your first time. You are going to learn everything from the basics to the most advanced stuff.
+        Let’s get started.
+    </p><br>
+
+    <p><b>Chapter 1: How to Drive a Car for the First Time</b></p><br>
+
+    <p><u>Overcoming the Fear of Driving for the First Time</u></p><br>
+    
+    <p> It’s completely normal to feel afraid when driving for the first time, but you can do a number of things to boost your confidence. 
+        To overcome the fear of driving, you may want to:<br>
+        · Get ready to drive by learning about the car you’d like to drive. · Learn how to handle things that might arise on the road.<br>
+        · Adjust the settings of your car before driving · Get rid of any distractions. · Get a supportive friend to ride in the vehicle with you.<br>
+        · Drive during daytime so you can enjoy good visibility.
+    </p><br>
+  
+    <p> Let’s look at what you need to do in details:</p><br>
+     
+    <p> 1.       <i>Gain More Knowledge about Driving </i>
+        Driving is broad and it’s good to be familiar with the different tasks related to it because you can encounter any of these tasks while behind the wheel. 
+        By being ready for such possibilities, you’ll eliminate the worry and uncertainty associated with driving. The tasks you should be familiar with include:<br><br>
+         · Pumping gas<br><br>
+         · Jumpstarting your car<br><br>
+         · Changing the tire<br><br>
+         · Adding a windshield washer fluid Learn about the car you’re driving<br><br>
+        Before driving, learn everything possible you can about the vehicle you’d like to drive, as that’ll give you more control while driving.
+        Go through the car’s manual to know more about its features, the location of various parts, and how to operated different car sections.<br>
+        Sit in your driver’s seat so you can locate all the basic controls, including horn, lights, blinker, and pedals.
+    </p><br>
+    
+    <p><b>Seek Advice from Family and Friends</b></p><br>
+
+    <p><b>Plan out a Route Beforehand</b></p>
+
+    <p> To avoid unnecessary anxiety while driving, know the route you’ll follow before getting into the car. 
+        Be sure to select areas you understand pretty well and are comfortable with. 
+        Choose streets with minimal traffic to enable you drive carefully and not worry about impatient drivers<br><br>
+        2.       <b>Adjust Things in the Car</b><br><br>
+        Driving successfully during the first time also depends on how well you adjust various parts inside the car. Here is how to go about it:
+    </p><br>
+
+    <p><b>Position the Seat:</b> Before you start driving, you should ensure the driver’s seat is in the right position so your feet can reach the pedals effortlessly. 
+        Sit up straight and ensure that one of your heels is on the floor while the ball of the other foot presses against the pedals.
+        Ensure you feel comfortable while in the seat so you can drive with confidence. 
+        When sitting up straight, don’t bend your knees excessively, as it can hinder you from properly operating the foot pedals during driving.
+    </p><br>
+
+    <p><b>Put the Rear-View Mirrors in the Right Position</b></p><br>
+
+
+    <p> Adjusting the rear-view mirrors is crucial before you drive. 
+        When in the driver’s seat, look at the car’s center mirror and adjust it in such a way that you can visualize the whole rear-view window.
+        Move each side mirror such that you can barely see the car when leaning in the direction of the mirror.
+        While sitting in the parked car, check the mirrors’ settings before driving. Be sure you can observe passing cars through the mirrors.        
+    </p><br>
+
+    <p><b>Eliminate Distractions</b> Switch off the phone or turn the silent mode on so you don’t receive texts, calls, or app notifications that may distract you. 
+        Besides, don’t drive with someone that might upset or distract you. Leave your iPod or radio off to stay focused while driving.
+        Adjust the Temperature<br>
+        Set the car’s temperature before you start driving. If you let the heat or air conditioning to operate too high as you drive, you might lose focus from the road. 
+        And playing with the vehicle’s climate settings while driving is risky and can cause accidents; so avoid that.
+    </p><br>
+
+        <p><b>3.       Reduce Anxiety</b></p><br>
+
+    <p>Anxiety can take a toll on you if you are getting behind the wheel for the first time. 
+        But, you don’t have to worry because even the best drivers started somewhere one day. So, if you are feeling anxious, do the following:<br>
+        Do Breathing Exercises<br><br>
+        To feel relaxed and gain focus before you drive, perform some breathing exercises.<br><br>
+        · Slowly, take a deep breath and hold it to the count of four.<br><br>
+        · Slowly, breathe out through the mouth.<br><br>
+        · Repeat this exercise four times until you experience calmness.<br><br>
+    </p><br>
+
+    <p><b>Take a family member or close friend with you</b> To avoid some anxiety, get someone you trust to go along with you when driving for the first time. 
+        You may want to take a close friend or relative along provided the person is a great driver. This way, the person will guide you accordingly as you drive. 
+        Don’t choose an individual that makes you stressed or impatient, as it can worsen your driving experience.
+    </p><br>
+
+    <p><b>Don’t Drive at Night</b> Because of reduced visibility, you shouldn’t drive at night. Of course, once you gain some experience and become comfortable as a driver, 
+        you can drive anytime you want. But as a first-timer, you should stay away from nighttime driving and only go out to drive during the day. 
+        During daytime, you can easily see signs, other cars, and pedestrians.
+    </p><br>
+
+    <p><b>Drive when there’s No Heavy Traffic</b> To minimize anxiety, you should drive at a time when traffic is not heavy.
+         A good way to do this is to drive during weekdays and not on weekends. During weekends, cars flood the road, increasing the risk of accidents. 
+         So, you want to stay away from that. If possible, you should go on the road on a day of the week, as there’s a reduced accident risk at that time.
+    </p><br>
+
+    <p> <b>8 Quick Tips on Learning to Drive a Car for the First Time</b>Whether you are attending 
+        driving lessons or learning on your own, getting some concepts clear will come in handy to help you learn how to drive.
+        Knowing how the car’s gears work, the best way to stop, or the ideal way to drive on the road is crucial to help you 
+        drive more safely and absorb more content during your driving lessons.
+        Here are practical tips to help you learn to drive a car for the first time:<br>
+    </p><br>
+
+    <p><b>Have some knowledge on speeds</b> It’s important that you know the speed limit you ought to stick to. The lower a gear, the greater power the engine contains. 
+        However, as the car gains speed, you’ll need to move the gears up so the vehicle can use less power.
+    </p><br>
+
+    <p><b>Don’t always start in the first gear</b> It’s not all the time that you have to start a car in the first gear. 
+        For instance, while moving downhill, you may only need to release the brakes for the vehicle to move forward. So, starting it in second gear is completely fine.
+        However, if you are driving on a slippery road, you should consider driving in high gears. 
+        The reason is high gears have less pressure and thus, the car is not likely to skid.
+    </p><br>
+
+
+    <p><b>Know when to change gears</b> Inexperienced drivers usually prefer to drive in a low gear until the hit top speeds. 
+        But, remember, it’s possible to engage the fifth gear while driving at 45 mph. Get to used to the engine’s noise while driving. 
+        If it gets too loud, it’s probably time to switch to a higher gear. If it sounds waning, on the other hand, you should engage a lower gear.
+        Importantly, this depends on the car and its power. When you start taking the driving lessons, your instructor will 
+        guide you on how to shift gears in a particular car you will be driving.
+        Later, when you pass the test and start driving your own car, you’ll be able to tell when you need to change gears, 
+        because you may be using a different car from the one you had during the driving lessons.        
+    </p><br>
+
+    <p><b>Positioning of arms on a steering wheel</b> It’s important that you know how to position your arms on the wheel so you 
+        don’t cross your arms when driving around a tight bend. Therefore, when making a sharp turn, hold your hands to resemble a clock at 10 past 10.
+        Keep your hands there and keep sliding the steering wheel between your hands as you turn around the bend. Don’t move your arms.
+    </p><br>
+
+    <p><b>Controlling speed when driving around a sharp turn</b> One of the things new drivers need to know is taking a bend from the perspective of speed. 
+        Whether the bend is sharp or smooth, you should follow this basic principle: lower the speed by 50 percent and start accelerating once you’ve passed 
+        the bend and are driving past it.
+        You should always stay in your lane at a speed that allows you to control the car. 
+        It’s better to start going slow at first instead of braking abruptly as the vehicle loses control.
+        Braking the car<br>
+        To slow the car, you don’t always need to go with the brake pedals. The other option you may use to slow down a car is by moving down the gear. 
+        And you should do it gradually, as vehicles may not go at high speeds under low gears.
+        Have an in-depth knowledge of your car<br>
+        When you know your car well, you can drive it safely as well as control it. Take the time to read the manual so you know where different features are, such as:<br><br>
+        · The horn<br><br>
+        · Type of fuel<br><br>
+        · Lights<br><br>
+        · How to open a bonnet<br><br>
+        The first thing you’ll probably do when you get into a vehicle is to familiarize yourself with various features. To achieve this, go the car’s cockpit drill – the spot with all the basic functions and controls of the car.
+        It’s critical that you know the above things as you learn how to drive so you eliminate all doubts. 
+        If you learn it from a driving school, ask all the questions you may have, even if you think they are obvious. 
+        The instructors at Pierre Paul Driving School are patient with all students and will respond to all your questions.
+    </p><br>
+
+    
+</div>
+</div>
+
+<script>
+function toggleDarkMode() {
+var body = document.body;
+body.classList.toggle('dark-mode');
+
+localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+
+var darkModeToggle = document.getElementById('darkModeToggle');
+if (body.classList.contains('dark-mode')) {
+  darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function loadDarkMode() {
+var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+var body = document.body;
+if (darkModeEnabled) {
+  body.classList.add('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+} else {
+  body.classList.remove('dark-mode');
+  document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+}
+}
+
+
+function addToLibrary(bookTitle) {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'block';
+  }
+
+  function confirmAddToLibrary() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+
+      var bookTitle = 'How to Drive a Car Made Simple A Step-By-Step Guide'; 
+      var libraryData = localStorage.getItem('library');
+
+      var library = [];
+      if (libraryData) {
+          library = JSON.parse(libraryData);
+      }
+
+      if (library.length >= 10) {
+          alert('You have reached the maximum limit of 10 books in your library.');
+          return; 
+      }
+
+      library.push(bookTitle);
+
+      localStorage.setItem('library', JSON.stringify(library));
+
+      openLibrarySuccessModal();
+
+      displayLibrary();
+  }
+
+  function closeAddToLibraryModal() {
+      var modal = document.getElementById('addToLibraryModal');
+      modal.style.display = 'none';
+  }
+
+  function openLibrarySuccessModal() {
+      var modal = document.getElementById('librarySuccessModal');
+      modal.style.display = 'block';
+
+      setTimeout(function() {
+          modal.style.display = 'none';
+      }, 2000);
+  }
+
+  function toggleNotes() {
+      var notesSection = document.getElementById('notesSection');
+      if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+          notesSection.style.display = 'flex';
+      } else {
+          notesSection.style.display = 'none';
+      }
+  }
+
+  function addNote() {
+      var noteText = document.getElementById('noteText').value;
+      if (noteText.trim() === '') {
+          alert('Note cannot be empty.');
+          return;
+      }
+
+      var notesList = document.getElementById('notesList');
+      var noteItem = document.createElement('li');
+      noteItem.className = 'note-item';
+      noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+      notesList.appendChild(noteItem);
+
+      saveNotes();
+
+      document.getElementById('noteText').value = '';
+  }
+
+  function deleteNote(button) {
+      var noteItem = button.parentElement;
+      noteItem.remove();
+      saveNotes();
+  }
+
+  function saveNotes() {
+      var notesList = document.getElementById('notesList');
+      var notes = [];
+      for (var i = 0; i < notesList.children.length; i++) {
+          notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+      }
+      localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+      var notes = JSON.parse(localStorage.getItem('notes'));
+      if (notes) {
+          var notesList = document.getElementById('notesList');
+          notesList.innerHTML = '';
+          for (var i = 0; i < notes.length; i++) {
+              var noteItem = document.createElement('li');
+              noteItem.className = 'note-item';
+              noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+              notesList.appendChild(noteItem);
+          }
+      }
+  }
+  function goToBooks() {
+      window.location.href = 'books.html';
+  }
+
+  function goToMyLibrary() {
+      window.location.href = 'mylibrary.html';
+  }
+
+
+  window.onload = function() {
+      loadDarkMode();
+      loadNotes();
+  };
+
+
+      function openModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'block';
+      }
+
+      
+      function closeModal() {
+          var modal = document.getElementById('logoutModal');
+          modal.style.display = 'none';
+      }
+
+      function logout() {
+          localStorage.clear();
+
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'block';
+
+          closeModal();
+
+          setTimeout(function() {
+              window.location.href = 'account.html';
+          }, 2000);
+      }
+
+
+      function closeLogoutSuccessModal() {
+          var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+          logoutSuccessModal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          var modals = document.getElementsByClassName('modal');
+          for (var i = 0; i < modals.length; i++) {
+              if (event.target == modals[i]) {
+                  modals[i].style.display = 'none';
+              }
+          }
+      }
+
+
+</script>
+</body>
+</html>

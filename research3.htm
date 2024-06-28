@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research 3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .main-div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 2%;
+        }
+        .research1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        .research2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            max-width: 600px;
+            padding: 10px;
+            font-size: large;
+            margin-left: 5%;
+            column-count: 1;
+            text-align: justify;
+        }
+        h1 {
+        text-align: center;
+        margin-top: 5%;
+        }
+        h2 {
+            text-align: center;
+            margin-top: .1%;
+            margin-bottom: 2%;
+        }
+        h3 {
+            text-align: left;
+        }
+        h4 {
+            text-align: center;
+        
+        }
+        .first-letter{
+           font-size: 50px;
+           font-family: serif;
+           font-weight: bolder;
+         }
+        .electronic {
+            text-align: center;
+            margin-left: 6%;
+            margin-right: 2%;
+        }
+        .keywords {
+    
+           text-align: center;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h5{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #fff4c3;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Si Langgam at si Tipaklong')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h5>Notes</h5>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Research 3'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+
+<h1>The Effects of Electronic Books Designed for Children in Education </h1>
+    <h2> by: Michelle Chau, FIS2309, Design of Electronic Text  </h2>
+    <div class="container">
+        <h4> ABSTRACT </h4>
+        <div class="container">
+            <p class="electronic"><b><i>Electronic books are quickly becoming more prominent in the field of education because of their
+                advantages over traditional printed textbooks. As more electronic textbooks are being produced and
+                utilized in classrooms, we must investigate just how useful and effective they are in teaching young
+                children the important skills they need for higher learning. This paper reviews some of the current
+                views on the topic for teaching and learning and discusses how electronic books can be integrated into
+                the classroom learning environment. Research has shown that when used as a teaching supplement,
+                electronic books have a positive impact on learning. They can be valuable in helping children with their
+                early literacy development, reading comprehension, and language development.</p> <br>
+            <p class="keywords">Keywords: Electronic books, textbooks, education, learning, children.</i></b></p>
+  
+<div class="main-div">
+    <div class="research1">
+        <h3> I. Introduction </h3>
+        <p> <br>Electronic 
+            books (or e-books) can be defined
+            as any group of text in a digital format that
+            is to be read and displayed on a computer
+            screen. They can be accessed in a myriad of
+            different ways including through the internet, on a
+            CD-ROM or by many of the portable e-book
+            readers available on the market. Many types of
+            content are also available for free download or
+            purchase including popular fiction, non-fiction, as
+            well as educational titles (Maynard, 2005, p. 103).
+            This emerging technology has opened the
+            possibility for a large range of new learning
+            experiences for students because of its advantages
+            over traditional printed textbooks. Electronic
+            books often contain rich multimedia features that
+            cannot be found in textbooks. These frequently
+            include recordings of the text read-aloud, lively
+            animations, music, video and various sound
+            effects. Young children are found to especially
+            respond well to these enhanced features (Korat,
+            2008, p.111). Many companies are now producing
+            more electronic textbooks for use in classrooms as
+            researchers believe that they can prove to be
+            excellent supplementary material for teachers, as
+            well as being quite effective in early literacy
+            development, reading comprehension and language 
+            development for young children (De
+            Jong, 2004; Grant, 2004; Grimshaw, 2007;
+            Higgins, 1999; Korat, 2008; Lewin, 2000;
+            Maynard, 2005). This paper highlights the
+            successes of children’s interactions with electronic
+            books in their learning environments. </p> <br>
+
+          <h3>Studies on Children’s Interactions with E-books:</h3> 
+          <p><br>Grimshaw (2007) believes that rich multimedia
+            features such as audio narration, sound effects and
+            animations embedded into electronic books can
+            very much help children improve their reading
+            comprehension skills. The reasoning is that these
+            features support the text, help the child "decode"
+            new words and children actually improve on their
+            understanding of the text (p.584). If a book has
+            audio narration and also highlights the text as it
+            goes along, the child is able to follow along much
+            easier. Sound and 3-D animation in the electronic
+            text can help illustrate meaning to young children
+            and can provide better examples in comparison to
+            a traditional 2-dimensional book. Voice narration
+            also aids children in pronunciation of particular
+            words and helps with understanding of syntax.
+            Children also respond well to these features
+            because if they need help defining or pronouncing
+            the words, they can instantly access help for themselves within the electronic book. There is the
+            added advantage of a degree of privacy as many
+            children are shy and reluctant to ask a teacher for
+            help in a classroom setting. Some children are
+            impatient, choosing to ignore the fact that they do
+            not understand the text, and will just keep on
+            reading anyway (p.585). When children are
+            motivated to read and to do so without fear of
+            failure, they also tend to excel in reading at or
+            above their grade level (p.586). Electronic texts
+            can provide this kind of support to them because it
+            actively engages their minds.
+         </p> <br> 
+        <p> Many researchers acknowledge the
+            difficulty in measuring comprehension of text
+            (Grimshaw, 2007; Grant, 2004; Higgins, 1999). It
+            can be very complicated simply because of many
+            of the other complex variables involved, one of
+            which is memory. Children can often forget parts
+            of the narrative when a person asks them to re-tell
+            the story or answer questions based on their
+            reading of a text for purposes of testing. Just
+            because they may forget some of the events of the
+            reading, it does not necessarily mean they failed to
+            grasp the concepts of the story. Grimshaw’s 2007
+            study on children’s reading and comprehension
+            skills based on print versus electronic text attempts
+            to resolve this issue by allowing children to have
+            access to the text as they are being tested. They
+            also challenge the children in their study to make
+            inferences to test their deeper understanding of the
+            story. They did not want to have the children
+            simply practice information retrieval (p. 586).
+            They tested children under several different
+            conditions including having them read the
+            electronic text of the storybook with and without
+            narration, animations and sound effects. Although
+            the results showed that children took longer
+            reading from a computer screen when compared to
+            a printed book, the children who read from the
+            book took longer to answer the comprehension
+            test. The children who had been placed in the test
+            group that had access to a CD-ROM version of the
+            story with narration turned on generally did the
+            best on the comprehension test. However, no other
+            significant results could be seen amongst the other
+            groups. Some useful and pertinent observations from the test included that the children made very
+            good use of the electronic dictionary that was
+            easily accessible within the CD-ROM version of
+            the text (p. 595). This far exceeded any use that
+            came from the paper version of the dictionary.
+            Children also generally like following the text of a
+            traditional printed book with their finger. They
+            were unable to do so with the electronic text that
+            was displayed to them on the computer, and this
+            must have factored into the slower reading time as
+            well (p. 596). Additional students also mentioned
+            that narration in the electronic version helped them
+            when they did not know the pronunciations of
+            certain words (p. 597).</p> <br> 
+       <p>  Maynard (2005) also conducted a study
+            comparing how much children learn from
+            electronic text in comparison to printed text. This
+            test differentiates itself from other tests in the fact
+            that children were tested both on an individual
+            basis as well as learning in groups. Half the
+            children used a printed book to answer questions
+            and the other half used an electronic CD-ROM,
+            which was filled with animations, sound effects,
+            music and video. The results showed that those
+            who used the electronic textbook did better on the
+            comprehension tests than those who used the
+            printed textbook even though they did take longer
+            to find the relevant answers to the questions they
+            were asked. The researcher observed that the
+            children who were working with the CD-ROM
+            version of the text seemed to be more productive
+            and were quieter using the text in groups. They all
+            took turns rotating around the computer to ensure
+            everyone had a turn accessing the text. It was a
+            very different scenario compared to the students
+            using the printed textbook. These children seemed
+            bored and uninterested easily. The researcher did
+            concede that there might have just been a “novelty
+            effect” (p. 110) with the students using the CD-
+            ROM version of the textbook. Another point to
+            note is that the children who were using the CD-
+            ROM version had to ask several times for help
+            including questions on how to navigate back to the
+            different sections that they needed as there are no
+            simple search ability. The children using the
+            textbook needed no help using it, as children are generally familiar and competent in learning to use
+            the contents and index pages of a book. This is a
+            clear advantage that this medium has over
+            electronic text (p. 111).</p> <br>
+            <p>De Jong’s study on children’s
+                understanding of stories presented to them
+                electronically posits that additional features such
+                as sound effects and animations actually can
+                interfere with children’s comprehension of the text
+                (2004, p. 381). She believes that they can easily
+                get distracted and miss important plot elements.</p><br>
+        </div>
+        <div class="research2">
+            <p> 
+                Although animations and such found in electronic
+                books are without a doubt, appealing and
+                attractive to children, De Jong says children
+                understand the story more when an adult reads the
+                text to them in a story time setting (p. 381). She
+                completed a study in 2004 examining whether or
+                not there are differences in comprehension with
+                children listening to a narration of a story from an
+                electronic text and children having the same text
+                read to them by an adult. The researcher asked the
+                children to re-tell the story that they had just heard
+                (whether it was electronically, or through an adult)
+                to them orally again and their results were coded.
+                Her belief is that electronic books can certainly
+                supplement children’s education, but is still no
+                true replacement for an adult reading them a
+                storybook. words after they had worked through the
+                electronic book (p. 121). The best results came
+                from the group who worked with the electronic
+                book in the “read story with dictionary” mode, as
+                they were able to have instant access to the
+                definitions of words that were unfamiliar to them. </p> <br>
+            <p> Higgins (1999) conducted a study to find
+                out if vocabulary-building activities are effective
+                when paired with animation in electronic books. In
+                the control group, the children listened as the
+                computer read a page of a poem to them, and then
+                they watched animated definitions of specific new
+                words on-screen. The researcher asked if that
+                helped them understand the meaning the word. If
+                they said “no”, they were permitted to access the
+                animation again. In the experimental group, a
+                researcher was able to speak and interact with the
+                children if they viewed the animation and they still
+                did not understand the meaning of the world. They
+                could give a definition and also provide the
+                children with a synonym (p. 427). Several days
+                later, the children that participated in the study
+                were tested to see if they could define certain
+                words that were in the previous readings. The
+                results of this study indicated that the children
+                who had adult help and other instructional
+                activities performed better on the test. This shows
+                that vocabulary-building activities can be
+                supplemented with the aid of electronic books to
+                produce the best results. </p> <br>
+                <p> Electronic books have also proven to be
+                    able to help children with brain developmental
+                    disabilities such as autism. One study learned that
+                    comprehension and reading skills of autistic
+                    children increased when they began to learn with
+                    computers and electronic books. Their electronic
+                    program consisted of flashcards with words on
+                    them, letter identification and short reading
+                    passages. The children showed improvement in
+                    their development of vocabulary (Grant, 2004, p.
+                    305). Children with other physical and learning
+                    disabilities can also benefit from using electronic
+                    books in the classroom. Their ability to translate
+                    text-to-speech gives young readers confidence and
+                    greatly boosts their self-esteem and projected self-worth (Rhodes, 2008, p. 256). Lewin (2000) also
+                    conducted a study where 16 children aged 5-6
+                    years old used talking electronic book software
+                    daily for a month. It was found that they were
+                    useful in supplementing lessons in the classroom
+                    and that the children improved in their cognitive
+                    skills.</p> <br> 
+                <p> Hill (1996) says electronic books are more
+                    appealing to children then traditional printed
+                    books. They bring the story to life to children in a
+                    rather lively way. It presents to them a brand new
+                    perspective and makes learning a magical
+                    experience. We should not worry about whether or
+                    not they will replace books and think of them
+                    more as another engaging way for children to
+                    learn. They can just insert the CD-ROM into their
+                    own computer and learn independently through
+                    these images and words. Their learning is not so
+                    limited anymore and their imaginations are free to
+                    roam.</p> <br> 
+
+                    <h3> Conclusion: </h3>
+                    <p> <br> The topic of electronic texts and their advantages
+                        in education is a rich and fertile ground for further
+                        study and analysis. The multitude of attitudes and
+                        viewpoints presented here is just a starting point.
+                        Although many researchers agree that children's
+                        enjoyment of electronic books might just be the
+                        novelty factor, there are also documented cases
+                        where electronic books can support literacy and
+                        further language development. The added
+                        functionality and interactivity available in
+                        electronic textbooks can greatly benefit children.
+                        Most children are already exposed to computers
+                        and technology in our evolving fast-paced world,
+                        and they generally enjoy interacting with
+                        electronic books very much. They show more co-
+                        operation with their peers and retain more
+                        information after using an electronic book.
+                        Electronic textbooks can have the ability to
+                        support learning and comprehension levels seem
+                        to increase when children use them in classrooms.
+                        Teachers and other educators should look at
+                        perhaps implementing electronic texts in their
+                        teaching methods in the near future if they have
+                        not done so already.</p> <br>   
+
+        <h3> Works Cited: </h3>
+        <p> <br>De Jong, M. T., & Bus, A. G. (2004). The efficacy
+            of electronic books in fostering kindergarten
+            children's emergent story understanding.
+            Reading Research Quarterly, 39(4),
+            378-393.</p> <br>
+        <p> Grant, J. M. A. (2004). Are electronic books
+            effective in teaching young children reading
+            and comprehension? International Journal
+            of Instructional Media, 31(3), 303.</p> <br>
+        <p> Grimshaw, S. (2007). Electronic books: Children's
+            reading and comprehension. British Journal
+            of Educational Technology, 38(4), 583-599.</p> <br> 
+        <p> Higgins, N. (1999). Using electronic books to
+            promote vocabulary development. Journal
+            of Research on Computing in Education,
+            31(4), 425-430.</p> <br>
+        <p> Hill, M. (1997). The home connection: Learning
+            resources for you and your children. Link-
+            Up, 14(3), 44(1)-45.</p> <br> 
+        <p> Korat, O. (2008). The educational electronic book
+            as a tool for supporting children's emergent
+            literacy in low versus middle SES groups.
+            Computers & Education, 50(1), 110-124.</p> <br>
+        <p> Lewin, C. (2000). Exploring the effects of talking
+            book software in UK primary classrooms.
+            Journal of Research in Reading, 23(2),
+            149-157.</p> <br>
+        <p> Maynard, S. (2005). Can electronic textbooks help
+            children to learn? The Electronic Library,
+            23(1), 103.</p> <br> 
+        <p> Rhodes, J. A., & Milby, T. M. (2007). Teacher-
+            created electronic books: Integrating      
+            technology to support readers with
+            disabilities. The Reading Teacher, 61(3),
+            255-259.</p> <br>
+            </div>
+                
+</div>
+</div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Research1'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

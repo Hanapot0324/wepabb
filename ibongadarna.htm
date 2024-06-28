@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alamat ng Ibong Adarna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .kids4 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Alamat ng Ibong Adarna')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'Alamat ng Ibong Adarna'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="kids4">
+    <h1>Alamat ng Ibong Adarna</h1>
+    <h3>by: Jim Lloyd</h3> <br> <br>
+    <h3><i>Buod ng Kuwentong Alamat ng Ibong Adarna</i></h3>
+    <p><span class="first-letter">M</span>ay isang kaharian na ang pangalan ay Berbanya na pinamumunuan ng isang hari na nagngangalang Haring Fernando. 
+       May asawa siyang nagngangalang Reyna Valeriana at mga anak na sina Don Pedro, Don Diego at Don Juan na pawang nakalinya na susunod na hari ng Berbanya. 
+       </p><br>
+
+    <p>Nang nagkaroon ng di malamang karamdaman ang hari, hinanap ni Don Pedro ang Ibong Adarna na ang awit lamang ang makapagpapagaling sa sakit. 
+       Narating niya ang puno ng Piedras Platas subalit hindi niya nakita ang ibon dahil siya ay naging bato. Sumonod naman ay si Don Diego, 
+       nakita niya ang Adarna subalit nakatulog sa ganda ng awit ng Adarna kaya naging bato. Maluwalhati namang nakarating si Don Juan sa tuktok 
+       ng bundok Tabor at doon ay may nakita siyang ermitanyo. Binigyan siya nito ng pagkain at ilang impormasyon tungkol sa ibong adarna pati na 
+       rin 7 dayap at isang labaha upang hindi makatulog. Nang marating niya ang puno, ginamit niya ang mga dayap at labaha. Nang mahuli niya ang 
+       adarna, tinalian niya ang paa at saka dinala sa ermitanyo at nilagay sa loob ng isang hawla. Pinabuhusan ng tubig ang dalawang kapatid at 
+       naglakad sila patungo sa Berbanya. Pinagtulungan ng dalawa si Don Juan upang masolo ang pagiging hari. Ang adarna ay pangit na at malungkot 
+       ganoon din si Haring Fernando nang makitang hindi kasama ng dalawa si Don Juan. Ginamot ng isang uugod-ugod na matanda si Don Juan at umuwi 
+       na sa Berbanya. Nakita ng adarna si Don Juan at ito ay umawit at nagamot si Haring Fernando. Iminungkahi ng adarna na gawing hari si Don Juan. 
+       Iniutos ng hari na ipatapon ang dalawa, ngunit dahil humiling si Don Juan na huwag na lang, ito ay ipinatigil.
+        </p><br>
+
+    <p>Pinabantay ng hari ang adarnasa tatlong magkakapatid, ngunit pinuyat ng dalawa si Don Juan kaya nakatakas ang Adarna. Pinahanap ng hari ang maysala. 
+       Nagkita-kita ang magkakapatid sa kaharian ng Armenya at hinikayat nila si Don Juan na doon na lang manirahan. May nakita silang balon at tinangka 
+       nila itong lusungin tanging si Don Juan lang ang nagtagumpay. Namangha si Don Juan sa ganda ng ilalim ng balon at kagandahan ni Donya Juana. 
+       Nag-ibigan ang dalawa. Napatay ni Don Juan ang higante. Paalis na sana sila nang ipasundo ni Juana kay Don Juan ang bunso niyang kapatid na si Donya Leonora. 
+       Umibig din si Don Juan kay prinsesang Leonora. Sa huli, ay napaibig din niya si Donya Leonora. Hindi matalo ni Don Juan ang serpiyente kaya siya ay nagdasal. 
+       Binigyan ni Leonora si Don Juan ng balsamo at napatay niya ang serpiyente. Sila ay umalis ng balon kasama si Juana. Naalala ni Leonora ang singsing na pamana 
+       sa kanya ng kanyang ina. Pinatid ni Don Pedro si Don Juan. Nang magkamalay si Donya Maria, nangako si Don Pedro na gagawin siyang reyna. Pinasundan niya si 
+       Don Juan sa lobo. Nanaginip si Haring Fernando tungkol kay Don Juan. Nalungkot ang hari nang di Makita si Don Juan. Hiniling ni Don Pedro na ipakasal na sila 
+       ni Leonora ngunit hindi pumayag si Leonora. Sa halip, sina Don Diego’t Donya Juana ang ipinakasal.
+        </p><br>
+
+    <p>Lumakas si Don Juan nang mapahidan ng tubig mula sa ilog-hordan sa tulong ng lobo. Kinalimutan ni Don Juan si Donya Leonora sa halip siya’y naglakbay 
+       patungo sa Reyno de los Cristal upang makita si Donya Maria Blanka. Inabot ng 3 taon si Don Juan sa paghahanap sa de los Cristal. May matandang 
+       nagbigay sa kanya ng tubig at pagkain. Iginiit ni Don Pedro kay Leonora ang kanyang pag-ibig subalit si Don Juan lang ang nasa puso ng prinsesa. 
+       Sumakay si Don Juan sa isang agila ng ermitanyo patungong de los Cristal. Ninakaw ni Don Juan ang kasuotan ni Donya Maria habang ito’y naliligo. 
+       Humingi ng patawad si Don Juan kay Donya Maria at di nagtagal umibig na rin si Maria ka Don Juan. Pinatuloy ni haring Salermo si Don Juan dahil 
+       ito ay nagalak sa kanyang pagsagot. Ibinigay na agad ng hari ang kanyang unang pagsubok kay Don Juan. Ginamit ni Donya Maria ang kanyang mahika 
+       upang maisagawa ang pagsubok. At dahil doon, palihim na natuwa si Haring Salermo kay Don Juan. Inilahad na ng hari ang kanyang ikalawang pagsubok 
+       kay Don Juan; ang pangongolekta muli ng 12 na negrito at si Maria nanaman ang gumawa nito. Pagkatapos, ibinigay na ng hari ang kanyang ikatlong 
+       pagsubok; ang paglipat ng bundok sa tapat ng bintana ng kwarto ng hari. Malamang, nagulat ang hari sa pagiging matagumpay ni Don Juan. Tinawanan 
+       lamang ni Donya Maria ang ika-apat na pagsubok. Hinayaan lamang Maria na matulog si Don Juan habang ginagawa niya ang pagsubok. Nawala ang singsing 
+       ng hari sa pagkakatalsik nito sa dagat nang siya ay nasa muog na ipinatayo niya kay Don Juan. Hiniling naman ng hari na ibalik ang bundok sa dating 
+       puwesto at patagin bilang ika-limang pagsubok na nagawa naman ni Donya Maria ng maayos. Kinailangan namang tadtarin pa ni Don Juan si Maria upang 
+       mahanap ang nawawalang singsing ng hari na naging dahilan ng pagkaputol ng kanyang daliri na nakapaloob sa ika-anim na pagsubok ng hari. Hiniling 
+       ng hari kay Don Juan na paamuhin ang mailap at ubod ng samang kabayo ng hari bilang huling pagsubok.Nagapi naman ni Don Juan ang kabayo sa tulong 
+       ng mga tagubilin ni Donya Maria.</p><br>
+
+    <p>Nang mapili ni Don Juan si Maria, ipatatapon dapat ng hari si Don Juan sa Inglatera ngunit nagtanan ang dalawang magkasintahan. 
+       Sinumpa ng hari si Maria at saka namatay ang hari. Bumalik si Don Juan sa kaharian ng Berbanya at nagsaya ang buong kaharian. 
+       Ipinagtapat ni Leonora ang tunay na ginawa ng dalawang prinsipe kay Don Juan. Hiniling niya sa hari na magpaksal sila ni Don Juan. 
+       Nagpunta si Maria sa Berbanya ngunit hindi siya nakilala ni Don Juan. Nagsagawa ng pagtatanghal si Donya Maria patungkol sa mga 
+       pangyayari at pagsubok nilang dalawa ni Don Juan gamit ang dalawang ita. Tatlong beses pinalo ng negrita ang negrito ngunit si 
+       Don Juan ang nasasaktan sa mga palong ito. Ngunit wala pa ring maalala si Don Juan. Babasagin na sana ni Maria ang prasko nang 
+       maalala siya ni Don Juan. Ipinagtapat ni Donya Maria ang totoong nangyari kaya nagalit ang hari sa dalawng prinsipe. Isinalaysay 
+       ni Donya Maria ang mga nangyari sa kanila ni Don Juan. Nagpakasal sina Donya Maria at Don Juan, bumalik sa Reyno de los Cristal 
+       at namuno. Si Leonora naman at si Don Pedro ang nagkatuluyan. Sina Don Pedro at Donya Leonora ang naging bagong reyno at reyna 
+       ng kaharian ng Berbanya.</p><br>
+</div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Alamat ng Ibong Adarna'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

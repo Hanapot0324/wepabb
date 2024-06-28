@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ang Alamat ng Sili</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="wisbuchicon.png" type="image/">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fff4c3;
+            overflow-x: hidden;
+        }
+        body.dark-mode {
+            background-color: #222;
+            color: #fff4c3; 
+        }
+        .kids10 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular';
+            padding: 25px;
+            margin-top: 25px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: justify;  
+        }
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .first-letter {
+            font-size: 50px;
+            font-family: serif;
+            font-weight: bolder;
+        }
+        .dropdown {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            display: inline-block;
+            z-index: 1;
+            color: #664229;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #664229;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            flex-direction: column;
+        }
+        .dropdown-content button {
+            color: #fff4c3;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #664229;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .dropdown-content button:hover {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        .dropbtn {
+            font-size: 24px; 
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:focus {
+            outline: none; 
+        }
+ 
+        body.dark-mode .dropdown .dropbtn {
+            color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content {
+            background-color: #664229;
+        }
+
+        body.dark-mode .dropdown-content button {
+            color: #664229;
+            background-color: #fff4c3;
+        }
+
+        body.dark-mode .dropdown-content button:hover {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        h2{
+            color: #fff4c3;
+        }
+        body.dark-mode h2{
+            color: #664229;
+        }
+        .notes-section {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            background-color: #664229;
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            color: #664229;
+        }
+        body.dark-mode .notes-section {
+            background-color: #fff4c3;
+            border: 1px solid #555;
+            color: #fff4c3;
+        }
+        .note-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .note-input input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .note-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff4c3;
+            color: #664229;
+        }
+        body.dark-mode .note-input input {
+            background-color: #333;
+            color: #fff4c3;
+            border: 1px solid #555;
+        }
+        body.dark-mode .note-input button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .note-item {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .note-item button {
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .note-item button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+        .minimize-button {
+            align-self: flex-end;
+            background-color: #fff4c3;
+            color: #664229;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        body.dark-mode .minimize-button {
+            background-color: #664229;
+            color: #fff4c3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff4c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #664229;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .modal-buttons {
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            background-color: #664229;
+            color: #fff4c3;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .modal-buttons button:hover {
+            background-color: #333;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #222;
+            border-color: #fff4c3;
+            color: #fff4c3;
+        }
+
+        body.dark-mode .modal-buttons button {
+            background-color: #fff4c3;
+            color: #664229;
+        }
+
+        body.dark-mode .modal-buttons button:hover {
+            background-color: #ccc;
+            color: #664229;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars fa-lg"></i></button>
+        <div class="dropdown-content">
+            <button id="darkModeToggle" onclick="toggleDarkMode()"><i class="fa fa-moon-o"></i> Dark Mode</button>
+            <button id="addToLibraryButton" onclick="addToLibrary('Ang Alamat ng Sili')"><i class="fa fa-plus-circle"></i>  Add to Library</button>
+            <button id="toggleNotesButton" onclick="toggleNotes()"><i class="fa fa-sticky-note-o"> Add Notes</i></button>
+            <button onclick="goToBooks()"><i class="fa fa-book"></i> Books</button>
+            <button onclick="goToMyLibrary()"><i class="fa fa-bookmark"></i>  My Library</button>
+            <button onclick="openModal()"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>    
+
+    <div class="notes-section" id="notesSection">
+        <button class="minimize-button" onclick="toggleNotes()">-</button>
+        <div class="note-input">
+            <input type="text" id="noteText" placeholder="Add your note here...">
+            <button onclick="addNote()">Add Note</button>
+        </div>
+        <div class="notes">
+            <h2>Notes</h2>
+            <ul id="notesList"></ul>
+        </div>
+    </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to log out?</p>
+        <div class="modal-buttons">
+            <button onclick="logout()">Log Out</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="logoutSuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="logoutSuccessMessage">Logged out successfully!</p>
+    </div>
+</div>
+
+<div id="addToLibraryModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to add <br><b>'The Hunger Games'</b><br> to your library?</p>
+        <div class="modal-buttons">
+            <button onclick="confirmAddToLibrary()">Add Book</button>
+            <button onclick="closeAddToLibraryModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="librarySuccessModal" class="modal">
+    <div class="modal-content">
+        <p id="librarySuccessMessage">The book has been added to your library!</p>
+    </div>
+</div>
+
+<div class="kids10">
+    <h1>Ang Alamat ng Sili</h1>
+    <h3>by: Jim Lloyd</h3> <br> <br>
+    <p><span class="first-letter">S</span>a isang malayong lugar sa Bicol, may isang napakalaking kaharian na pinamumunuan ng isang hari at reyna at ng kanilang anak na si Prinsipe Siling. 
+       Masaya silang namumuhay sa kaharian, ginagalang at may mataas na pagtingin ang mga tao sa nasasakupan ng hari at reyna dahil na rin sa kanilang angkin na kabaitan sa mga mahihirap. 
+       Tumutulong sila sa bawat taong kumakatok sa kanilang kaharian kaya ganoon na lamang ang pagmamahal sa kanila ng mga tao roon.
+    </p> <br>
+
+    <p>Samantalang, isang araw naisipan ng mag-asawang Haring Iling at Reyna Cecilia na magbakasyon sa Europa upang ipagdiwang ang kanilang tatlumpong anibersaryo ng kanilang pagmamahalan. 
+       “Mahal kong Reyna, kailangan po ba talagang sa Europa pa kayo magbakasyon ni Amang hari?” pagpipigil ni Prinsipe Siling. “ Anak, hindi naman kami magtatagal ng iyong amang hari roon, 
+       nais lang ng iyong ama na pumunta sa ibang lugar para maiba naman” sagot ni reyna Cecilia . “ Oo nga naman prinsipe, huwag mo kaming alalahanin, palagi kami roon mag-iingat ng reyna 
+       nang sa ganun matutunan mo na rin pamunuan ang ating kaharian upang pag nawala na kami ng iyong ina, handang-handa ka na maging isang hari. “ Huwag ninyong sabihin iyan dahil walang 
+       papalit sainyo sa pagiging magaling na hari sa lahat” pagpupuri ng Prinsipe.</p> <br>
+
+    <p>Pagkatapos magpaalam ng mag-asawa sa buong kaharian, lumakad na ito sakay ng kanilang barko patungong Europa. Mahigit kalahating buwan ang pagpapalaot ng barko patungong Europa. 
+       Pagkaraan ng tatlong araw, isang malakas na bagyo ang dumating. Alalang-alala ang Prinsipe sa kanyang amang hari at inang reyna. Alam niyang labis na lalakas ang alon dulot ng bagyo 
+       at hindi malayong maapektuhan ang barkong sinasakyan nila. Matapos ang bagyo, agad na lumabas ang Prinsipe upang mag ikot-ikot sa buong komunidad upang kumustahin ang mga nasasakupan. 
+       Nais nya rin makibalita sa barkong sinasakyan ng kanyang mga magulang. Habang naghihintay siya sa pantalan,kitang-kita sa kanya ang labis na takot at pag-aalala. Paparating na ang isa 
+       sa mga kawal na siya lamang ang nailigtas ng kanyang mga inutusang mga kawal sa paghahanap sa barkong sakay ng amang hari at reyna. Nagbigay muna ito ng galang sa pamamagitan ng pagyuko 
+       bago nagpahayag, “ mahal na prinsipe, ipagpaumanhin po ninyo ngunit wala na po ang inyong mga magulang. Nagkahiwalay po kami ng palakas na ng palakas ang bagyo at sa sobrang lakas po ng 
+       hagupit ng bagyo lumubog ang sinasakyan namin na barko. Nagising na lamang po ako na napadpad po ako sa isang isla kung saan natagpuan ako ng mga inatasan ninyo sa paghahanap”.
+    </p> <br>
+
+    <p>Namugto ang mga mata ng prinsipe at kumaripas ito pabalik ng kaharian. Nagulat na lamang ang karamihan sa biglaang pagtakbo nito. Halos ilang araw siyang nagkulong sa kanyang silid dahil 
+       na lamang sa labis na hinagpis na sinapit ng kanyang mga magulang. Alalang-alala na ang mga tao kay Prinsipe Siling dahil hindi ito kumakain. Nabalot ng kalungkutan ang kaharian, kaya’t 
+       ng matapos ang seremonya na ginanap sa karagatan na pinaglubugan ng labi ng mag-asawa hindi pa rin iniwan ng mga tao ang prinsipe kaya inintindi na lamang nila ito. Isang araw gulat na 
+       gulat ang mga tao sa kaharian sa muling pagbalik ng sigla nito na tila’y handang harapin ang lahat. Ngunit ng makaraan ang ilang buwan unti-unting nagbago si Prinsipe Siling. Nagiging masungit, 
+       mainitin ang ulo at hindi na rin ito nakikihalubilo sa mga tao. Nagiging malupit siya sa mga tagasilbi at mga kawal ng kaharian, malayo sa dating prinsipe na kanilang kilala noon.
+    </p> <br>
+
+    <p>“Patawad po kamahalan, hindi ko po sinasadya,papalitan ko na lamang po ang aking mga napinsalang mga kagamitan”. “ Umalis ka riyan sa harapan ko! Baguhan ka ba dito? Pagdala lang ng mga 
+       kagamitan hindi mo pa magawa! galit na sabi ni Prinsipe Siling. “Paumanhin po hindi na po mauulit”, mangiyak-ngiyak na sabi ng tagasilbi. Talagang hindi na mauulit dahil makakaalis ka na 
+       ng kaharian ko! Umalis na ang kasambahay pagkatapos siyang palayasin ng prinsipe. Nagpatuloy si Prinsipe Siling sa pagmamalupit sa mga tao sa kaharian. Kaya naman paunti-unti ng 
+       nagsisialisan ang mga tagsilbi dahil sa takot sa prinsipe. Hindi maikubli na nagbago na nga ang prinsipe simula ng mamatay ang kanyang mga magulang. Isang diwata ang pinapanood ang prinsipe 
+       sa kanyang pagmamalupit sa mga tao na minsan ay naranasan niya rin sa isang prinsipe. “ Hindi siya karapat-dapat sa kaharian na ipinagkaloob ko sa kanyang mga magulang. Kailangan siyang 
+       parusahan dahil labis-labis na ang paghihirap ng mga tao dahil sa kanya” bulong ng diwata sa kanyang sarili.
+    </p> <br>
+
+    <p>Isang araw, nagpasya ang prinsipe na mamasyal ng mag-isa,ilang araw na ang nakakalipas ngunit hindi pa rin siya bumabalik ng kaharian. Nagtaka ang mga tao at bigla na lamang namangha at 
+       nagulat dahil sa kanilang nakita sa hardin na paboritong pasyalan ni Prinsipe Siling. Isang halaman na namumunga ng kulay luntian at pula na hugis pahaba at paublong na may makinis na balat. 
+       Naalala ng mga tao roon si Prinsipe Siling na may pagkakahalintulad sa balat ng namumula nitong pisngi. Sinumpa ng diwata si Prinsipe Siling na maging isang halaman na may katangian ng 
+       pagigigng maanghang dahil sa ugali nitong kalupitan.</p> <br>
+
+    <p>Mula noon, hindi na nakita ang prinsipe sa kaharian at tanging halaman na lamang ang natagpuan ng mga tao na maihahalintulad kay Prinsipe Siling kaya naman inalagaan nila ito at pinangalanan na Sili.
+    </p> <br>
+
+</div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+         var body = document.body;
+         body.classList.toggle('dark-mode');
+     
+         localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+     
+         var darkModeToggle = document.getElementById('darkModeToggle');
+         if (body.classList.contains('dark-mode')) {
+             darkModeToggle.innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             darkModeToggle.innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function loadDarkMode() {
+         var darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+         var body = document.body;
+         if (darkModeEnabled) {
+             body.classList.add('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-sun-o"></i> Light Mode';
+         } else {
+             body.classList.remove('dark-mode');
+             document.getElementById('darkModeToggle').innerHTML = '<i class="fa fa-moon-o"></i> Dark Mode';
+         }
+     }
+     
+     
+     function addToLibrary(bookTitle) {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'block';
+             }
+     
+             function confirmAddToLibrary() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+     
+                 var bookTitle = 'Ang Alamat ng Sili'; 
+                 var libraryData = localStorage.getItem('library');
+     
+                 var library = [];
+                 if (libraryData) {
+                     library = JSON.parse(libraryData);
+                 }
+     
+                 if (library.length >= 10) {
+                     alert('You have reached the maximum limit of 10 books in your library.');
+                     return; 
+                 }
+     
+                 library.push(bookTitle);
+     
+                 localStorage.setItem('library', JSON.stringify(library));
+     
+                 openLibrarySuccessModal();
+     
+                 displayLibrary();
+             }
+     
+             function closeAddToLibraryModal() {
+                 var modal = document.getElementById('addToLibraryModal');
+                 modal.style.display = 'none';
+             }
+     
+             function openLibrarySuccessModal() {
+                 var modal = document.getElementById('librarySuccessModal');
+                 modal.style.display = 'block';
+     
+                 setTimeout(function() {
+                     modal.style.display = 'none';
+                 }, 2000);
+             }
+     
+             function toggleNotes() {
+                 var notesSection = document.getElementById('notesSection');
+                 if (notesSection.style.display === 'none' || notesSection.style.display === '') {
+                     notesSection.style.display = 'flex';
+                 } else {
+                     notesSection.style.display = 'none';
+                 }
+             }
+     
+             function addNote() {
+                 var noteText = document.getElementById('noteText').value;
+                 if (noteText.trim() === '') {
+                     alert('Note cannot be empty.');
+                     return;
+                 }
+     
+                 var notesList = document.getElementById('notesList');
+                 var noteItem = document.createElement('li');
+                 noteItem.className = 'note-item';
+                 noteItem.innerHTML = noteText + ' <button onclick="deleteNote(this)">Delete</button>';
+                 notesList.appendChild(noteItem);
+     
+                 saveNotes();
+     
+                 document.getElementById('noteText').value = '';
+             }
+     
+             function deleteNote(button) {
+                 var noteItem = button.parentElement;
+                 noteItem.remove();
+                 saveNotes();
+             }
+     
+             function saveNotes() {
+                 var notesList = document.getElementById('notesList');
+                 var notes = [];
+                 for (var i = 0; i < notesList.children.length; i++) {
+                     notes.push(notesList.children[i].innerText.replace('Delete', '').trim());
+                 }
+                 localStorage.setItem('notes', JSON.stringify(notes));
+             }
+     
+             function loadNotes() {
+                 var notes = JSON.parse(localStorage.getItem('notes'));
+                 if (notes) {
+                     var notesList = document.getElementById('notesList');
+                     notesList.innerHTML = '';
+                     for (var i = 0; i < notes.length; i++) {
+                         var noteItem = document.createElement('li');
+                         noteItem.className = 'note-item';
+                         noteItem.innerHTML = notes[i] + ' <button onclick="deleteNote(this)">Delete</button>';
+                         notesList.appendChild(noteItem);
+                     }
+                 }
+             }
+             function goToBooks() {
+                 window.location.href = 'books.html';
+             }
+     
+             function goToMyLibrary() {
+                 window.location.href = 'mylibrary.html';
+             }
+     
+     
+             window.onload = function() {
+                 loadDarkMode();
+                 loadNotes();
+             };
+     
+           
+                 function openModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'block';
+                 }
+     
+                 
+                 function closeModal() {
+                     var modal = document.getElementById('logoutModal');
+                     modal.style.display = 'none';
+                 }
+     
+                 function logout() {
+                     localStorage.clear();
+     
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'block';
+     
+                     closeModal();
+     
+                     setTimeout(function() {
+                         window.location.href = 'account.html';
+                     }, 2000);
+                 }
+     
+     
+                 function closeLogoutSuccessModal() {
+                     var logoutSuccessModal = document.getElementById('logoutSuccessModal');
+                     logoutSuccessModal.style.display = 'none';
+                 }
+     
+                 window.onclick = function(event) {
+                     var modals = document.getElementsByClassName('modal');
+                     for (var i = 0; i < modals.length; i++) {
+                         if (event.target == modals[i]) {
+                             modals[i].style.display = 'none';
+                         }
+                     }
+                 }
+     
+     
+         </script>
+     </body>
+     </html>   
+

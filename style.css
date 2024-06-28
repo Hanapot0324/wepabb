@@ -1,0 +1,54 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  .hero {
+    width: 100px;
+    padding: 0 2%;
+    position: relative;
+    height: 100vh; /* This might need adjustment based on your content */
+  }
+  .wisbuchname {
+    height: 65vh;
+    width: 100vh;
+    margin-bottom: 10%;
+    margin-top: 20%;
+    margin-left: 50%;
+    position: absolute;
+  }
+  .bookmain {
+    height: 95vh;
+    width: 75vh;
+    position:absolute;
+    top: 5%;
+    margin-left: 500%;
+    
+  }
+  .btn1 {
+    background-color: #FDEFB2; /* Green */
+    border: none;
+    border-radius:  13px;
+    color: #593724;
+    border: 2px solid #593724;
+    padding: 15px 65px;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    cursor: pointer;
+    margin-left: 43.5vh;
+    margin-top: 75vh;
+    font-weight: bold;
+    font-size: 120%;
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .btn1:hover {
+    background-color: #E1A06C;
+    color: #FDEFB2;
+    border: 2px solid #FDEFB2;
+    
+  }
+  
